@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 
 interface AdminHeaderProps {
-  user: {
+  user?: {
     name?: string | null;
     email?: string | null;
-  };
+  } | null;
 }
 
 export default function AdminHeader({ user }: AdminHeaderProps) {
@@ -19,7 +19,7 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
             <User className="h-4 w-4" />
-            <span className="font-medium">{user.name || user.email}</span>
+            <span className="font-medium">{user?.name || user?.email || "Admin"}</span>
           </div>
           <Button
             variant="ghost"
