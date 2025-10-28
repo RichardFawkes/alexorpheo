@@ -35,7 +35,7 @@ async function getCategories() {
     });
     return categories;
   } catch (error) {
-    return [];
+    return [] as Awaited<ReturnType<typeof prisma.category.findMany>>;
   }
 }
 
