@@ -1,0 +1,6 @@
+# Ignorar arquivos desnecessários no deploy
+.env.local
+.env*.local
+node_modules
+.next
+.git
