@@ -1,40 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Color Palette 2025 */
+  /* Paleta Jurídica Profissional */
   --background: 0 0% 100%;
-  --foreground: 0 0% 10%;
+  --foreground: 215 25% 15%;
 
-  /* Premium Neutrals */
+  /* Cards e Popovers */
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
+  --card-foreground: 215 25% 15%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
+  --popover-foreground: 215 25% 15%;
 
-  /* Luxury Gold Accent */
-  --primary: 43 74% 66%;
-  --primary-foreground: 0 0% 10%;
+  /* Azul Marinho - Confiança e Profissionalismo */
+  --primary: 221 83% 25%;
+  --primary-foreground: 0 0% 100%;
 
-  /* Elegant Navy Secondary */
-  --secondary: 215 25% 27%;
+  /* Dourado Sóbrio - Excelência */
+  --secondary: 43 74% 40%;
   --secondary-foreground: 0 0% 100%;
 
-  /* Sophisticated Grays */
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 10%;
+  /* Cinzas Sofisticados */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 215 25% 15%;
 
-  /* Premium Borders & Inputs */
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 43 74% 66%;
+  /* Bordas e Inputs */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 221 83% 25%;
 
   /* Destructive */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 .dark {
@@ -61,6 +61,12 @@
 
 * {
   border-color: hsl(var(--border));
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {

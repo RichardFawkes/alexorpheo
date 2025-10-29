@@ -78,17 +78,22 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const published = searchParams.get("published") === "true"
+    const slug = searchParams.get("slug")
 
     let query = supabaseServer
       .from('Article')
       .select(`
         *,
-        category:Category(name)
+        category:Category(name, slug)
       `)
       .order('createdAt', { ascending: false })
 
     if (published) {
       query = query.eq('published', true)
+    }
+
+    if (slug) {
+      query = query.eq('slug', slug)
     }
 
     const { data: articles, error } = await query

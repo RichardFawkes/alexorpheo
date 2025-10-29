@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-200">
+    <footer className="bg-slate-900 text-slate-200">
       {/* Newsletter Section */}
-      <div className="border-b border-slate-700/50">
+      <div className="border-b border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
@@ -19,9 +19,9 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Seu melhor e-mail"
-                className="flex-1 px-4 py-3 rounded-full bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
-              <Button className="bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700 rounded-full px-8">
+              <Button className="bg-blue-900 text-white hover:bg-blue-800 rounded-lg px-8">
                 Inscrever-se
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -36,14 +36,14 @@ export default function Footer() {
           {/* Logo e Descrição */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="h-12 w-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="h-12 w-12 bg-blue-900 rounded-lg flex items-center justify-center group-hover:bg-blue-800 transition-colors duration-300">
                 <Scale className="h-7 w-7 text-white" />
               </div>
               <div className="flex flex-col">
                 <span className="font-serif font-bold text-xl leading-tight text-white">
                   Alex Orpheo
                 </span>
-                <span className="text-xs text-amber-500 font-medium">
+                <span className="text-xs text-slate-400 font-medium">
                   OAB/SP 123.456
                 </span>
               </div>
@@ -56,7 +56,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="h-10 w-10 bg-slate-800 rounded-full flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300"
+                className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-blue-900 hover:text-white transition-all duration-300"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
