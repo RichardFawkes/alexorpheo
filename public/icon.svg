@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#0a1628"/>
+
+  <!-- Outer Circle -->
+  <circle cx="16" cy="16" r="12" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+
+  <!-- Letter A -->
+  <path d="M16 9L19.5 19H18L17.2 16.5H14.8L14 19H12.5L16 9ZM15.2 15H16.8L16 11.8L15.2 15Z" fill="#d4af37"/>
+</svg>
+
