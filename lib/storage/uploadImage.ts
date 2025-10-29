@@ -86,7 +86,18 @@ export async function deleteImage(url: string, bucket: string = 'alexorpheo') {
     const pathParts = urlObj.pathname.split('/')
     const filePath = pathParts.slice(pathParts.indexOf(bucket) + 1).join('/')
 
-    const { error } = await supabase.storage.from(bucket).remove([filePath])
+    // Usar Service Role Key para bypass RLS
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+    const supabaseServiceKey = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY!
+
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
+
+    const { error } = await supabaseAdmin.storage.from(bucket).remove([filePath])
 
     if (error) return { success: false, error: error.message }
     return { success: true }
