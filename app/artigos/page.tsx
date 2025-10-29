@@ -201,7 +201,7 @@ export default function ArtigosPage() {
                           </div>
 
                           {/* Title */}
-                          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-900 transition-colors duration-300" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 font-serif group-hover:text-blue-900 transition-colors duration-300">
                             {article.title}
                           </h3>
 

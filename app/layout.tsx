@@ -53,7 +53,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen pt-20 md:pt-24">{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>

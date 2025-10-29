@@ -52,7 +52,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden -mt-20 md:-mt-24">
 
       {/* HERO SECTION - Ultra Premium com Parallax */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
