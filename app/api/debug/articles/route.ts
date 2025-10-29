@@ -16,9 +16,21 @@ export async function GET() {
       )
     }
 
+    const published = articles?.filter(a => a.published) || []
+    const drafts = articles?.filter(a => !a.published) || []
+
     return NextResponse.json({
       total: articles?.length || 0,
-      articles: articles || []
+      published: published.length,
+      drafts: drafts.length,
+      articles: articles?.map(a => ({
+        id: a.id,
+        title: a.title,
+        slug: a.slug,
+        published: a.published,
+        publishedAt: a.publishedAt,
+        createdAt: a.createdAt
+      })) || []
     })
   } catch (error: any) {
     return NextResponse.json(

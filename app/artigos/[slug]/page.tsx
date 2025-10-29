@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { supabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
@@ -110,6 +111,19 @@ export default async function ArtigoPage({ params }: Props) {
       <article className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
+            {/* Imagem de Capa */}
+            {article.coverImage && (
+              <div className="relative w-full aspect-video mb-12 rounded-xl overflow-hidden">
+                <Image
+                  src={article.coverImage}
+                  alt={article.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
+
             <div className="prose prose-lg max-w-none prose-slate prose-headings:font-serif prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {article.content}

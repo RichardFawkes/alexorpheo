@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { supabaseServer } from "@/lib/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ async function getArticles() {
         category:Category(name, slug)
       `)
       .eq('published', true)
-      .order('publishedAt', { ascending: false, nullsFirst: false })
+      .order('createdAt', { ascending: false })
 
     if (error) {
       console.error('❌ Erro ao buscar artigos:', error)
@@ -29,6 +30,14 @@ async function getArticles() {
     }
 
     console.log('✅ Artigos encontrados:', articles?.length || 0)
+    if (articles && articles.length > 0) {
+      console.log('📄 Primeiro artigo:', {
+        id: articles[0].id,
+        title: articles[0].title,
+        published: articles[0].published,
+        publishedAt: articles[0].publishedAt
+      })
+    }
     return articles || []
   } catch (error) {
     console.error('❌ Erro ao buscar artigos:', error)
@@ -117,7 +126,19 @@ export default async function ArtigosPage() {
               ) : (
                 <div className="space-y-6">
                   {articles.map((article) => (
-                    <Card key={article.id} className="hover:shadow-lg transition-shadow">
+                    <Card key={article.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+                      {/* Imagem de Capa */}
+                      {article.coverImage && (
+                        <div className="relative w-full aspect-video">
+                          <Image
+                            src={article.coverImage}
+                            alt={article.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
+
                       <CardHeader>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           {article.category && (
