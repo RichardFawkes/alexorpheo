@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion"
 import { MessageCircle } from "lucide-react"
+import { SITE_CONFIG } from "@/lib/constants/site-config"
 
 export default function WhatsAppButton() {
-  const phoneNumber = "5511999999999" // Substitua pelo número real
-  const message = "Olá! Gostaria de agendar uma consulta jurídica."
+  const phoneNumber = SITE_CONFIG.contato.telefone.whatsapp
+  const message = SITE_CONFIG.mensagens.whatsapp
 
   const handleClick = () => {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
@@ -24,7 +25,7 @@ export default function WhatsAppButton() {
       aria-label="Contato via WhatsApp"
     >
       <MessageCircle className="w-7 h-7 md:w-8 md:h-8 group-hover:rotate-12 transition-transform duration-300" />
-      
+
       {/* Pulse Animation */}
       <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20" />
     </motion.button>

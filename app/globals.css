@@ -109,3 +109,44 @@ html {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
 }
+
+/* Swiper customizado para tema escuro */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fbbf24 !important;
+  background: rgba(26, 35, 50, 0.8) !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  border: 2px solid #334155 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #f59e0b !important;
+  border-color: #f59e0b !important;
+  color: #1a2332 !important;
+  transform: scale(1.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.swiper-pagination-bullet {
+  background: #475569 !important;
+  opacity: 0.5 !important;
+  width: 12px !important;
+  height: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #f59e0b !important;
+  opacity: 1 !important;
+  width: 32px !important;
+  border-radius: 6px !important;
+}

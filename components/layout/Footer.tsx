@@ -1,9 +1,22 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowRight } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowRight, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SITE_CONFIG, obterRedesSociaisAtivas } from "@/lib/constants/site-config"
 
 export default function Footer() {
+  const redesSociaisAtivas = obterRedesSociaisAtivas()
+
+  const getIconeRedeSocial = (nome: string) => {
+    const icones: Record<string, React.ReactNode> = {
+      instagram: <Instagram className="h-5 w-5" />,
+      facebook: <Facebook className="h-5 w-5" />,
+      linkedin: <Linkedin className="h-5 w-5" />,
+      youtube: <Youtube className="h-5 w-5" />,
+    }
+    return icones[nome] || null
+  }
+
   return (
     <footer className="bg-slate-900 text-slate-200">
       {/* Newsletter Section */}
@@ -48,33 +61,21 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Advocacia com excelência, ética e comprometimento absoluto com os melhores resultados para nossos clientes.
+              {SITE_CONFIG.mensagens.rodape}
             </p>
             <div className="flex space-x-3">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-blue-900 hover:text-white transition-all duration-300"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 w-10 bg-slate-800 rounded-full flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 w-10 bg-slate-800 rounded-full flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
+              {redesSociaisAtivas.map((rede) => (
+                <a
+                  key={rede.nome}
+                  href={rede.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300"
+                  aria-label={`Visite nosso ${rede.nome}`}
+                >
+                  {getIconeRedeSocial(rede.nome)}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -131,9 +132,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Av. Paulista, 1000<br />
-                    São Paulo - SP<br />
-                    CEP 01310-100
+                    {SITE_CONFIG.contato.endereco.logradouro}<br />
+                    {SITE_CONFIG.contato.endereco.bairro} - {SITE_CONFIG.contato.endereco.cidade}/{SITE_CONFIG.contato.endereco.estado}<br />
+                    CEP {SITE_CONFIG.contato.endereco.cep}
                   </p>
                 </div>
               </li>
@@ -141,16 +142,22 @@ export default function Footer() {
                 <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
                   <Phone className="h-5 w-5 text-amber-500" />
                 </div>
-                <a href="tel:+5511999999999" className="text-sm text-slate-400 hover:text-amber-500 transition-colors">
-                  (11) 99999-9999
+                <a
+                  href={`tel:+55${SITE_CONFIG.contato.telefone.principal.replace(/\D/g, '')}`}
+                  className="text-sm text-slate-400 hover:text-amber-500 transition-colors"
+                >
+                  {SITE_CONFIG.contato.telefone.principal}
                 </a>
               </li>
               <li className="flex items-center space-x-3 group">
                 <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
                   <Mail className="h-5 w-5 text-amber-500" />
                 </div>
-                <a href="mailto:contato@alexorpheo.adv.br" className="text-sm text-slate-400 hover:text-amber-500 transition-colors">
-                  contato@alexorpheo.adv.br
+                <a
+                  href={`mailto:${SITE_CONFIG.contato.email.principal}`}
+                  className="text-sm text-slate-400 hover:text-amber-500 transition-colors"
+                >
+                  {SITE_CONFIG.contato.email.principal}
                 </a>
               </li>
             </ul>
@@ -161,7 +168,7 @@ export default function Footer() {
         <div className="border-t border-slate-700/50 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-slate-400 text-center md:text-left">
-              © {new Date().getFullYear()} Alex Orpheo - Advocacia. Todos os direitos reservados.
+              © {new Date().getFullYear()} {SITE_CONFIG.site.nome}. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm text-slate-400">
               <Link href="/privacidade" className="hover:text-amber-500 transition-colors">

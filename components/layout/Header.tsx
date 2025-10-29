@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Menu, X, Phone, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
+import { SITE_CONFIG } from "@/lib/constants/site-config"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,6 +25,7 @@ export default function Header() {
     { name: "Sobre", href: "/sobre" },
     { name: "Áreas de Atuação", href: "/areas-atuacao" },
     { name: "Artigos", href: "/artigos" },
+    { name: "Notícias", href: "/noticias" },
     { name: "Contato", href: "/contato" },
   ]
 
@@ -153,7 +155,7 @@ export default function Header() {
                   className="mt-6 text-center"
                 >
                   <p className="text-xs text-slate-400 mb-1">Atendimento Premium</p>
-                  <p className="text-sm text-amber-400 font-semibold">OAB/SP 123.456</p>
+                  <p className="text-sm text-amber-400 font-semibold">{SITE_CONFIG.advogado.oab}</p>
                 </motion.div>
               </div>
             </motion.div>

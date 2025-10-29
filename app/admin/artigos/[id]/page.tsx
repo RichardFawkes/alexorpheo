@@ -2,16 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import ImageUpload from "@/components/admin/ImageUpload"
-import { ArrowLeft, Loader2, Trash2 } from "lucide-react"
+import { ArrowLeft, Loader2, Trash2, Edit, FileText, AlignLeft, Image as ImageIcon, Settings, Save, Link as LinkIcon } from "lucide-react"
 import Link from "next/link"
-import { supabaseServer } from "@/lib/supabase/server"
 
 type TArticleFormData = {
   title: string
@@ -141,44 +140,57 @@ export default function EditarArtigoPage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-5xl mx-auto">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button asChild variant="ghost" size="icon">
+          <Button asChild variant="outline" size="icon">
             <Link href="/admin/artigos">
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
-          <h1 className="text-3xl font-bold">Editar Artigo</h1>
+          <div>
+            <h1 className="text-3xl font-bold flex items-center gap-3">
+              <Edit className="h-8 w-8 text-blue-600" />
+              Editar Artigo
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-1">Atualize as informações do artigo</p>
+          </div>
         </div>
         <Button
           variant="destructive"
           onClick={handleDelete}
           disabled={isDeleting}
+          size="lg"
         >
           {isDeleting ? (
             <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              <Loader2 className="h-5 w-5 mr-2 animate-spin" />
               Excluindo...
             </>
           ) : (
             <>
-              <Trash2 className="h-4 w-4 mr-2" />
-              Excluir
+              <Trash2 className="h-5 w-5 mr-2" />
+              Excluir Artigo
             </>
           )}
         </Button>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <Card>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Informações Básicas */}
+        <Card className="border-t-4 border-t-blue-500">
           <CardHeader>
-            <CardTitle>Informações do Artigo</CardTitle>
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-blue-600" />
+              <CardTitle>Informações Básicas</CardTitle>
+            </div>
+            <CardDescription>Título e identificação do artigo</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Título */}
             <div className="space-y-2">
-              <Label htmlFor="title">Título *</Label>
+              <Label htmlFor="title" className="text-base font-semibold">Título do Artigo *</Label>
               <Input
                 id="title"
                 value={formData.title}
@@ -188,91 +200,155 @@ export default function EditarArtigoPage({ params }: { params: Promise<{ id: str
                     setFormData({ ...formData, title: e.target.value, slug: gerarSlug(e.target.value) })
                   }
                 }}
+                className="h-12 text-lg"
                 required
               />
             </div>
 
             {/* Slug */}
             <div className="space-y-2">
-              <Label htmlFor="slug">Slug (URL) *</Label>
+              <Label htmlFor="slug" className="text-base font-semibold">Slug (URL) *</Label>
               <Input
                 id="slug"
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                 required
               />
-              <p className="text-sm text-muted-foreground">
-                URL amigável: /artigos/{formData.slug || "seu-slug"}
+              <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <LinkIcon className="h-3 w-3" />
+                URL: <span className="font-mono text-blue-600">/artigos/{formData.slug || "seu-slug"}</span>
               </p>
             </div>
+          </CardContent>
+        </Card>
 
+        {/* Conteúdo */}
+        <Card className="border-t-4 border-t-purple-500">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <AlignLeft className="h-5 w-5 text-purple-600" />
+              <CardTitle>Conteúdo</CardTitle>
+            </div>
+            <CardDescription>Resumo e texto completo do artigo</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
             {/* Resumo */}
             <div className="space-y-2">
-              <Label htmlFor="excerpt">Resumo</Label>
+              <Label htmlFor="excerpt" className="text-base font-semibold">Resumo</Label>
               <Textarea
                 id="excerpt"
                 value={formData.excerpt}
                 onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                 rows={3}
                 placeholder="Breve descrição do artigo..."
+                className="resize-none"
               />
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Recomendado: 150-200 caracteres para melhor SEO
+              </p>
             </div>
 
             {/* Conteúdo */}
             <div className="space-y-2">
-              <Label htmlFor="content">Conteúdo (Markdown) *</Label>
+              <Label htmlFor="content" className="text-base font-semibold">Conteúdo Completo (Markdown) *</Label>
               <Textarea
                 id="content"
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                rows={15}
+                rows={20}
                 required
                 placeholder="# Título do Artigo&#10;&#10;Seu conteúdo aqui..."
+                className="font-mono text-sm resize-none"
               />
-              <p className="text-sm text-muted-foreground">
-                Suporta Markdown: **negrito**, *itálico*, # títulos, etc.
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Suporta Markdown: **negrito**, *itálico*, # títulos, listas, links, etc.
               </p>
             </div>
+          </CardContent>
+        </Card>
 
-            {/* Imagem de Capa */}
-            <div className="space-y-2">
-              <Label>Imagem de Capa</Label>
-              <ImageUpload
-                value={formData.coverImage}
-                onChange={(url) => setFormData({ ...formData, coverImage: url })}
-              />
+        {/* Imagem */}
+        <Card className="border-t-4 border-t-green-500">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <ImageIcon className="h-5 w-5 text-green-600" />
+              <CardTitle>Imagem de Capa</CardTitle>
             </div>
+            <CardDescription>Imagem principal do artigo (opcional)</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ImageUpload
+              value={formData.coverImage}
+              onChange={(url) => setFormData({ ...formData, coverImage: url })}
+            />
+          </CardContent>
+        </Card>
 
-            {/* Publicado */}
-            <div className="flex items-center space-x-2">
+        {/* Configurações */}
+        <Card className="border-t-4 border-t-amber-500">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Settings className="h-5 w-5 text-amber-600" />
+              <CardTitle>Configurações de Publicação</CardTitle>
+            </div>
+            <CardDescription>Defina o status de publicação</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-lg border-2 hover:border-amber-500 transition-colors">
+              <div className="flex-1">
+                <Label htmlFor="published" className="text-base font-semibold cursor-pointer">
+                  Publicar artigo
+                </Label>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                  O artigo ficará visível publicamente no site
+                </p>
+              </div>
               <Switch
                 id="published"
                 checked={formData.published}
                 onCheckedChange={(checked) => setFormData({ ...formData, published: checked })}
+                className="data-[state=checked]:bg-amber-600"
               />
-              <Label htmlFor="published" className="cursor-pointer">
-                Publicar artigo
-              </Label>
-            </div>
-
-            {/* Botões */}
-            <div className="flex gap-4 pt-4">
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Salvando...
-                  </>
-                ) : (
-                  "Salvar Alterações"
-                )}
-              </Button>
-              <Button type="button" variant="outline" asChild>
-                <Link href="/admin/artigos">Cancelar</Link>
-              </Button>
             </div>
           </CardContent>
         </Card>
+
+        {/* Botões de Ação */}
+        <div className="flex items-center justify-between p-6 bg-slate-50 dark:bg-slate-900 rounded-lg border-2 border-dashed">
+          <div className="flex gap-3">
+            <Button
+              type="submit"
+              disabled={isLoading}
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                  Salvando...
+                </>
+              ) : (
+                <>
+                  <Save className="h-5 w-5 mr-2" />
+                  Salvar Alterações
+                </>
+              )}
+            </Button>
+            <Button type="button" variant="outline" size="lg" asChild>
+              <Link href="/admin/artigos">
+                <ArrowLeft className="h-5 w-5 mr-2" />
+                Cancelar
+              </Link>
+            </Button>
+          </div>
+
+          {formData.published && (
+            <div className="flex items-center gap-2 text-sm text-green-600 font-medium">
+              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+              Publicado
+            </div>
+          )}
+        </div>
       </form>
     </div>
   )

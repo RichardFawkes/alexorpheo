@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import ContactForm from "@/components/ContactForm";
+import { SITE_CONFIG } from "@/lib/constants/site-config";
 
 export const metadata: Metadata = {
   title: "Contato | Dr. João Silva - Advocacia",
@@ -34,9 +35,9 @@ export default function ContatoPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Avenida Paulista, 1000<br />
-                    Bela Vista - São Paulo, SP<br />
-                    CEP: 01310-100
+                    {SITE_CONFIG.contato.endereco.logradouro}<br />
+                    {SITE_CONFIG.contato.endereco.bairro} - {SITE_CONFIG.contato.endereco.cidade}, {SITE_CONFIG.contato.endereco.estado}<br />
+                    CEP: {SITE_CONFIG.contato.endereco.cep}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -48,8 +49,17 @@ export default function ContatoPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    (11) 98765-4321<br />
-                    (11) 3456-7890
+                    <a href={`tel:+55${SITE_CONFIG.contato.telefone.principal.replace(/\D/g, '')}`} className="hover:text-primary transition-colors">
+                      {SITE_CONFIG.contato.telefone.principal}
+                    </a>
+                    {SITE_CONFIG.contato.telefone.secundario && (
+                      <>
+                        <br />
+                        <a href={`tel:+55${SITE_CONFIG.contato.telefone.secundario.replace(/\D/g, '')}`} className="hover:text-primary transition-colors">
+                          {SITE_CONFIG.contato.telefone.secundario}
+                        </a>
+                      </>
+                    )}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -61,7 +71,9 @@ export default function ContatoPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    contato@joaosilva.adv.br
+                    <a href={`mailto:${SITE_CONFIG.contato.email.principal}`} className="hover:text-primary transition-colors">
+                      {SITE_CONFIG.contato.email.principal}
+                    </a>
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -72,9 +84,9 @@ export default function ContatoPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Segunda a Sexta: 9h às 18h<br />
-                    Sábado: 9h às 13h<br />
-                    Domingo: Fechado
+                    {SITE_CONFIG.contato.horarioAtendimento.semana}<br />
+                    {SITE_CONFIG.contato.horarioAtendimento.sabado}<br />
+                    {SITE_CONFIG.contato.horarioAtendimento.domingo}
                   </CardDescription>
                 </CardContent>
               </Card>

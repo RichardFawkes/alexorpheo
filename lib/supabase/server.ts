@@ -43,3 +43,20 @@ export type TUser = {
   role: string
 }
 
+export type TNews = {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  content: string
+  coverImage: string | null
+  category: string | null
+  tags: string[] | null
+  published: boolean
+  featured: boolean
+  authorId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string | null
+}
+
