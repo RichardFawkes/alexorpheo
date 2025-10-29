@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import {
   Box,
-  Grid,
   Card,
   CardContent,
   Typography,
@@ -120,71 +119,71 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4, flexWrap: 'wrap' }}>
         {statsCards.map((card, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card
-              sx={{
-                height: '100%',
-                transition: 'all 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: 4,
-                },
-              }}
-            >
-              <CardContent>
-                <Stack spacing={2}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <Avatar
+          <Card
+            key={index}
+            sx={{
+              flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(25% - 18px)' },
+              minWidth: 0,
+              transition: 'all 0.3s',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: 4,
+              },
+            }}
+          >
+            <CardContent>
+              <Stack spacing={2}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <Avatar
+                    sx={{
+                      bgcolor: card.bgColor,
+                      color: card.color,
+                      width: 48,
+                      height: 48,
+                    }}
+                  >
+                    {card.icon}
+                  </Avatar>
+                  {card.badge && (
+                    <Chip
+                      label={card.badge}
+                      size="small"
                       sx={{
-                        bgcolor: card.bgColor,
-                        color: card.color,
-                        width: 48,
-                        height: 48,
+                        bgcolor: '#d1fae5',
+                        color: '#10b981',
+                        fontWeight: 600,
+                        fontSize: '0.75rem',
                       }}
-                    >
-                      {card.icon}
-                    </Avatar>
-                    {card.badge && (
-                      <Chip
-                        label={card.badge}
-                        size="small"
-                        sx={{
-                          bgcolor: '#d1fae5',
-                          color: '#10b981',
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                        }}
-                      />
-                    )}
-                  </Box>
-                  <Box>
-                    <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {card.value}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500, mb: 0.5 }}>
-                      {card.title}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {card.subtitle}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
+                    />
+                  )}
+                </Box>
+                <Box>
+                  <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
+                    {card.value}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500, mb: 0.5 }}>
+                    {card.title}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {card.subtitle}
+                  </Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Stack>
 
       {/* Quick Actions */}
       <Box>
         <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
           Ações Rápidas
         </Typography>
-        <Grid container spacing={2}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           {quickActions.map((action, index) => (
-            <Grid item xs={12} sm={6} key={index}>
+            <Box key={index} sx={{ flex: 1 }}>
               <Card
                 component={Link}
                 href={action.href}
@@ -224,9 +223,9 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
                   </Box>
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Stack>
       </Box>
 
       {/* Recent Activity Section (Optional) */}

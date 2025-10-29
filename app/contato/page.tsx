@@ -52,7 +52,7 @@ export default function ContatoPage() {
                     <a href={`tel:+55${SITE_CONFIG.contato.telefone.principal.replace(/\D/g, '')}`} className="hover:text-primary transition-colors">
                       {SITE_CONFIG.contato.telefone.principal}
                     </a>
-                    {SITE_CONFIG.contato.telefone.secundario && (
+                    {SITE_CONFIG.contato.telefone.secundario && SITE_CONFIG.contato.telefone.secundario.trim() !== '' && (
                       <>
                         <br />
                         <a href={`tel:+55${SITE_CONFIG.contato.telefone.secundario.replace(/\D/g, '')}`} className="hover:text-primary transition-colors">

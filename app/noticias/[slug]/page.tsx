@@ -127,7 +127,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
                   {noticia.category}
                 </span>
               )}
-              {noticia.tags && noticia.tags.slice(0, 3).map((tag, idx) => (
+              {noticia.tags && noticia.tags.slice(0, 3).map((tag: string, idx: number) => (
                 <span
                   key={idx}
                   className="px-4 py-2 bg-slate-800 border border-slate-700 text-slate-300 text-sm font-bold uppercase tracking-wider rounded-full"

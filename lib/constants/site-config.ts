@@ -3,7 +3,77 @@
  * Todas as informações de contato, redes sociais e dados do escritório
  */
 
-export const SITE_CONFIG = {
+type TSiteConfig = {
+  advogado: {
+    nome: string
+    nomeExibicao: string
+    oab: string
+    formacao: string
+    titulo: string
+  }
+  contato: {
+    telefone: {
+      principal: string
+      whatsapp: string
+      secundario: string
+    }
+    email: {
+      principal: string
+      atendimento: string
+    }
+    endereco: {
+      logradouro: string
+      bairro: string
+      cidade: string
+      estado: string
+      cep: string
+      completo: string
+      googleMapsUrl: string
+    }
+    horarioAtendimento: {
+      semana: string
+      sabado: string
+      domingo: string
+    }
+  }
+  redesSociais: {
+    instagram: {
+      url: string
+      usuario: string
+    }
+    facebook: {
+      url: string
+      usuario: string
+    }
+    linkedin: {
+      url: string
+      usuario: string
+    }
+    youtube?: {
+      url: string
+      usuario: string
+    }
+    twitter?: {
+      url: string
+      usuario: string
+    }
+  }
+  site: {
+    nome: string
+    titulo: string
+    descricao: string
+    url: string
+    logo: string
+    anoFundacao: number
+    anosExperiencia: number
+  }
+  mensagens: {
+    whatsapp: string
+    rodape: string
+  }
+}
+
+export const SITE_CONFIG: TSiteConfig = {
   // Informações do Advogado
   advogado: {
     nome: "Alex de Melo Orphêo",

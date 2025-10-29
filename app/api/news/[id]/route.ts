@@ -18,10 +18,10 @@ const newsSchema = z.object({
 // GET - Buscar notícia por ID ou slug
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = params.id
+    const { id } = await params
 
     // Tentar buscar por ID primeiro
     let query = supabaseServer
@@ -58,7 +58,7 @@ export async function GET(
 // PUT - Atualizar notícia
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth()
@@ -70,6 +70,7 @@ export async function PUT(
       )
     }
 
+    const { id } = await params
     const body = await request.json()
     const validatedData = newsSchema.parse(body)
 
@@ -80,7 +81,7 @@ export async function PUT(
       const { data: currentNews } = await supabaseServer
         .from("News")
         .select("publishedAt")
-        .eq("id", params.id)
+        .eq("id", id)
         .single()
 
       if (!currentNews?.publishedAt) {
@@ -93,7 +94,7 @@ export async function PUT(
     const { data, error } = await supabaseServer
       .from("News")
       .update(updateData)
-      .eq("id", params.id)
+      .eq("id", id)
       .select()
       .single()
 
@@ -109,7 +110,7 @@ export async function PUT(
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Dados inválidos", details: error.errors },
+        { error: "Dados inválidos", details: error.issues },
         { status: 400 }
       )
     }
@@ -125,7 +126,7 @@ export async function PUT(
 // DELETE - Deletar notícia
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth()
@@ -137,10 +138,11 @@ export async function DELETE(
       )
     }
 
+    const { id } = await params
     const { error } = await supabaseServer
       .from("News")
       .delete()
-      .eq("id", params.id)
+      .eq("id", id)
 
     if (error) {
       console.error("Erro ao deletar notícia:", error)

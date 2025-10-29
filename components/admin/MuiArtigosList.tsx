@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import {
   Box,
-  Grid,
   Card,
   CardContent,
   Typography,
@@ -103,36 +102,34 @@ export default function MuiArtigosList({ artigos }: MuiArtigosListProps) {
       </Box>
 
       {/* Stats */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4 }}>
         {statsCards.map((card, index) => (
-          <Grid item xs={12} sm={4} key={index}>
-            <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                      {card.title}
-                    </Typography>
-                    <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                      {card.value}
-                    </Typography>
-                  </Box>
-                  <Avatar
-                    sx={{
-                      bgcolor: card.bgColor,
-                      color: card.color,
-                      width: 48,
-                      height: 48,
-                    }}
-                  >
-                    {card.icon}
-                  </Avatar>
+          <Card key={index} sx={{ flex: 1 }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                    {card.title}
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                    {card.value}
+                  </Typography>
                 </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+                <Avatar
+                  sx={{
+                    bgcolor: card.bgColor,
+                    color: card.color,
+                    width: 48,
+                    height: 48,
+                  }}
+                >
+                  {card.icon}
+                </Avatar>
+              </Box>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Stack>
 
       {/* Articles List */}
       <Box>

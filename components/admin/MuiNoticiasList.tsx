@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import {
   Box,
-  Grid,
   Card,
   CardContent,
   Typography,
@@ -98,7 +97,7 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
           href="/admin/noticias/novo"
           variant="contained"
           startIcon={<AddIcon />}
-          sx={{ 
+          sx={{
             textTransform: 'none',
             bgcolor: '#f59e0b',
             '&:hover': {
@@ -111,36 +110,40 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
       </Box>
 
       {/* Stats */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4, flexWrap: 'wrap' }}>
         {statsCards.map((card, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                      {card.title}
-                    </Typography>
-                    <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                      {card.value}
-                    </Typography>
-                  </Box>
-                  <Avatar
-                    sx={{
-                      bgcolor: card.bgColor,
-                      color: card.color,
-                      width: 48,
-                      height: 48,
-                    }}
-                  >
-                    {card.icon}
-                  </Avatar>
+          <Card
+            key={index}
+            sx={{
+              flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(25% - 18px)' },
+              minWidth: 0,
+            }}
+          >
+            <CardContent>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                    {card.title}
+                  </Typography>
+                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                    {card.value}
+                  </Typography>
                 </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+                <Avatar
+                  sx={{
+                    bgcolor: card.bgColor,
+                    color: card.color,
+                    width: 48,
+                    height: 48,
+                  }}
+                >
+                  {card.icon}
+                </Avatar>
+              </Box>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Stack>
 
       {/* News List */}
       <Box>
@@ -173,7 +176,7 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
               href="/admin/noticias/novo"
               variant="contained"
               startIcon={<AddIcon />}
-              sx={{ 
+              sx={{
                 textTransform: 'none',
                 bgcolor: '#f59e0b',
                 '&:hover': {
