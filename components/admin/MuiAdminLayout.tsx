@@ -16,7 +16,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  CssBaseline,
   Avatar,
   Menu,
   MenuItem,
@@ -168,9 +167,9 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
   )
 
   return (
-    <ThemeProvider theme={muiTheme}>
-      <CssBaseline />
-      <Box sx={{ display: 'flex' }}>
+    <div suppressHydrationWarning>
+      <ThemeProvider theme={muiTheme}>
+        <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
         {/* AppBar */}
         <AppBar
           position="fixed"
@@ -277,7 +276,8 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
           {children}
         </Box>
       </Box>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   )
 }
 
