@@ -136,15 +136,15 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-500/20 to-amber-600/20 backdrop-blur-xl border border-amber-500/30 rounded-full mb-8 shadow-2xl shadow-amber-500/20"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500/20 to-amber-600/20 backdrop-blur-xl border border-amber-500/40 rounded-full mb-12 shadow-2xl shadow-amber-500/30"
             >
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <Scale className="w-5 h-5 text-amber-400" />
+                <Scale className="w-5 h-5 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
               </motion.div>
-              <span className="text-amber-400 text-sm font-bold tracking-wider">OAB/SP 123.456 • ADVOCACIA PREMIUM</span>
+              <span className="text-amber-400 text-sm md:text-base font-bold tracking-wider drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">OAB/SP 123.456 • ADVOCACIA PREMIUM</span>
             </motion.div>
 
             {/* Título Principal com Gradient Animado */}
@@ -152,12 +152,12 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1]"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[1.1]"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              <span className="block text-white mb-2">Advocacia de</span>
+              <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
               <motion.span
-                className="block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent"
+                className="block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -179,9 +179,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light"
+              className="text-xl md:text-2xl text-slate-300/90 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
             >
-              Soluções jurídicas estratégicas de <span className="text-amber-400 font-semibold">alto padrão</span> com atendimento personalizado e resultados extraordinários há mais de 15 anos
+              Soluções jurídicas estratégicas de <span className="text-amber-400 font-semibold drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]">alto padrão</span> com atendimento personalizado e resultados extraordinários há mais de 15 anos
             </motion.p>
 
             {/* CTAs Premium */}
@@ -252,7 +252,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto"
             >
               {diferenciais.map((item, index) => (
                 <motion.div
@@ -261,23 +261,31 @@ export default function Home() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{
-                    y: -10,
+                    y: -12,
                     scale: 1.05,
                     transition: { type: "spring", stiffness: 400, damping: 17 }
                   }}
-                  className="group relative flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:border-amber-400/50 transition-all duration-500 cursor-pointer overflow-hidden"
+                  className="group relative flex flex-col items-center gap-4 p-8 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:border-amber-400/60 hover:shadow-amber-500/20 transition-all duration-500 cursor-pointer overflow-hidden"
                 >
                   {/* Glow Effect on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/0 to-amber-600/0 group-hover:from-amber-500/10 group-hover:to-amber-600/10 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/0 to-amber-600/0 group-hover:from-amber-500/20 group-hover:to-amber-600/10 transition-all duration-500" />
+
+                  {/* Shine Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
 
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.2 }}
                     transition={{ duration: 0.6 }}
                     className="relative z-10"
                   >
-                    <item.icon className="w-8 h-8 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
+                    <item.icon className="w-10 h-10 md:w-12 md:h-12 text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.6)]" />
                   </motion.div>
-                  <span className="text-sm md:text-base text-white font-semibold text-center relative z-10">{item.text}</span>
+                  <span className="text-sm md:text-base text-white font-semibold text-center relative z-10 leading-snug">{item.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -287,21 +295,22 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2, duration: 1 }}
-              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+              className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
             >
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="flex flex-col items-center gap-2"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className="flex flex-col items-center gap-3"
               >
-                <span className="text-white/60 text-sm font-medium">Descubra mais</span>
+                <span className="text-white/70 text-sm font-medium tracking-wider">Descubra mais</span>
                 <motion.div
-                  className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
+                  className="w-7 h-11 border-2 border-amber-400/60 rounded-full flex items-start justify-center p-2 shadow-lg shadow-amber-400/20"
+                  whileHover={{ scale: 1.1, borderColor: "rgba(251, 191, 36, 0.8)" }}
                 >
                   <motion.div
-                    animate={{ y: [0, 12, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="w-1.5 h-1.5 bg-amber-400 rounded-full"
+                    animate={{ y: [0, 14, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-2 h-2 bg-amber-400 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)]"
                   />
                 </motion.div>
               </motion.div>
