@@ -8,19 +8,21 @@ async function main() {
 
   // Criar usuário admin
   const hashedPassword = await hash('admin123', 10);
-  
+
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@joaosilva.adv.br' },
+    where: { email: 'admin@alexorpheo.adv.br' },
     update: {},
     create: {
-      email: 'admin@joaosilva.adv.br',
-      name: 'Dr. João Silva',
+      email: 'admin@alexorpheo.adv.br',
+      name: 'Alex Orpheo',
       password: hashedPassword,
       role: 'ADMIN',
     },
   });
 
   console.log('✅ Usuário admin criado');
+  console.log('📧 Email: admin@alexorpheo.adv.br');
+  console.log('🔑 Senha: admin123');
 
   // Criar categorias
   const categorias = [

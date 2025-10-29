@@ -4,15 +4,34 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Alex Orpheo - Advocacia de Excelência | Direito com Sofisticação",
-  description: "Advocacia premium com excelência incomparável. Soluções jurídicas estratégicas e personalizadas para clientes que exigem o melhor.",
-  keywords: ["advogado", "advocacia premium", "direito civil", "direito empresarial", "alex orpheo", "advocacia de elite"],
+  title: "Alex Orpheo - Advogado Especialista | Excelência Jurídica em São Paulo",
+  description: "Advocacia de excelência com +15 anos de experiência. Atendimento personalizado e soluções jurídicas estratégicas em Direito Civil, Empresarial, Trabalhista e mais. Agende sua consultoria gratuita.",
+  keywords: [
+    "advogado são paulo",
+    "alex orpheo",
+    "advocacia premium",
+    "direito civil",
+    "direito empresarial",
+    "direito trabalhista",
+    "direito do consumidor",
+    "advogado especialista",
+    "consultoria jurídica",
+    "escritório de advocacia sp"
+  ],
   authors: [{ name: "Alex Orpheo" }],
   openGraph: {
-    title: "Alex Orpheo - Advocacia de Excelência",
-    description: "Advocacia premium com excelência incomparável",
+    title: "Alex Orpheo - Advogado Especialista | Excelência Jurídica",
+    description: "Advocacia de excelência com atendimento humanizado e resultados comprovados. +15 anos de experiência.",
     type: "website",
     locale: "pt_BR",
+    siteName: "Alex Orpheo Advocacia",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    google: "seu-codigo-google-verification",
   },
 };
 

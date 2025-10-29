@@ -1,7 +1,6 @@
 import type { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import { compare } from 'bcryptjs'
-import { prisma } from '@/lib/prisma'
+import { createClient } from '@supabase/supabase-js'
 
 export const authConfig: NextAuthConfig = {
   providers: [
@@ -16,31 +15,32 @@ export const authConfig: NextAuthConfig = {
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
+        try {
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+          const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+          const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+          const { data, error } = await supabase.auth.signInWithPassword({
             email: credentials.email as string,
-          },
-        })
+            password: credentials.password as string,
+          })
 
-        if (!user || !user.password) {
+          if (error || !data.user) {
+            console.error('Erro ao autenticar:', error)
+            return null
+          }
+
+          return {
+            id: data.user.id,
+            email: data.user.email!,
+            name: data.user.user_metadata?.name || data.user.email,
+            image: data.user.user_metadata?.avatar_url || null,
+            role: data.user.user_metadata?.role || 'ADMIN',
+          }
+        } catch (error) {
+          console.error('Erro na autenticação:', error)
           return null
-        }
-
-        const isPasswordValid = await compare(
-          credentials.password as string,
-          user.password
-        )
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.image,
-          role: user.role,
         }
       },
     }),
