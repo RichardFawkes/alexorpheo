@@ -18,20 +18,20 @@ async function getArticles() {
       .from('Article')
       .select(`
         *,
-        author:User!Article_authorId_fkey(name),
         category:Category(name, slug)
       `)
       .eq('published', true)
       .order('publishedAt', { ascending: false, nullsFirst: false })
 
     if (error) {
-      console.error('Erro ao buscar artigos:', error)
+      console.error('❌ Erro ao buscar artigos:', error)
       return []
     }
 
+    console.log('✅ Artigos encontrados:', articles?.length || 0)
     return articles || []
   } catch (error) {
-    console.error('Erro ao buscar artigos:', error)
+    console.error('❌ Erro ao buscar artigos:', error)
     return [];
   }
 }
@@ -130,12 +130,6 @@ export default async function ArtigosPage() {
                             {article.publishedAt &&
                               format(new Date(article.publishedAt), "dd 'de' MMMM, yyyy", { locale: ptBR })}
                           </span>
-                          {article.author?.name && (
-                            <>
-                              <span>•</span>
-                              <span>Por {article.author.name}</span>
-                            </>
-                          )}
                         </div>
                         <CardTitle className="text-2xl hover:text-primary transition-colors">
                           <Link href={`/artigos/${article.slug}`}>{article.title}</Link>

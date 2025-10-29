@@ -29,17 +29,27 @@ export default function NovoArtigoPage() {
     setIsLoading(true)
 
     try {
+      // Limpar campos vazios antes de enviar
+      const dataToSend = {
+        ...formData,
+        categoryId: formData.categoryId || undefined,
+        excerpt: formData.excerpt || undefined,
+        coverImage: formData.coverImage || undefined
+      }
+
       const response = await fetch("/api/articles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       })
 
       if (response.ok) {
         router.push("/admin/artigos")
         router.refresh()
       } else {
-        alert("Erro ao criar artigo")
+        const errorData = await response.json()
+        console.error("Erro ao criar artigo:", errorData)
+        alert(`Erro ao criar artigo: ${errorData.details || errorData.error}`)
       }
     } catch (error) {
       console.error("Erro:", error)

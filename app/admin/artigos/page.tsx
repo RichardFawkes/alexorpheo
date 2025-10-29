@@ -15,7 +15,6 @@ async function getArticles() {
       .from('Article')
       .select(`
         *,
-        author:User!Article_authorId_fkey(name),
         category:Category(name)
       `)
       .order('createdAt', { ascending: false })
@@ -76,7 +75,6 @@ export default async function ArtigosAdminPage() {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       {article.category && <span>{article.category.name}</span>}
                       <span>{article.published ? "Publicado" : "Rascunho"}</span>
-                      {article.author && <span>Por {article.author.name}</span>}
                     </div>
                   </div>
                   <Button asChild variant="outline" size="sm">

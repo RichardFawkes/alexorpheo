@@ -5,7 +5,7 @@ import { supabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { ArrowLeft, Calendar, User, FolderOpen } from "lucide-react";
+import { ArrowLeft, Calendar, FolderOpen } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -41,7 +41,6 @@ async function getArticle(slug: string) {
       .from('Article')
       .select(`
         *,
-        author:User!Article_authorId_fkey(name, image),
         category:Category(name, slug)
       `)
       .eq('slug', slug)
@@ -94,12 +93,6 @@ export default async function ArtigoPage({ params }: Props) {
             </h1>
 
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              {article.author?.name && (
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  <span>{article.author.name}</span>
-                </div>
-              )}
               {article.publishedAt && (
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />

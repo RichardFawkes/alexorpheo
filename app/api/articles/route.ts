@@ -27,10 +27,21 @@ export async function POST(request: Request) {
     const body = await request.json()
     const validatedData = articleSchema.parse(body)
 
+    // Converter string vazia para null
+    const categoryId = validatedData.categoryId && validatedData.categoryId.trim() !== ''
+      ? validatedData.categoryId
+      : null
+
     const { data: article, error } = await supabaseServer
       .from('Article')
       .insert({
-        ...validatedData,
+        title: validatedData.title,
+        slug: validatedData.slug,
+        excerpt: validatedData.excerpt || null,
+        content: validatedData.content,
+        coverImage: validatedData.coverImage || null,
+        published: validatedData.published,
+        categoryId: categoryId,
         authorId: session.user.id,
         publishedAt: validatedData.published ? new Date().toISOString() : null
       })
@@ -72,7 +83,6 @@ export async function GET(request: Request) {
       .from('Article')
       .select(`
         *,
-        author:User!Article_authorId_fkey(name),
         category:Category(name)
       `)
       .order('createdAt', { ascending: false })
