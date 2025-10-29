@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Scale, Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowRight } from "lucide-react"
+import Image from "next/image"
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
@@ -19,9 +20,9 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Seu melhor e-mail"
-                className="flex-1 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-900"
+                className="flex-1 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-600"
               />
-              <Button className="bg-blue-900 text-white hover:bg-blue-800 rounded-lg px-8">
+              <Button className="bg-gradient-to-r from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-lg px-8 shadow-lg shadow-amber-600/20">
                 Inscrever-se
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -35,17 +36,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo e Descrição */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="h-12 w-12 bg-blue-900 rounded-lg flex items-center justify-center group-hover:bg-blue-800 transition-colors duration-300">
-                <Scale className="h-7 w-7 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-bold text-xl leading-tight text-white">
-                  Alex Orpheo
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  OAB/SP 123.456
-                </span>
+            <Link href="/" className="flex items-center group">
+              <div className="relative h-10 w-auto">
+                <Image
+                  src="/logo.avif"
+                  alt="Alex Orpheo - Advocacia"
+                  width={200}
+                  height={50}
+                  className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80 brightness-0 invert"
+                />
               </div>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
