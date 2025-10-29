@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { supabaseServer } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -16,9 +16,12 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const article = await prisma.article.findUnique({
-    where: { slug, published: true },
-  });
+  const { data: article } = await supabaseServer
+    .from('Article')
+    .select('*')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single()
 
   if (!article) {
     return {
@@ -34,15 +37,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function getArticle(slug: string) {
   try {
-    const article = await prisma.article.findUnique({
-      where: { slug, published: true },
-      include: {
-        author: { select: { name: true, image: true } },
-        category: { select: { name: true, slug: true } },
-      },
-    });
-    return article;
+    const { data: article, error } = await supabaseServer
+      .from('Article')
+      .select(`
+        *,
+        author:User!Article_authorId_fkey(name, image),
+        category:Category(name, slug)
+      `)
+      .eq('slug', slug)
+      .eq('published', true)
+      .single()
+
+    if (error) {
+      console.error('Erro ao buscar artigo:', error)
+      return null
+    }
+
+    return article
   } catch (error) {
+    console.error('Erro ao buscar artigo:', error)
     return null;
   }
 }

@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, FileText } from "lucide-react"
-import { prisma } from "@/lib/prisma"
+import { supabaseServer } from "@/lib/supabase/server"
 
 export const metadata: Metadata = {
   title: "Artigos | Admin",
@@ -11,15 +11,23 @@ export const metadata: Metadata = {
 
 async function getArticles() {
   try {
-    const articles = await prisma.article.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        author: { select: { name: true } },
-        category: { select: { name: true } },
-      },
-    })
-    return articles
+    const { data: articles, error } = await supabaseServer
+      .from('Article')
+      .select(`
+        *,
+        author:User!Article_authorId_fkey(name),
+        category:Category(name)
+      `)
+      .order('createdAt', { ascending: false })
+
+    if (error) {
+      console.error('Erro ao buscar artigos:', error)
+      return []
+    }
+
+    return articles || []
   } catch (error) {
+    console.error('Erro ao buscar artigos:', error)
     return []
   }
 }

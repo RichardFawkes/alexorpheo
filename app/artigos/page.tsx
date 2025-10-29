@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { supabaseServer } from "@/lib/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
@@ -14,28 +14,44 @@ export const metadata: Metadata = {
 
 async function getArticles() {
   try {
-    const articles = await prisma.article.findMany({
-      where: { published: true },
-      orderBy: { publishedAt: "desc" },
-      include: {
-        author: { select: { name: true } },
-        category: { select: { name: true, slug: true } },
-      },
-    });
-    return articles;
+    const { data: articles, error } = await supabaseServer
+      .from('Article')
+      .select(`
+        *,
+        author:User!Article_authorId_fkey(name),
+        category:Category(name, slug)
+      `)
+      .eq('published', true)
+      .order('publishedAt', { ascending: false, nullsFirst: false })
+
+    if (error) {
+      console.error('Erro ao buscar artigos:', error)
+      return []
+    }
+
+    return articles || []
   } catch (error) {
+    console.error('Erro ao buscar artigos:', error)
     return [];
   }
 }
 
 async function getCategories() {
   try {
-    const categories = await prisma.category.findMany({
-      orderBy: { name: "asc" },
-    });
-    return categories;
+    const { data: categories, error } = await supabaseServer
+      .from('Category')
+      .select('*')
+      .order('name', { ascending: true })
+
+    if (error) {
+      console.error('Erro ao buscar categorias:', error)
+      return []
+    }
+
+    return categories || []
   } catch (error) {
-    return [] as Awaited<ReturnType<typeof prisma.category.findMany>>;
+    console.error('Erro ao buscar categorias:', error)
+    return []
   }
 }
 

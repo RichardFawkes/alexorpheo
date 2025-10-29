@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth/auth"
-import { prisma } from "@/lib/prisma"
+import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
 
 const articleSchema = z.object({
@@ -27,13 +27,23 @@ export async function POST(request: Request) {
     const body = await request.json()
     const validatedData = articleSchema.parse(body)
 
-    const article = await prisma.article.create({
-      data: {
+    const { data: article, error } = await supabaseServer
+      .from('Article')
+      .insert({
         ...validatedData,
         authorId: session.user.id,
-        publishedAt: validatedData.published ? new Date() : null
-      }
-    })
+        publishedAt: validatedData.published ? new Date().toISOString() : null
+      })
+      .select()
+      .single()
+
+    if (error) {
+      console.error("Erro ao criar artigo:", error)
+      return NextResponse.json(
+        { error: "Erro ao criar artigo", details: error.message },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json(article, { status: 201 })
   } catch (error) {
@@ -58,16 +68,30 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const published = searchParams.get("published") === "true"
 
-    const articles = await prisma.article.findMany({
-      where: published ? { published: true } : undefined,
-      orderBy: { createdAt: "desc" },
-      include: {
-        author: { select: { name: true } },
-        category: { select: { name: true } }
-      }
-    })
+    let query = supabaseServer
+      .from('Article')
+      .select(`
+        *,
+        author:User!Article_authorId_fkey(name),
+        category:Category(name)
+      `)
+      .order('createdAt', { ascending: false })
 
-    return NextResponse.json(articles)
+    if (published) {
+      query = query.eq('published', true)
+    }
+
+    const { data: articles, error } = await query
+
+    if (error) {
+      console.error("Erro ao buscar artigos:", error)
+      return NextResponse.json(
+        { error: "Erro ao buscar artigos" },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json(articles || [])
   } catch (error) {
     console.error("Erro ao buscar artigos:", error)
     return NextResponse.json(

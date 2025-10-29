@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { prisma } from "@/lib/prisma";
+import { supabaseServer } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, FolderOpen, Eye } from "lucide-react";
 
@@ -9,19 +9,24 @@ export const metadata: Metadata = {
 
 async function getStats() {
   try {
-    const [totalArticles, publishedArticles, totalCategories] = await Promise.all([
-      prisma.article.count(),
-      prisma.article.count({ where: { published: true } }),
-      prisma.category.count(),
+    const [
+      { count: totalArticles },
+      { count: publishedArticles },
+      { count: totalCategories }
+    ] = await Promise.all([
+      supabaseServer.from('Article').select('*', { count: 'exact', head: true }),
+      supabaseServer.from('Article').select('*', { count: 'exact', head: true }).eq('published', true),
+      supabaseServer.from('Category').select('*', { count: 'exact', head: true }),
     ]);
 
     return {
-      totalArticles,
-      publishedArticles,
-      draftArticles: totalArticles - publishedArticles,
-      totalCategories,
+      totalArticles: totalArticles || 0,
+      publishedArticles: publishedArticles || 0,
+      draftArticles: (totalArticles || 0) - (publishedArticles || 0),
+      totalCategories: totalCategories || 0,
     };
   } catch (error) {
+    console.error('Erro ao buscar estatísticas:', error)
     return {
       totalArticles: 0,
       publishedArticles: 0,
