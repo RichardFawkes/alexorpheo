@@ -35,7 +35,7 @@ export default function Footer() {
                 placeholder="Seu melhor e-mail"
                 className="flex-1 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-600"
               />
-              <Button className="bg-gradient-to-r from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-lg px-8 shadow-lg shadow-amber-600/20">
+              <Button className=" text-white hover:from-amber-700 hover:to-amber-800 rounded-lg px-8 shadow-lg shadow-amber-600/20">
                 Inscrever-se
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
