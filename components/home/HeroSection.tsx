@@ -174,12 +174,12 @@ export default function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="relative group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-10 py-7 text-lg font-bold rounded-xl shadow-2xl shadow-amber-500/50 hover:shadow-amber-500/70 transition-all duration-500 overflow-hidden"
+                className="relative group from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-10 py-7 text-lg font-bold rounded-xl shadow-2xl shadow-amber-500/50 hover:shadow-amber-500/70 transition-all duration-500 overflow-hidden"
               >
                 <Link href="/contato" className="flex items-center relative z-10">
                   {/* Shimmer Effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    className="absolute inset-0  from-transparent via-white/30 to-transparent"
                     animate={{
                       x: ["-200%", "200%"],
                     }}
