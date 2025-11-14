@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-x-hidden ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-x-hidden bg-[ #002640] ${
         isScrolled
           ? "bg-slate-950/98 backdrop-blur-xl shadow-2xl border-b border-slate-800/50"
           : "bg-slate-950/95 backdrop-blur-lg border-b border-slate-800/30"

@@ -97,7 +97,7 @@ export default function AreasAtuacaoPage() {
 
       {/* Outras Áreas */}
       {outrasAreas.length > 0 && (
-        <section className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+        <section className="py-20 md:py-28 bg-[#FF5733] from-slate-50 via-white to-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif text-slate-900">
@@ -112,7 +112,7 @@ export default function AreasAtuacaoPage() {
               {outrasAreas.map((area) => {
                 const IconComponent = iconeMap[area.icone] || Briefcase;
                 return (
-                  <Card key={area.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Card key={area.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 ">
                     <CardHeader>
                       <div className="h-12 w-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
                         <IconComponent className="h-6 w-6 text-blue-600" />

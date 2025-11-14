@@ -7,7 +7,7 @@ import { Scale, Phone, Mail } from "lucide-react"
 
 export default function SectionCTAFinal() {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-gradient-to-br relative overflow-hidden bg-[#002640]">
       {/* Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px]" />
