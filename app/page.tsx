@@ -35,15 +35,15 @@ export default async function Home() {
 
       {/* HERO SECTION - Ultra Premium com Parallax */}
       <HeroSection />
-
+{/* NOTÍCIAS */}
+      {noticias.length > 0 && <CarouselNoticias noticias={noticias} />}
       {/* NÚMEROS IMPRESSIONANTES */}
       <SectionNumeros />
 
       {/* ÁREAS DE ATUAÇÃO */}
       <SectionAreasAtuacao />
 
-      {/* NOTÍCIAS */}
-      {noticias.length > 0 && <CarouselNoticias noticias={noticias} />}
+
 
       {/* CTA FINAL */}
       <SectionCTAFinal />
