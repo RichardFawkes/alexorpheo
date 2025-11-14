@@ -132,7 +132,7 @@ export default function HeroSection() {
           >
             <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
             <motion.span
-              className="block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]"
+              className="block bg-gradient-to-r to-amber-200 bg-clip-text text-transparent"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
