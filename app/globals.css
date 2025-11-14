@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-.text-amber-400 {
+.text-amber-400,.text-amber-200 {
   color: #D9B060 !important;
 }
 .to-amber-600 {
