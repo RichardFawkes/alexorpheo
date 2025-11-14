@@ -130,7 +130,7 @@ export default function Header() {
                 >
                   <Button
                     asChild
-                    className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-xl py-7 text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full  from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-xl py-7 text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center">
                       <Phone className="mr-2 h-5 w-5" />
