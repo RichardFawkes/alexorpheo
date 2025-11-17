@@ -43,8 +43,8 @@ export async function POST() {
     console.log('✅ Cliente criado, tentando criar usuário...')
 
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
-      email: 'admin@alexorpheo.adv.br',
-      password: 'admin123',
+      email: 'adv.orpheo@gmail.com',
+      password: 'admin@orpheo#',
       email_confirm: true,
       user_metadata: {
         name: 'Alex Orpheo',
@@ -67,8 +67,8 @@ export async function POST() {
       success: true,
       message: '✅ Usuário admin criado com sucesso!',
       credentials: {
-        email: 'admin@alexorpheo.adv.br',
-        password: 'admin123'
+        email: 'adv.orpheo@gmail.com',
+        password: 'admin@orpheo#'
       },
       user: {
         id: data.user?.id,

@@ -72,7 +72,6 @@ export default function LoginForm() {
               id="email"
               type="email"
               {...register("email")}
-              placeholder="seu@email.com"
               disabled={isLoading}
             />
             {errors.email && (
@@ -86,7 +85,6 @@ export default function LoginForm() {
               id="password"
               type="password"
               {...register("password")}
-              placeholder="••••••••"
               disabled={isLoading}
             />
             {errors.password && (
