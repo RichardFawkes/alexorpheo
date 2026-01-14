@@ -6,9 +6,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Phone, Scale, Award, Users, CheckCircle2, Star } from "lucide-react"
 import { useRef } from "react"
+import { SITE_CONFIG } from "@/lib/constants/site-config"
 
 const diferenciais = [
-  { icon: Award, text: "Mais de 15 anos de experiência" },
+  { icon: Award, text: `${SITE_CONFIG.site.anosExperiencia}+ anos de experiência` },
   { icon: Users, text: "Atendimento personalizado" },
   { icon: CheckCircle2, text: "Resultados comprovados" },
   { icon: Star, text: "Excelência reconhecida" }
@@ -31,74 +32,21 @@ export default function HeroSection() {
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image com Parallax */}
+      {/* Background com Banner Principal */}
       <motion.div
         style={{ y: smoothY, scale: smoothScale }}
         className="absolute inset-0 z-0"
       >
         <Image
-          src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070"
-          alt="Escritório de Advocacia"
+          src="/banner.jpeg"
+          alt="Orpheo Advocacia - Banner principal"
           fill
-          className="object-cover"
+          className="object-cover object-center md:object-[60%_50%]"
           priority
         />
-        {/* Overlay Gradiente Sofisticado */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/98 via-slate-900/95 to-blue-950/90" />
-
-        {/* Animated Gradient Orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -100, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              x: [0, -100, 0],
-              y: [0, 100, 0],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
-          />
-        </div>
-
-        {/* Luxury Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#fbbf2412_1px,transparent_1px),linear-gradient(to_bottom,#fbbf2412_1px,transparent_1px)] bg-[size:60px_60px]" />
-        </div>
+        {/* Overlay suave para leitura do texto */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/80 to-slate-950/88" />
       </motion.div>
-
-      {/* Shimmer Effect */}
-      <div className="absolute inset-0 z-[1]">
-        <motion.div
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-          style={{
-            backgroundSize: "200% 200%",
-          }}
-        />
-      </div>
 
       <motion.div
         style={{ opacity: smoothOpacity }}
@@ -106,60 +54,50 @@ export default function HeroSection() {
       >
         <div className="max-w-5xl mx-auto text-center">
 
-          {/* Premium Badge com Glow */}
+          {/* Badge profissional */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500/20 to-amber-600/20 backdrop-blur-xl border border-amber-500/40 rounded-full mb-12 shadow-2xl shadow-amber-500/30"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-3 px-6 py-3 bg-slate-950/70 border border-white/10 rounded-full mb-10 shadow-md"
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <Scale className="w-5 h-5 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
-            </motion.div>
-            <span className="text-amber-400 text-sm md:text-base font-bold tracking-wider drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">OAB/SP 123.456 • ADVOCACIA PREMIUM</span>
+            <Scale className="w-5 h-5 text-amber-300" />
+            <span className="text-sm md:text-base font-semibold text-slate-50">
+              <span className="text-amber-300">{SITE_CONFIG.advogado.oab}</span>
+              {" • "}
+              {SITE_CONFIG.site.anosExperiencia}+ anos de experiência
+            </span>
           </motion.div>
 
-          {/* Título Principal com Gradient Animado */}
+          {/* Título principal */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[1.1]"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1]"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
-            <motion.span
-              className="block bg-gradient-to-r to-amber-200 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                backgroundSize: "200% auto",
-              }}
-            >
+            <span className="block text-white mb-2">Advocacia de</span>
+            <span className="block bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent">
               Excelência Absoluta
-            </motion.span>
+            </span>
           </motion.h1>
 
-          {/* Subtítulo Elegante */}
+          {/* Subtítulo */}
           <motion.p
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl md:text-2xl text-slate-300/90 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
+            className="text-lg md:text-xl text-slate-200/90 mb-14 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            Soluções jurídicas estratégicas de <span className="text-amber-400 font-semibold drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]">alto padrão</span> com atendimento personalizado e resultados extraordinários há mais de 15 anos
+            Soluções jurídicas estratégicas de{" "}
+            <span className="text-amber-300 font-semibold">
+              alto padrão
+            </span>{" "}
+            com atendimento personalizado e {SITE_CONFIG.site.anosExperiencia}+ anos de experiência em São Paulo
           </motion.p>
 
-          {/* CTAs Premium */}
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -167,29 +105,15 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
           >
             <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHover={{ y: -3 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
             >
               <Button
                 asChild
                 size="lg"
-                className="relative group from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-4 py-7 text-lg  shadow-amber-500/50 hover:shadow-amber-500/70 transition-all duration-500 overflow-hidden"
+                className="bg-amber-400 hover:bg-amber-500 text-slate-900 px-8 py-6 text-base md:text-lg font-semibold rounded-full shadow-lg transition-colors duration-300"
               >
                 <Link href="/contato" className="flex items-center relative z-10">
-                  {/* Shimmer Effect */}
-                  <motion.div
-                    className="absolute inset-0  from-transparent via-white/30 to-transparent"
-                    animate={{
-                      x: ["-200%", "200%"],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "linear",
-                      repeatDelay: 1
-                    }}
-                  />
                   <Phone className="mr-3 h-6 w-6" />
                   Agendar Consulta Exclusiva
                   <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
@@ -198,31 +122,24 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHover={{ y: -3 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
             >
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="relative group border-2 border-amber-400/50 text-white hover:bg-amber-400/10 backdrop-blur-xl px-10 py-7 text-lg font-bold rounded-xl transition-all duration-500 shadow-xl shadow-amber-500/20"
+                className="border border-slate-100/40 text-white hover:bg-white/5 px-8 py-6 text-base md:text-lg font-semibold rounded-full transition-colors duration-300"
               >
                 <Link href="/sobre" className="flex items-center">
                   Conheça o Escritório
-                  <motion.div
-                    className="ml-3"
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="h-6 w-6" />
-                  </motion.div>
+                  <ArrowRight className="ml-3 h-6 w-6" />
                 </Link>
               </Button>
             </motion.div>
           </motion.div>
 
-          {/* Stats Premium */}
+          {/* Diferenciais */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -236,31 +153,15 @@ export default function HeroSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{
-                  y: -12,
-                  scale: 1.05,
-                  transition: { type: "spring", stiffness: 400, damping: 17 }
+                  y: -6,
+                  transition: { type: "spring", stiffness: 320, damping: 22 }
                 }}
-                className="group relative flex flex-col items-center gap-4 p-8 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:border-amber-400/60 hover:shadow-amber-500/20 transition-all duration-500 cursor-pointer overflow-hidden"
+                className="flex flex-col items-center gap-3 p-6 md:p-7 bg-slate-950/75 rounded-2xl border border-white/10 shadow-lg hover:border-amber-400/50 transition-all duration-300 cursor-pointer"
               >
-                {/* Glow Effect on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/0 to-amber-600/0 group-hover:from-amber-500/20 group-hover:to-amber-600/10 transition-all duration-500" />
-
-                {/* Shine Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
-                />
-
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative z-10"
-                >
-                  <item.icon className="w-10 h-10 md:w-12 md:h-12 text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.6)]" />
-                </motion.div>
-                <span className="text-sm md:text-base text-white font-semibold text-center relative z-10 leading-snug">{item.text}</span>
+                <item.icon className="w-9 h-9 md:w-10 md:h-10 text-amber-300" />
+                <span className="text-sm md:text-base text-slate-50 font-medium text-center leading-snug">
+                  {item.text}
+                </span>
               </motion.div>
             ))}
           </motion.div>
@@ -277,15 +178,15 @@ export default function HeroSection() {
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               className="flex flex-col items-center gap-3"
             >
-              <span className="text-white/70 text-sm font-medium tracking-wider">Descubra mais</span>
+              <span className="text-white/70 text-sm font-medium tracking-wider">Deslize para conhecer mais</span>
               <motion.div
-                className="w-7 h-11 border-2 border-amber-400/60 rounded-full flex items-start justify-center p-2 shadow-lg shadow-amber-400/20"
-                whileHover={{ scale: 1.1, borderColor: "rgba(251, 191, 36, 0.8)" }}
+                className="w-7 h-11 border-2 border-white/30 rounded-full flex items-start justify-center p-2 shadow-lg shadow-black/40"
+                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.6)" }}
               >
                 <motion.div
                   animate={{ y: [0, 14, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-2 h-2 bg-amber-400 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)]"
+                  className="w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(0,0,0,0.6)]"
                 />
               </motion.div>
             </motion.div>

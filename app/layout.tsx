@@ -3,13 +3,14 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { SITE_CONFIG } from "@/lib/constants/site-config";
 
 export const metadata: Metadata = {
-  title: "Alex Orpheo - Advogado Especialista | Excelência Jurídica em São Paulo",
-  description: "Advocacia de excelência com +15 anos de experiência. Atendimento personalizado e soluções jurídicas estratégicas em Direito Civil, Empresarial, Trabalhista e mais. Agende sua consultoria gratuita.",
+  title: `${SITE_CONFIG.site.nome} - Excelência Jurídica em São Paulo`,
+  description: `Advocacia de excelência com ${SITE_CONFIG.site.anosExperiencia}+ anos de experiência em São Paulo. Atendimento personalizado e soluções jurídicas estratégicas com foco em Direito do Trabalho.`,
   keywords: [
     "advogado são paulo",
-    "alex orpheo",
+    "orpheo advocacia",
     "advocacia premium",
     "direito civil",
     "direito empresarial",
@@ -19,13 +20,13 @@ export const metadata: Metadata = {
     "consultoria jurídica",
     "escritório de advocacia sp"
   ],
-  authors: [{ name: "Alex Orpheo" }],
+  authors: [{ name: SITE_CONFIG.advogado.nome }],
   openGraph: {
-    title: "Alex Orpheo - Advogado Especialista | Excelência Jurídica",
-    description: "Advocacia de excelência com atendimento humanizado e resultados comprovados. +15 anos de experiência.",
+    title: `${SITE_CONFIG.site.nome} - Excelência Jurídica`,
+    description: `Advocacia de excelência com atendimento humanizado e resultados comprovados. ${SITE_CONFIG.site.anosExperiencia}+ anos de experiência.`,
     type: "website",
     locale: "pt_BR",
-    siteName: "Alex Orpheo Advocacia",
+    siteName: SITE_CONFIG.site.nome,
   },
   robots: {
     index: true,

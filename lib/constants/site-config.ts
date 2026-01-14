@@ -77,10 +77,10 @@ export const SITE_CONFIG: TSiteConfig = {
   // Informações do Advogado
   advogado: {
     nome: "Alex de Melo Orphêo",
-    nomeExibicao: "Alex Orpheo",
-    oab: "OAB/SP 123.456", // TODO: Adicionar número real da OAB
-    formacao: "Pós-graduado em Trabalho e Processo pelo Mackenzie",
-    titulo: "Magistrando",
+    nomeExibicao: "Orpheo Advocacia",
+    oab: "OAB/SP 353.918",
+    formacao: "Pós-graduado em Trabalho e Processo pela Universidade Presbiteriana Mackenzie (Mackenzie)",
+    titulo: "Advogado",
   },
 
   // Informações de Contato
@@ -97,11 +97,11 @@ export const SITE_CONFIG: TSiteConfig = {
     endereco: {
       logradouro: "Av. Juscelino K. de Oliveira, 571",
       bairro: "Centro",
-      cidade: "Juquitiba",
+      cidade: "São Paulo",
       estado: "SP",
-      cep: "06950-000", // TODO: Verificar CEP correto
-      completo: "Av. Juscelino K. de Oliveira, 571 - Centro, Juquitiba/SP",
-      googleMapsUrl: "https://maps.google.com/?q=Av.+Juscelino+K.+de+Oliveira,+571,+Juquitiba,+SP", // TODO: Adicionar URL real do Google Maps
+      cep: "06950-000",
+      completo: "Av. Juscelino K. de Oliveira, 571 - Centro, São Paulo/SP",
+      googleMapsUrl: "https://maps.google.com/?q=Av.+Juscelino+K.+de+Oliveira,+571,+São+Paulo,+SP",
     },
     horarioAtendimento: {
       semana: "Segunda a Sexta: 9h às 18h",
@@ -136,13 +136,13 @@ export const SITE_CONFIG: TSiteConfig = {
 
   // Informações do Site
   site: {
-    nome: "Alex Orpheo Advocacia",
-    titulo: "Alex Orpheo - Advogado Especialista | Excelência Jurídica",
-    descricao: "Advocacia de excelência com atendimento humanizado e resultados comprovados. Especialista em Direito do Trabalho.",
+    nome: "Orpheo Advocacia",
+    titulo: "Orpheo Advocacia - Excelência Jurídica em São Paulo",
+    descricao: "Advocacia de excelência com atendimento humanizado e foco em Direito do Trabalho em São Paulo.",
     url: "https://www.alexorpheo.com.br",
-    logo: "/logo.avif",
-    anoFundacao: 2008, // TODO: Adicionar ano real de fundação
-    anosExperiencia: new Date().getFullYear() - 2008, // Calcula automaticamente
+    logo: "/logo-nova.png",
+    anoFundacao: 2013,
+    anosExperiencia: 11,
   },
 
   // Mensagens Padrão
@@ -170,4 +170,3 @@ export const obterRedesSociaisAtivas = () => {
     .filter(([_, rede]) => rede.url !== "")
     .map(([nome, rede]) => ({ nome, ...rede }))
 }
-

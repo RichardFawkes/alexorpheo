@@ -43,11 +43,11 @@ export default function Header() {
           <Link href="/" className="flex items-center group">
             <div className="relative h-16 md:h-24 w-auto">
               <Image
-                src="/logo.avif"
+                src="/logo-nova.png"
                 alt="Orpheo Advocacia"
                 width={400}
                 height={100}
-                className="h-16 md:h-24 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+                className="h-16 md:h-24 w-auto object-contain transition-all duration-300 group-hover:opacity-80 brightness-[1.05] contrast-[1.1]"
                 priority
               />
             </div>

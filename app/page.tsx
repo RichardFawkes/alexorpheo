@@ -32,7 +32,8 @@ export default async function Home() {
 
       {/* HERO SECTION - Ultra Premium com Parallax */}
       <HeroSection />
-{/* NOTÍCIAS */}
+
+      {/* NOTÍCIAS */}
       {noticias.length > 0 && <CarouselNoticias noticias={noticias} />}
 
       {/* ÁREAS DE ATUAÇÃO */}
