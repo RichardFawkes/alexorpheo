@@ -74,11 +74,11 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1]"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[1.1]"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            <span className="block text-white mb-2">Advocacia de</span>
-            <span className="block bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent">
+            <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
+            <span className="block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent pb-2">
               Excelência Absoluta
             </span>
           </motion.h1>
