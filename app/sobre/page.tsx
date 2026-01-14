@@ -19,8 +19,8 @@ export default function SobrePage() {
 
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-6 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full">
-              <span className="text-amber-400 text-sm font-semibold">{SITE_CONFIG.advogado.oab}</span>
+            <div className="inline-block mb-6 px-4 py-2 bg-gold-500/10 border border-gold-500/20 rounded-full">
+              <span className="text-gold-400 text-sm font-semibold">{SITE_CONFIG.advogado.oab}</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               {SITE_CONFIG.advogado.nome}
@@ -28,20 +28,20 @@ export default function SobrePage() {
             <p className="text-xl md:text-2xl text-slate-300 mb-4">
               {SITE_CONFIG.advogado.formacao}
             </p>
-            <p className="text-lg text-amber-400 font-semibold mb-8">
+            <p className="text-lg text-gold-400 font-semibold mb-8">
               {SITE_CONFIG.advogado.titulo}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-amber-500" />
+                <CheckCircle className="h-5 w-5 text-gold-500" />
                 <span>{SITE_CONFIG.site.anosExperiencia}+ anos de experiência</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-amber-500" />
+                <CheckCircle className="h-5 w-5 text-gold-500" />
                 <span>Especialista em Direito do Trabalho</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-amber-500" />
+                <CheckCircle className="h-5 w-5 text-gold-500" />
                 <span>Atendimento em {SITE_CONFIG.contato.endereco.cidade}/{SITE_CONFIG.contato.endereco.estado}</span>
               </div>
             </div>
@@ -56,7 +56,7 @@ export default function SobrePage() {
             {/* Imagem do Advogado */}
             <div className="lg:col-span-2">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/20 to-blue-500/20 rounded-2xl blur-2xl"></div>
+                <div className="absolute -inset-4 bg-gradient-to-br from-gold-500/20 to-blue-500/20 rounded-2xl blur-2xl"></div>
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
                     src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000"
@@ -83,28 +83,31 @@ export default function SobrePage() {
                 </h2>
                 <div className="prose prose-lg max-w-none space-y-5 text-slate-600 leading-relaxed">
                   <p>
-                    O escritório <strong>{SITE_CONFIG.site.nome}</strong> é um escritório de consultoria, assessoria e serviços jurídicos, que possui um quadro societário eclético, compacto, arrojado e competente, solidificado na experiência, na eficiência e no empreendedorismo.
+                    <strong>Orpheo Advocacia</strong> é um escritório dedicado à consultoria, assessoria e serviços jurídicos, formado por uma equipe experiente, multidisciplinar e comprometida com soluções eficientes para seus clientes.
                   </p>
                   <p>
-                    O Escritório está preocupado com a melhora dos serviços que oferece e com a rápida resolução das pendências de seus clientes, sempre intensificando suas atuações junto ao Judiciário e desta forma possibilitando a resolução dos processos com praticidade e competência.
+                    Trabalhamos com foco na agilidade, na clareza e na atuação estratégica, buscando sempre a melhor condução dos processos e a rápida resolução das demandas, tanto no Judiciário quanto na esfera consultiva.
                   </p>
                   <p>
-                    Nossa <strong>maior especialidade é o Direito do Trabalho</strong>, voltado para as diversas ações de cunho processual, como por exemplo, adicional de insalubridade e periculosidade, adicional noturno, indenização pela redução da capacidade laborativa, horas extras, intervalo intrajornada, descontos indevidos, vale refeição, cesta básica, verbas rescisórias, vínculo de emprego, estabilidade gestante, membros da CIPA, etc.
+                    Nossa <strong>principal área de atuação é o Direito do Trabalho</strong>, abrangendo ações relacionadas a adicional de insalubridade e periculosidade, adicional noturno, indenizações decorrentes de redução da capacidade laborativa, horas extras, intervalos, descontos indevidos, benefícios corporativos, verbas rescisórias, vínculo de emprego, estabilidade gestante, proteção de membros da CIPA, entre outras demandas trabalhistas.
                   </p>
                   <p>
-                    Também realizamos serviços de <strong>assessoria empresarial</strong>, organizando na escala de revezamento dos colaboradores, plano de pagamentos eficientes, controle de jornada organizacional, análises de justa causa, acordos com CEF (Caixa Econômica Federal), reestruturação financeira empresarial, dentre outros serviços.
+                    Também oferecemos <strong>assessoria empresarial</strong>, auxiliando na organização de escalas de revezamento, planejamento de pagamentos, controle de jornada, análises de justa causa, acordos com a CEF (Caixa Econômica Federal), reestruturação financeira e outras soluções voltadas à área trabalhista corporativa.
+                  </p>
+                  <p>
+                    Somos um escritório moderno, preparado para um mercado em constante transformação, e comprometido em ajudar nossos clientes a enfrentar desafios jurídicos com segurança, transparência e estratégia.
                   </p>
                   <p className="text-slate-700 font-medium">
-                    Somos um novo tipo de escritório de advocacia em um mercado desafiador e em constante mudança, ajudando os clientes a superarem seus problemas jurídicos mais complexos. Será um prazer receber sua ligação e entender melhor as suas necessidades.
+                    Será um prazer entender suas necessidades e contribuir para a solução do seu caso.
                   </p>
                 </div>
               </div>
 
               {/* Cards de Destaque */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="border-2 border-amber-100 bg-gradient-to-br from-amber-50 to-white">
+                <Card className="border-2 border-gold-100 bg-gradient-to-br from-gold-50 to-white">
                   <CardHeader>
-                    <GraduationCap className="h-10 w-10 text-amber-600 mb-3" />
+                    <GraduationCap className="h-10 w-10 text-gold-600 mb-3" />
                     <CardTitle className="text-lg">Formação Acadêmica</CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -138,8 +141,8 @@ export default function SobrePage() {
       <section className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-2 bg-amber-100 rounded-full">
-              <span className="text-amber-700 text-sm font-semibold">NOSSOS DIFERENCIAIS</span>
+            <div className="inline-block mb-4 px-4 py-2 bg-gold-100 rounded-full">
+              <span className="text-gold-700 text-sm font-semibold">NOSSOS DIFERENCIAIS</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif text-slate-900">
               Por que escolher nosso escritório?

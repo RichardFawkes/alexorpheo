@@ -96,7 +96,7 @@ export default function ContatoPage() {
             <div className="lg:col-span-2">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-2xl">Envie uma Mensagem</CardTitle>
+                  <CardTitle className="text-2xl uppercase">VAMOS TRABALHAR JUNTOS?</CardTitle>
                   <CardDescription>
                     Preencha o formulário abaixo e entraremos em contato o mais breve possível
                   </CardDescription>

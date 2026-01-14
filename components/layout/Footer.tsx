@@ -52,8 +52,8 @@ export default function Footer() {
             <Link href="/" className="flex items-center group">
               <div className="relative h-10 w-auto">
                 <Image
-                  src="/logo.avif"
-                  alt="Alex Orpheo - Advocacia"
+                  src="/logo.png"
+                  alt="Orpheo Advocacia"
                   width={200}
                   height={50}
                   className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80 brightness-0 invert"

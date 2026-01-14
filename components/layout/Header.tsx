@@ -31,23 +31,23 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-x-hidden bg-[ #002640] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-x-hidden bg-[#002640] ${
         isScrolled
-          ? "bg-slate-950/98 backdrop-blur-xl shadow-2xl border-b border-slate-800/50"
-          : "bg-slate-950/95 backdrop-blur-lg border-b border-slate-800/30"
+          ? "bg-slate-950/98 backdrop-blur-xl shadow-2xl border-b border-gold-500/20"
+          : "bg-slate-950/95 backdrop-blur-lg border-b border-white/5"
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-24">
+        <div className="flex justify-between items-center h-24 md:h-32">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-10 md:h-12 w-auto">
+            <div className="relative h-16 md:h-24 w-auto">
               <Image
                 src="/logo.avif"
-                alt="Alex Orpheo - Advocacia"
-                width={250}
-                height={60}
-                className="h-10 md:h-12 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+                alt="Orpheo Advocacia"
+                width={400}
+                height={100}
+                className="h-16 md:h-24 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
                 priority
               />
             </div>
@@ -59,15 +59,15 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-semibold text-slate-200 hover:text-amber-400 transition-all duration-300 relative group"
+                className="text-base font-medium text-slate-200 hover:text-gold-400 transition-all duration-300 relative group"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
             <Button
               asChild
-              className="bg-gradient-to-r from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-lg px-6 py-2.5 shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:from-gold-600 hover:to-gold-700 rounded-lg px-8 py-3 shadow-md hover:shadow-lg transition-all duration-300"
             >
               <Link href="/contato" className="flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
@@ -83,9 +83,9 @@ export default function Header() {
             aria-label="Menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-amber-400" />
+              <X className="h-6 w-6 text-gold-400" />
             ) : (
-              <Menu className="h-6 w-6 text-amber-400" />
+              <Menu className="h-6 w-6 text-gold-400" />
             )}
           </button>
         </div>
@@ -112,11 +112,11 @@ export default function Header() {
                     >
                       <Link
                         href={item.href}
-                        className="group flex items-center justify-between py-4 px-4 rounded-xl text-base font-semibold text-slate-200 hover:text-amber-400 transition-all duration-300 hover:bg-slate-800/30 border border-transparent hover:border-slate-700/50"
+                        className="group flex items-center justify-between py-4 px-4 rounded-xl text-base font-semibold text-slate-200 hover:text-gold-400 transition-all duration-300 hover:bg-slate-800/30 border border-transparent hover:border-slate-700/50"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <span>{item.name}</span>
-                        <ChevronRight className="w-5 h-5 text-amber-400 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
+                        <ChevronRight className="w-5 h-5 text-gold-400 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
                       </Link>
                     </motion.div>
                   ))}
@@ -130,7 +130,7 @@ export default function Header() {
                 >
                   <Button
                     asChild
-                    className="w-full  from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 rounded-xl py-7 text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:from-gold-600 hover:to-gold-700 rounded-xl py-7 text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center">
                       <Phone className="mr-2 h-5 w-5" />
@@ -155,7 +155,7 @@ export default function Header() {
                   className="mt-6 text-center"
                 >
                   <p className="text-xs text-slate-400 mb-1">Atendimento Premium</p>
-                  <p className="text-sm text-amber-400 font-semibold">{SITE_CONFIG.advogado.oab}</p>
+                  <p className="text-sm text-gold-400 font-semibold">{SITE_CONFIG.advogado.oab}</p>
                 </motion.div>
               </div>
             </motion.div>

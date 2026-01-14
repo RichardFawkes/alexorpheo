@@ -97,7 +97,7 @@ export default function AreasAtuacaoPage() {
 
       {/* Outras Áreas */}
       {outrasAreas.length > 0 && (
-        <section className="py-20 md:py-28 bg-[#FF5733] from-slate-50 via-white to-slate-50">
+        <section className="py-20 md:py-28 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif text-slate-900">
@@ -112,12 +112,12 @@ export default function AreasAtuacaoPage() {
               {outrasAreas.map((area) => {
                 const IconComponent = iconeMap[area.icone] || Briefcase;
                 return (
-                  <Card key={area.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 ">
+                  <Card key={area.id} className="bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all duration-300 group">
                     <CardHeader>
-                      <div className="h-12 w-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                        <IconComponent className="h-6 w-6 text-blue-600" />
+                      <div className="h-12 w-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
+                        <IconComponent className="h-6 w-6 text-amber-600" />
                       </div>
-                      <CardTitle className="text-xl mb-2">{area.titulo}</CardTitle>
+                      <CardTitle className="text-xl mb-2 text-slate-900">{area.titulo}</CardTitle>
                       <CardDescription className="text-sm text-slate-600">
                         {area.descricao}
                       </CardDescription>
@@ -126,12 +126,12 @@ export default function AreasAtuacaoPage() {
                       <ul className="space-y-2">
                         {area.servicos.slice(0, 5).map((servico, idx) => (
                           <li key={idx} className="flex items-start text-sm text-slate-600">
-                            <span className="text-blue-500 mr-2">•</span>
+                            <span className="text-amber-500 mr-2 mt-1">•</span>
                             <span>{servico}</span>
                           </li>
                         ))}
                         {area.servicos.length > 5 && (
-                          <li className="text-sm text-slate-400 italic">
+                          <li className="text-sm text-slate-400 italic pl-3">
                             + {area.servicos.length - 5} outros serviços
                           </li>
                         )}
