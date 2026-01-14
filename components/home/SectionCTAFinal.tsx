@@ -21,7 +21,7 @@ export default function SectionCTAFinal() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Scale className="w-16 h-16 text-amber-400 mx-auto mb-6" />
+            <Scale className="w-16 h-16 text-[#d9b060] mx-auto mb-6" />
 
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">
               Precisa de Assessoria Jurídica?

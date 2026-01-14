@@ -130,8 +130,8 @@ html {
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background: #f59e0b !important;
-  border-color: #f59e0b !important;
+  background: #d9b060 !important;
+  border-color: #d9b060 !important;
   color: #1a2332 !important;
   transform: scale(1.1);
 }
@@ -151,7 +151,7 @@ html {
 }
 
 .swiper-pagination-bullet-active {
-  background: #f59e0b !important;
+  background: #d9b060 !important;
   opacity: 1 !important;
   width: 32px !important;
   border-radius: 6px !important;

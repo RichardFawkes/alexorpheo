@@ -30,9 +30,9 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
   }
 
   return (
-    <section className="py-20 md:py-32 bg-gold-50 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-slate-950 relative overflow-hidden">
       {/* Linhas decorativas */}
-      <div className="absolute left-0 top-20 w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-50" />
+      <div className="absolute left-0 top-20 w-32 h-1 bg-gradient-to-r from-transparent via-[#d9b060] to-transparent opacity-60" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -43,9 +43,9 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 uppercase tracking-tight"
+              className="text-4xl md:text-6xl font-bold text-white mb-6 uppercase tracking-tight"
             >
-              INSIGHTS <span className="text-gold-500">JURÍDICOS</span>
+              INSIGHTS <span className="text-[#d9b060]">JURÍDICOS</span>
             </motion.h2>
 
             <motion.p
@@ -53,7 +53,7 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-xl text-slate-600 max-w-3xl leading-relaxed"
+              className="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed"
             >
               Fique por dentro das principais atualizações do mundo jurídico
             </motion.p>
@@ -94,14 +94,14 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
                       transition={{ duration: 0.3 }}
                       className="group h-full"
                     >
-                      <div className="relative border border-gold-200 bg-white hover:border-gold-500 transition-all duration-500 overflow-hidden h-full flex flex-col shadow-sm hover:shadow-md">
+                      <div className="relative border border-gold-200 bg-white hover:border-gold-500 transition-all duration-500 overflow-hidden h-full flex flex-col shadow-sm hover:shadow-md rounded-3xl">
                         {/* Triângulo dourado no canto */}
                         <div className="absolute top-0 right-0 w-0 h-0 border-t-[60px] border-t-gold-500 border-l-[60px] border-l-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
                         <div className="p-6 flex-1 flex flex-col">
                           {/* Data */}
                           {noticia.publishedAt && (
-                            <div className="text-gold-600 font-bold text-sm mb-4 uppercase">
+                            <div className="text-[#d9b060] font-bold text-sm mb-4 uppercase">
                               {new Date(noticia.publishedAt).toLocaleDateString('pt-BR', {
                                 day: '2-digit',
                                 month: 'short',
@@ -128,7 +128,7 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
                           </div>
 
                           {/* Título */}
-                          <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-3 group-hover:text-gold-600 transition-colors duration-300 flex-1">
+                          <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-3 group-hover:text-[#d9b060] transition-colors duration-300 flex-1">
                             {noticia.title}
                           </h3>
 
@@ -157,7 +157,7 @@ export default function CarouselNoticias({ noticias }: TCarouselNoticiasProps) {
           >
             <Link
               href="/noticias"
-              className="inline-block px-8 py-4 border-2 border-gold-500 text-gold-600 rounded-full font-bold uppercase tracking-wider hover:bg-gold-500 hover:text-white transition-all duration-300"
+              className="inline-block px-8 py-4 border-2 border-[#d9b060] text-[#d9b060] rounded-full font-bold uppercase tracking-wider hover:bg-[#d9b060] hover:text-slate-900 transition-all duration-300"
             >
               Ver Todos os Insights
             </Link>

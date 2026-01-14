@@ -41,7 +41,7 @@ export default function HeroSection() {
           src="/banner.jpeg"
           alt="Orpheo Advocacia - Banner principal"
           fill
-          className="object-cover object-center md:object-[60%_50%]"
+          className="object-cover object-[25%_50%] md:object-[60%_50%]"
           priority
         />
         {/* Overlay suave para leitura do texto */}
@@ -61,9 +61,9 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-3 px-6 py-3 bg-slate-950/70 border border-white/10 rounded-full mb-10 shadow-md"
           >
-            <Scale className="w-5 h-5 text-amber-300" />
+            <Scale className="w-5 h-5 text-[#d9b060]" />
             <span className="text-sm md:text-base font-semibold text-slate-50">
-              <span className="text-amber-300">{SITE_CONFIG.advogado.oab}</span>
+              <span className="text-[#d9b060]">{SITE_CONFIG.advogado.oab}</span>
               {" • "}
               {SITE_CONFIG.site.anosExperiencia}+ anos de experiência
             </span>
@@ -78,9 +78,7 @@ export default function HeroSection() {
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
-            <span className="block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent pb-2">
-              Excelência Absoluta
-            </span>
+            <span className="block text-[#d9b060] pb-2">Excelência Absoluta</span>
           </motion.h1>
 
           {/* Subtítulo */}
@@ -91,9 +89,7 @@ export default function HeroSection() {
             className="text-lg md:text-xl text-slate-200/90 mb-14 max-w-3xl mx-auto leading-relaxed font-light"
           >
             Soluções jurídicas estratégicas de{" "}
-            <span className="text-amber-300 font-semibold">
-              alto padrão
-            </span>{" "}
+            <span className="text-[#d9b060] font-semibold">alto padrão</span>{" "}
             com atendimento personalizado e {SITE_CONFIG.site.anosExperiencia}+ anos de experiência em São Paulo
           </motion.p>
 
@@ -111,7 +107,7 @@ export default function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-amber-400 hover:bg-amber-500 text-slate-900 px-8 py-6 text-base md:text-lg font-semibold rounded-full shadow-lg transition-colors duration-300"
+                className="bg-[#d9b060] hover:bg-[#c49b52] text-slate-900 px-8 py-6 text-base md:text-lg font-semibold rounded-full shadow-lg transition-colors duration-300"
               >
                 <Link href="/contato" className="flex items-center relative z-10">
                   <Phone className="mr-3 h-6 w-6" />
@@ -156,40 +152,14 @@ export default function HeroSection() {
                   y: -6,
                   transition: { type: "spring", stiffness: 320, damping: 22 }
                 }}
-                className="flex flex-col items-center gap-3 p-6 md:p-7 bg-slate-950/75 rounded-2xl border border-white/10 shadow-lg hover:border-amber-400/50 transition-all duration-300 cursor-pointer"
+                className="flex flex-col items-center gap-3 p-6 md:p-7 bg-slate-950/75 rounded-2xl border border-[#d9b060]/40 shadow-lg hover:border-[#d9b060] transition-all duration-300 cursor-pointer"
               >
-                <item.icon className="w-9 h-9 md:w-10 md:h-10 text-amber-300" />
+                <item.icon className="w-9 h-9 md:w-10 md:h-10 text-[#d9b060]" />
                 <span className="text-sm md:text-base text-slate-50 font-medium text-center leading-snug">
                   {item.text}
                 </span>
               </motion.div>
             ))}
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-3"
-            >
-              <span className="text-white/70 text-sm font-medium tracking-wider">Deslize para conhecer mais</span>
-              <motion.div
-                className="w-7 h-11 border-2 border-white/30 rounded-full flex items-start justify-center p-2 shadow-lg shadow-black/40"
-                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.6)" }}
-              >
-                <motion.div
-                  animate={{ y: [0, 14, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(0,0,0,0.6)]"
-                />
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
       </motion.div>

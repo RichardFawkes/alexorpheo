@@ -14,21 +14,21 @@ export default function SobrePage() {
     <div className="flex flex-col">
       {/* Hero com Imagem */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070')] bg-cover bg-center opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/90 to-slate-900/95"></div>
+        <div className="absolute inset-0 bg-[url('/banner.jpeg')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/94 to-slate-900/92"></div>
 
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-block mb-6 px-4 py-2 bg-gold-500/10 border border-gold-500/20 rounded-full">
               <span className="text-gold-400 text-sm font-semibold">{SITE_CONFIG.advogado.oab}</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-serif bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
               {SITE_CONFIG.advogado.nome}
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-4">
+            <p className="text-lg md:text-2xl text-slate-300/90 mb-3">
               {SITE_CONFIG.advogado.formacao}
             </p>
-            <p className="text-lg text-gold-400 font-semibold mb-8">
+            <p className="text-base md:text-lg text-gold-300 font-semibold mb-10">
               {SITE_CONFIG.advogado.titulo}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
@@ -50,16 +50,16 @@ export default function SobrePage() {
       </section>
 
       {/* Sobre o Advogado */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             {/* Imagem do Advogado */}
             <div className="lg:col-span-2">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-gold-500/20 to-blue-500/20 rounded-2xl blur-2xl"></div>
+                <div className="absolute -inset-4 bg-slate-100 rounded-2xl"></div>
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000"
+                    src="/foto-advogado.png"
                     alt={SITE_CONFIG.advogado.nome}
                     fill
                     className="object-cover"
@@ -78,10 +78,10 @@ export default function SobrePage() {
             {/* Conteúdo */}
             <div className="lg:col-span-3 space-y-8">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif text-slate-900">
+                <h2 className="text-3xl md:text-4xl font-bold mb-5 font-serif text-slate-900">
                   Um Novo Tipo de Escritório de Advocacia
                 </h2>
-                <div className="prose prose-lg max-w-none space-y-5 text-slate-600 leading-relaxed">
+                <div className="prose prose-lg max-w-none space-y-5 text-slate-700 leading-relaxed">
                   <p>
                     <strong>Orpheo Advocacia</strong> é um escritório dedicado à consultoria, assessoria e serviços jurídicos, formado por uma equipe experiente, multidisciplinar e comprometida com soluções eficientes para seus clientes.
                   </p>
@@ -153,10 +153,10 @@ export default function SobrePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
+            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Scale className="h-8 w-8 text-white" />
+                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Scale className="h-8 w-8 text-[#002640]" />
                 </div>
                 <CardTitle className="text-xl">Ética e Integridade</CardTitle>
               </CardHeader>
@@ -167,10 +167,10 @@ export default function SobrePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
+            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Target className="h-8 w-8 text-white" />
+                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Target className="h-8 w-8 text-[#002640]" />
                 </div>
                 <CardTitle className="text-xl">Foco em Resultados</CardTitle>
               </CardHeader>
@@ -181,10 +181,10 @@ export default function SobrePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
+            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Heart className="h-8 w-8 text-white" />
+                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Heart className="h-8 w-8 text-[#002640]" />
                 </div>
                 <CardTitle className="text-xl">Atendimento Humanizado</CardTitle>
               </CardHeader>
@@ -195,10 +195,10 @@ export default function SobrePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
+            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="h-8 w-8 text-white" />
+                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Shield className="h-8 w-8 text-[#002640]" />
                 </div>
                 <CardTitle className="text-xl">Experiência Comprovada</CardTitle>
               </CardHeader>
@@ -225,10 +225,10 @@ export default function SobrePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 border-slate-100 hover:border-amber-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-2 border-slate-100 hover:border-[#d9b060] transition-all duration-300 hover:shadow-lg bg-white">
               <CardHeader>
-                <div className="h-12 w-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-                  <Briefcase className="h-6 w-6 text-amber-600" />
+                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
+                  <Briefcase className="h-6 w-6 text-gold-300" />
                 </div>
                 <CardTitle className="text-xl">Direito Trabalhista</CardTitle>
               </CardHeader>
@@ -239,10 +239,10 @@ export default function SobrePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-slate-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-2 border-slate-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg bg-white">
               <CardHeader>
-                <div className="h-12 w-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <Scale className="h-6 w-6 text-blue-600" />
+                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
+                  <Scale className="h-6 w-6 text-gold-300" />
                 </div>
                 <CardTitle className="text-xl">Direito Cível</CardTitle>
               </CardHeader>
@@ -253,10 +253,10 @@ export default function SobrePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-slate-100 hover:border-red-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-2 border-slate-100 hover:border-red-200 transition-all duration-300 hover:shadow-lg bg-white">
               <CardHeader>
-                <div className="h-12 w-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
-                  <Shield className="h-6 w-6 text-red-600" />
+                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
+                  <Shield className="h-6 w-6 text-gold-300" />
                 </div>
                 <CardTitle className="text-xl">Direito Criminal</CardTitle>
               </CardHeader>
@@ -285,7 +285,7 @@ export default function SobrePage() {
               href={`https://wa.me/${SITE_CONFIG.contato.telefone.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.mensagens.whatsapp)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#d9b060] hover:bg-[#c49b52] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <Users className="h-5 w-5 mr-2" />
               Agendar Consulta

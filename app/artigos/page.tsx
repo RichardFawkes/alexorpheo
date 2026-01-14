@@ -68,15 +68,16 @@ export default function ArtigosPage() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-blue-50 border border-blue-200 rounded-full mb-6 md:mb-8"
+              className="inline-flex items-center gap-2 px-5 md:px-7 py-2.5 md:py-3 bg-[#002640] border border-amber-400/70 rounded-full mb-6 md:mb-8 shadow-sm shadow-slate-900/40"
             >
-              <BookOpen className="w-3 h-3 md:w-4 md:h-4 text-blue-900" />
-              <span className="text-blue-900 text-xs md:text-sm font-semibold tracking-wide">INSIGHTS JURÍDICOS</span>
+              <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-amber-300" />
+              <span className="text-amber-100 text-xs md:text-sm font-semibold tracking-[0.18em] uppercase">
+                Insights Jurídicos
+              </span>
             </motion.div>
 
             <motion.h1
@@ -230,4 +231,3 @@ export default function ArtigosPage() {
     </div>
   );
 }
-

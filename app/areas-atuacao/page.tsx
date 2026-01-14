@@ -65,9 +65,9 @@ export default function AreasAtuacaoPage() {
             {areasDestaque.map((area) => {
               const IconComponent = iconeMap[area.icone] || Briefcase;
               return (
-                <Card key={area.id} className="border-2 border-slate-100 hover:border-amber-200 hover:shadow-2xl transition-all duration-300 group">
+                <Card key={area.id} className="border-2 border-slate-100 hover:border-[#d9b060] hover:shadow-2xl transition-all duration-300 group">
                   <CardHeader className="pb-4">
-                    <div className="h-16 w-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div className="h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="h-8 w-8 text-white" />
                     </div>
                     <CardTitle className="text-2xl mb-3">{area.titulo}</CardTitle>
@@ -82,7 +82,7 @@ export default function AreasAtuacaoPage() {
                     <ul className="space-y-2.5 max-h-64 overflow-y-auto pr-2">
                       {area.servicos.map((servico, idx) => (
                         <li key={idx} className="flex items-start text-sm text-slate-600">
-                          <CheckCircle className="h-4 w-4 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-[#d9b060] mr-2 mt-0.5 flex-shrink-0" />
                           <span>{servico}</span>
                         </li>
                       ))}
@@ -112,10 +112,10 @@ export default function AreasAtuacaoPage() {
               {outrasAreas.map((area) => {
                 const IconComponent = iconeMap[area.icone] || Briefcase;
                 return (
-                  <Card key={area.id} className="bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all duration-300 group">
+                  <Card key={area.id} className="bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#d9b060] transition-all duration-300 group">
                     <CardHeader>
-                      <div className="h-12 w-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-100 transition-colors">
-                        <IconComponent className="h-6 w-6 text-amber-600" />
+                      <div className="h-12 w-12 bg-[#fff8ec] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#f2e0b8] transition-colors">
+                        <IconComponent className="h-6 w-6 text-[#d9b060]" />
                       </div>
                       <CardTitle className="text-xl mb-2 text-slate-900">{area.titulo}</CardTitle>
                       <CardDescription className="text-sm text-slate-600">
@@ -126,7 +126,7 @@ export default function AreasAtuacaoPage() {
                       <ul className="space-y-2">
                         {area.servicos.slice(0, 5).map((servico, idx) => (
                           <li key={idx} className="flex items-start text-sm text-slate-600">
-                            <span className="text-amber-500 mr-2 mt-1">•</span>
+                            <span className="text-[#d9b060] mr-2 mt-1">•</span>
                             <span>{servico}</span>
                           </li>
                         ))}
@@ -160,7 +160,7 @@ export default function AreasAtuacaoPage() {
               href={`https://wa.me/${SITE_CONFIG.contato.telefone.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.mensagens.whatsapp)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#d9b060] hover:bg-[#c49b52] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Falar no WhatsApp
             </a>

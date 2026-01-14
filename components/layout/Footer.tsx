@@ -93,7 +93,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-amber-500 transition-colors text-sm flex items-center group"
+                    className="text-slate-400 hover:text-[#d9b060] transition-colors text-sm flex items-center group"
                   >
                     <ArrowRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
@@ -115,7 +115,7 @@ export default function Footer() {
                 "Direito Imobiliário",
                 "Direito Previdenciário"
               ].map((area) => (
-                <li key={area} className="text-slate-400 hover:text-amber-500 transition-colors cursor-pointer">
+                <li key={area} className="text-slate-400 hover:text-[#d9b060] transition-colors cursor-pointer">
                   {area}
                 </li>
               ))}
@@ -127,8 +127,8 @@ export default function Footer() {
             <h3 className="font-semibold text-white mb-6 text-lg">Contato</h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3 group">
-                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
-                  <MapPin className="h-5 w-5 text-amber-500" />
+                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#d9b060]/20 transition-colors">
+                  <MapPin className="h-5 w-5 text-[#d9b060]" />
                 </div>
                 <div>
                   <p className="text-sm text-slate-400 leading-relaxed">
@@ -139,23 +139,23 @@ export default function Footer() {
                 </div>
               </li>
               <li className="flex items-center space-x-3 group">
-                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
-                  <Phone className="h-5 w-5 text-amber-500" />
+                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#d9b060]/20 transition-colors">
+                  <Phone className="h-5 w-5 text-[#d9b060]" />
                 </div>
                 <a
                   href={`tel:+55${SITE_CONFIG.contato.telefone.principal.replace(/\D/g, '')}`}
-                  className="text-sm text-slate-400 hover:text-amber-500 transition-colors"
+                  className="text-sm text-slate-400 hover:text-[#d9b060] transition-colors"
                 >
                   {SITE_CONFIG.contato.telefone.principal}
                 </a>
               </li>
               <li className="flex items-center space-x-3 group">
-                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
-                  <Mail className="h-5 w-5 text-amber-500" />
+                <div className="h-10 w-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#d9b060]/20 transition-colors">
+                  <Mail className="h-5 w-5 text-[#d9b060]" />
                 </div>
                 <a
                   href={`mailto:${SITE_CONFIG.contato.email.principal}`}
-                  className="text-sm text-slate-400 hover:text-amber-500 transition-colors"
+                  className="text-sm text-slate-400 hover:text-[#d9b060] transition-colors"
                 >
                   {SITE_CONFIG.contato.email.principal}
                 </a>
@@ -171,10 +171,10 @@ export default function Footer() {
               © {new Date().getFullYear()} {SITE_CONFIG.site.nome}. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm text-slate-400">
-              <Link href="/privacidade" className="hover:text-amber-500 transition-colors">
+              <Link href="/privacidade" className="hover:text-[#d9b060] transition-colors">
                 Política de Privacidade
               </Link>
-              <Link href="/termos" className="hover:text-amber-500 transition-colors">
+              <Link href="/termos" className="hover:text-[#d9b060] transition-colors">
                 Termos de Uso
               </Link>
             </div>
