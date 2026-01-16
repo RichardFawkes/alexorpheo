@@ -21,7 +21,7 @@ export default function AdminSidebar() {
         <Link href="/" className="flex items-center space-x-2 px-4 py-3 mb-4">
           <Scale className="h-6 w-6 text-primary" />
           <div className="flex flex-col">
-            <span className="font-bold text-sm leading-tight">Dr. João Silva</span>
+            <span className="font-bold text-sm leading-tight">Orpheo Silva</span>
             <span className="text-xs text-muted-foreground">Ver site</span>
           </div>
         </Link>

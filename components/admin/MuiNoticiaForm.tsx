@@ -128,7 +128,7 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
         </Button>
         <Box>
           <Typography variant="h4" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
-            <NewspaperIcon sx={{ color: '#f59e0b' }} />
+            <NewspaperIcon sx={{ color: '#d9b060' }} />
             {isEdit ? 'Editar Notícia' : 'Criar Nova Notícia'}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -148,7 +148,7 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
           {/* Informações Básicas */}
           <Card>
             <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, color: '#f59e0b' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, color: '#d9b060' }}>
                 Informações Básicas
               </Typography>
 
@@ -298,9 +298,9 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
           </Card>
 
           {/* Configurações de Publicação */}
-          <Card sx={{ bgcolor: '#fef3c7', borderLeft: '4px solid #f59e0b' }}>
+          <Card sx={{ bgcolor: '#fef3c7', borderLeft: '4px solid #d9b060' }}>
             <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#f59e0b' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#d9b060' }}>
                 Configurações de Publicação
               </Typography>
 
@@ -337,7 +337,7 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
                   }
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <StarIcon sx={{ fontSize: 20, color: formData.featured ? '#f59e0b' : '#9ca3af' }} />
+                      <StarIcon sx={{ fontSize: 20, color: formData.featured ? '#d9b060' : '#9ca3af' }} />
                       <Box>
                         <Typography variant="body1" sx={{ fontWeight: 500 }}>
                           Marcar como destaque
@@ -372,9 +372,9 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
                 startIcon={isLoading ? <CircularProgress size={20} /> : <SaveIcon />}
                 sx={{
                   textTransform: 'none',
-                  bgcolor: '#f59e0b',
+                  bgcolor: '#d9b060',
                   '&:hover': {
-                    bgcolor: '#d97706',
+                    bgcolor: '#b08d4b',
                   },
                 }}
               >

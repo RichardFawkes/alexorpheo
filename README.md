@@ -1,4 +1,4 @@
-# 🏛️ Site Profissional para Advogado - Dr. João Silva
+# 🏛️ Site Profissional para Advogado - Dr. Alex Orpheo
 
 Site institucional completo com painel administrativo, desenvolvido com Next.js 14+, TypeScript, Tailwind CSS e Prisma.
 
@@ -318,4 +318,4 @@ Este projeto é proprietário e confidencial.
 
 ---
 
-**Desenvolvido para Dr. João Silva Advocacia**
+**Desenvolvido para Alex Orpheo Silva Advocacia**

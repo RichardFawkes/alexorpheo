@@ -54,7 +54,7 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
       title: 'Total',
       value: totalNoticias,
       icon: <NewspaperIcon />,
-      color: '#f59e0b',
+      color: '#d9b060',
       bgColor: '#fef3c7',
     },
     {
@@ -99,9 +99,9 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
           startIcon={<AddIcon />}
           sx={{
             textTransform: 'none',
-            bgcolor: '#f59e0b',
+            bgcolor: '#d9b060',
             '&:hover': {
-              bgcolor: '#d97706',
+              bgcolor: '#b08d4b',
             },
           }}
         >
@@ -158,7 +158,7 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
                 width: 64,
                 height: 64,
                 bgcolor: '#fef3c7',
-                color: '#f59e0b',
+                color: '#d9b060',
                 mx: 'auto',
                 mb: 2,
               }}
@@ -178,11 +178,11 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
               startIcon={<AddIcon />}
               sx={{
                 textTransform: 'none',
-                bgcolor: '#f59e0b',
-                '&:hover': {
-                  bgcolor: '#d97706',
-                },
-              }}
+            bgcolor: '#d9b060',
+            '&:hover': {
+              bgcolor: '#b08d4b',
+            },
+          }}
             >
               Criar Primeira Notícia
             </Button>

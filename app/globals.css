@@ -4,7 +4,7 @@
   color: #D9B060 !important;
 }
 .to-amber-600 {
-background-color: D9B060 !important;
+  background-color: #D9B060 !important;
 }
 :root {
   /* Paleta Jurídica Profissional */
@@ -22,7 +22,7 @@ background-color: D9B060 !important;
   --primary-foreground: 0 0% 100%;
 
   /* Dourado Sóbrio - Excelência */
-  --secondary: 43 74% 40%;
+  --secondary: 40 60.5% 61.4%;
   --secondary-foreground: 0 0% 100%;
 
   /* Cinzas Sofisticados */
@@ -96,7 +96,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(43 74% 56%);
+  background: hsl(40 60.5% 61.4%);
 }
 
 /* Smooth Scroll */

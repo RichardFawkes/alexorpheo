@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import { SITE_CONFIG } from "@/lib/constants/site-config";
 
 export const metadata: Metadata = {
-  title: "Contato | Dr. João Silva - Advocacia",
+  title: "Contato | Orpheo - Advocacia",
   description: "Entre em contato conosco para agendar uma consulta",
 };
 

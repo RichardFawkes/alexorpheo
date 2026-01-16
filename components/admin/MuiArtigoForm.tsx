@@ -120,7 +120,7 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
         </Button>
         <Box>
           <Typography variant="h4" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
-            <ArticleIcon sx={{ color: '#1976d2' }} />
+            <ArticleIcon sx={{ color: '#d9b060' }} />
             {isEdit ? 'Editar Artigo' : 'Criar Novo Artigo'}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -140,7 +140,7 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
           {/* Informações Básicas */}
           <Card>
             <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, color: '#1976d2' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, color: '#d9b060' }}>
                 Informações Básicas
               </Typography>
 
@@ -261,9 +261,9 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
           </Card>
 
           {/* Configurações de Publicação */}
-          <Card sx={{ bgcolor: '#fef3c7', borderLeft: '4px solid #f59e0b' }}>
+          <Card sx={{ bgcolor: '#fef3c7', borderLeft: '4px solid #d9b060' }}>
             <CardContent>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#f59e0b' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#d9b060' }}>
                 Configurações de Publicação
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
@@ -313,9 +313,9 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
                 startIcon={isLoading ? <CircularProgress size={20} /> : <SaveIcon />}
                 sx={{
                   textTransform: 'none',
-                  bgcolor: '#1976d2',
+                  bgcolor: '#d9b060',
                   '&:hover': {
-                    bgcolor: '#1565c0',
+                    bgcolor: '#b08d4b',
                   },
                 }}
               >

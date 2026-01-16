@@ -219,7 +219,7 @@ export default function EditarNoticiaPage({ params }: { params: Promise<{ id: st
                   className="font-mono"
                 />
                 <p className="text-xs text-muted-foreground">
-                  URL: /noticias/<span className="text-amber-600">{formData.slug || 'slug'}</span>
+                  URL: /noticias/<span className="text-[#d9b060]">{formData.slug || 'slug'}</span>
                 </p>
               </div>
 
@@ -250,7 +250,7 @@ export default function EditarNoticiaPage({ params }: { params: Promise<{ id: st
                   {formData.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1.5 bg-amber-100 text-amber-900 rounded-full text-sm font-medium dark:bg-amber-900/20 dark:text-amber-400"
+                      className="px-3 py-1.5 bg-[#d9b060]/10 text-[#d9b060] rounded-full text-sm font-medium dark:bg-[#d9b060]/20 dark:text-[#d9b060]"
                     >
                       #{tag}
                     </span>
@@ -344,9 +344,9 @@ export default function EditarNoticiaPage({ params }: { params: Promise<{ id: st
               />
             </div>
 
-            <div className="flex items-center justify-between p-4 border-2 border-amber-200 rounded-lg bg-amber-50 dark:bg-amber-950/20 hover:border-amber-400 transition-colors">
+            <div className="flex items-center justify-between p-4 border-2 border-[#d9b060]/30 rounded-lg bg-[#d9b060]/5 dark:bg-[#d9b060]/10 hover:border-[#d9b060] transition-colors">
               <div className="flex items-start gap-3">
-                <Star className="h-6 w-6 text-amber-600 mt-0.5" />
+                <Star className="h-6 w-6 text-[#d9b060] mt-0.5" />
                 <div className="space-y-0.5">
                   <Label htmlFor="featured" className="text-base font-semibold cursor-pointer">Destaque na Home</Label>
                   <p className="text-sm text-muted-foreground">
@@ -370,7 +370,7 @@ export default function EditarNoticiaPage({ params }: { params: Promise<{ id: st
               type="submit"
               disabled={isLoading}
               size="lg"
-              className="bg-amber-600 hover:bg-amber-700 text-white shadow-lg hover:shadow-xl transition-all"
+              className="bg-[#d9b060] hover:bg-[#b08d4b] text-white shadow-lg hover:shadow-xl transition-all"
             >
               {isLoading ? (
                 <>

@@ -285,16 +285,16 @@ export default function EditarArtigoPage({ params }: { params: Promise<{ id: str
         </Card>
 
         {/* Configurações */}
-        <Card className="border-t-4 border-t-amber-500">
+        <Card className="border-t-4 border-t-[#d9b060]">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Settings className="h-5 w-5 text-amber-600" />
+              <Settings className="h-5 w-5 text-[#d9b060]" />
               <CardTitle>Configurações de Publicação</CardTitle>
             </div>
             <CardDescription>Defina o status de publicação</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-lg border-2 hover:border-amber-500 transition-colors">
+            <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-lg border-2 hover:border-[#d9b060] transition-colors">
               <div className="flex-1">
                 <Label htmlFor="published" className="text-base font-semibold cursor-pointer">
                   Publicar artigo

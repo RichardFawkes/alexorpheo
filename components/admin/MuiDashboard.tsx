@@ -53,7 +53,7 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
       value: stats.totalNoticias,
       subtitle: `${stats.noticiasPublicadas} publicadas • ${stats.rascunhosNoticias} rascunhos`,
       icon: <NewspaperIcon />,
-      color: '#f59e0b',
+      color: '#d9b060',
       bgColor: '#fef3c7',
     },
     {
@@ -88,7 +88,7 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
       description: 'Publique uma notícia',
       icon: <NewspaperIcon />,
       href: '/admin/noticias/novo',
-      color: '#f59e0b',
+      color: '#d9b060',
     },
     {
       title: 'Gerenciar Artigos',

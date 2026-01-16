@@ -16,7 +16,7 @@ export default function LoginPage() {
           <Link href="/" className="inline-flex items-center space-x-2 mb-6">
             <Scale className="h-10 w-10 text-primary" />
             <div className="flex flex-col items-start">
-              <span className="font-bold text-xl leading-tight">Dr. João Silva</span>
+              <span className="font-bold text-xl leading-tight">Orpheo</span>
               <span className="text-xs text-muted-foreground">Advocacia</span>
             </div>
           </Link>

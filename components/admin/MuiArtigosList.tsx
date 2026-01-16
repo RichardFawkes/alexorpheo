@@ -73,7 +73,7 @@ export default function MuiArtigosList({ artigos }: MuiArtigosListProps) {
       title: 'Rascunhos',
       value: rascunhos,
       icon: <EditIcon />,
-      color: '#f59e0b',
+      color: '#d9b060',
       bgColor: '#fef3c7',
     },
   ]

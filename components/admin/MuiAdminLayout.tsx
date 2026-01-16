@@ -56,6 +56,10 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
   const pathname = usePathname()
   const router = useRouter()
 
+  if (!user) {
+    return <>{children}</>
+  }
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
