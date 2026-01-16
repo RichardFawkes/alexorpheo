@@ -97,11 +97,11 @@ export const SITE_CONFIG: TSiteConfig = {
     endereco: {
       logradouro: "Av. Juscelino K. de Oliveira, 571",
       bairro: "Centro",
-      cidade: "São Paulo",
+      cidade: "Juquitiba",
       estado: "SP",
       cep: "06950-000",
-      completo: "Av. Juscelino K. de Oliveira, 571 - Centro, São Paulo/SP",
-      googleMapsUrl: "https://maps.google.com/?q=Av.+Juscelino+K.+de+Oliveira,+571,+São+Paulo,+SP",
+      completo: "Av. Juscelino K. de Oliveira, 571 - Centro, Juquitiba/SP",
+      googleMapsUrl: "https://maps.google.com/?q=Av.+Juscelino+K.+de+Oliveira,+571,+Juquitiba,+SP",
     },
     horarioAtendimento: {
       semana: "Segunda a Sexta: 9h às 18h",

@@ -115,7 +115,7 @@ export default function ContatoPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="aspect-video rounded-xl overflow-hidden border shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1983824983193!2d-46.65575368502198!3d-23.561414784685447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1635179876543!5m2!1spt-BR!2sbr"
+              src="https://maps.google.com/maps?q=Av.+Juscelino+K.+de+Oliveira,+571,+Juquitiba,+SP&t=&z=15&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
