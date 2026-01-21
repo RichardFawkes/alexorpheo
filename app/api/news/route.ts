@@ -2,12 +2,13 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth/auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
+import { revalidatePath } from "next/cache"
 
 const newsSchema = z.object({
   title: z.string().min(3, "Título deve ter no mínimo 3 caracteres"),
   slug: z.string().min(3, "Slug deve ter no mínimo 3 caracteres"),
   excerpt: z.string().optional(),
-  content: z.string().min(10, "Conteúdo deve ter no mínimo 10 caracteres"),
+  content: z.string().min(5, "Conteúdo deve ter no mínimo 5 caracteres"),
   coverImage: z.string().optional(),
   category: z.string().optional(),
   tags: z.array(z.string()).optional(),
@@ -101,6 +102,11 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
+
+    // Revalidar caminhos
+    revalidatePath("/")
+    revalidatePath("/noticias")
+    revalidatePath("/admin/noticias")
 
     return NextResponse.json(data, { status: 201 })
   } catch (error) {

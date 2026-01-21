@@ -7,7 +7,7 @@ const articleSchema = z.object({
   title: z.string().min(3).optional(),
   slug: z.string().min(3).optional(),
   excerpt: z.string().optional(),
-  content: z.string().min(10).optional(),
+  content: z.string().min(5).optional(),
   coverImage: z.string().optional(),
   categoryId: z.string().optional(),
   published: z.boolean().optional()

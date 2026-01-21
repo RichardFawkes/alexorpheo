@@ -54,42 +54,54 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
       title: 'Total',
       value: totalNoticias,
       icon: <NewspaperIcon />,
-      color: '#d9b060',
-      bgColor: '#fef3c7',
+      bg: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)',
+      color: '#fff',
+      iconColor: '#d9b060'
     },
     {
       title: 'Publicadas',
       value: noticiasPublicadas,
       icon: <VisibilityIcon />,
-      color: '#10b981',
-      bgColor: '#d1fae5',
+      bg: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
+      color: '#fff',
+      iconColor: '#fff'
     },
     {
       title: 'Em Destaque',
       value: noticiasDestaque,
       icon: <StarIcon />,
-      color: '#8b5cf6',
-      bgColor: '#ede9fe',
+      bg: 'linear-gradient(135deg, #d9b060 0%, #b08d4b 100%)',
+      color: '#0f172a',
+      iconColor: '#0f172a'
     },
     {
       title: 'Rascunhos',
       value: rascunhos,
       icon: <EditIcon />,
+      bg: '#fff',
       color: '#64748b',
-      bgColor: '#f1f5f9',
+      iconColor: '#94a3b8',
+      border: true
     },
   ]
 
   return (
     <Box>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+        justifyContent: 'space-between',
+        alignItems: { xs: 'flex-start', sm: 'center' },
+        gap: 2,
+        mb: 5
+      }}>
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#1e293b', letterSpacing: '-0.02em' }}>
             Notícias
           </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Gerencie e publique notícias jurídicas
+          <Typography variant="body1" sx={{ color: '#64748b' }}>
+            Mantenha seus clientes informados sobre o mundo jurídico
           </Typography>
         </Box>
         <Button
@@ -100,9 +112,16 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
           sx={{
             textTransform: 'none',
             bgcolor: '#d9b060',
+            color: '#0f172a',
+            fontWeight: 700,
+            borderRadius: 2,
+            px: 3,
+            py: 1.2,
+            boxShadow: '0 4px 6px -1px rgba(217, 176, 96, 0.2)',
             '&:hover': {
               bgcolor: '#b08d4b',
-            },
+              boxShadow: '0 10px 15px -3px rgba(217, 176, 96, 0.3)'
+            }
           }}
         >
           Nova Notícia
@@ -110,66 +129,86 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
       </Box>
 
       {/* Stats */}
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4, flexWrap: 'wrap' }}>
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+        gap: 3,
+        mb: 5
+      }}>
         {statsCards.map((card, index) => (
-          <Card
+          <Paper
             key={index}
+            elevation={0}
             sx={{
-              flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(25% - 18px)' },
-              minWidth: 0,
+              p: 3,
+              borderRadius: 4,
+              background: card.bg,
+              color: card.color,
+              border: card.border ? '1px solid #e2e8f0' : 'none',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            <CardContent>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                    {card.title}
-                  </Typography>
-                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                    {card.value}
-                  </Typography>
-                </Box>
+            <Box sx={{ position: 'relative', zIndex: 1 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                 <Avatar
                   sx={{
-                    bgcolor: card.bgColor,
-                    color: card.color,
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    color: card.iconColor,
                     width: 48,
                     height: 48,
+                    borderRadius: 3
                   }}
                 >
                   {card.icon}
                 </Avatar>
               </Box>
-            </CardContent>
-          </Card>
+              <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.5 }}>
+                {card.value}
+              </Typography>
+              <Typography variant="body2" sx={{ opacity: 0.8, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                {card.title}
+              </Typography>
+            </Box>
+          </Paper>
         ))}
-      </Stack>
+      </Box>
 
       {/* News List */}
       <Box>
-        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: '#1e293b', display: 'flex', alignItems: 'center', gap: 1 }}>
           Todas as Notícias
+          <Chip label={totalNoticias} size="small" sx={{ bgcolor: '#f1f5f9', fontWeight: 700 }} />
         </Typography>
 
         {noticias.length === 0 ? (
-          <Paper sx={{ p: 8, textAlign: 'center', bgcolor: '#fefce8' }}>
+          <Paper
+            elevation={0}
+            sx={{
+              p: 8,
+              textAlign: 'center',
+              borderRadius: 4,
+              bgcolor: '#f8fafc',
+              border: '2px dashed #e2e8f0'
+            }}
+          >
             <Avatar
               sx={{
-                width: 64,
-                height: 64,
-                bgcolor: '#fef3c7',
-                color: '#d9b060',
+                width: 72,
+                height: 72,
+                bgcolor: '#f1f5f9',
+                color: '#94a3b8',
                 mx: 'auto',
-                mb: 2,
+                mb: 3,
               }}
             >
-              <NewspaperIcon sx={{ fontSize: 32 }} />
+              <NewspaperIcon sx={{ fontSize: 36 }} />
             </Avatar>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: '#1e293b' }}>
               Nenhuma notícia criada
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 400, mx: 'auto' }}>
-              Comece criando sua primeira notícia jurídica e mantenha seus clientes informados
+            <Typography variant="body2" sx={{ color: '#64748b', mb: 4, maxWidth: 400, mx: 'auto' }}>
+              Comece criando sua primeira notícia jurídica e mantenha seus clientes informados.
             </Typography>
             <Button
               component={Link}
@@ -178,11 +217,10 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
               startIcon={<AddIcon />}
               sx={{
                 textTransform: 'none',
-            bgcolor: '#d9b060',
-            '&:hover': {
-              bgcolor: '#b08d4b',
-            },
-          }}
+                bgcolor: '#0f172a',
+                borderRadius: 2,
+                '&:hover': { bgcolor: '#1e293b' }
+              }}
             >
               Criar Primeira Notícia
             </Button>
@@ -192,26 +230,65 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
             {noticias.map((noticia) => (
               <Card
                 key={noticia.id}
+                elevation={0}
                 sx={{
+                  borderRadius: 3,
+                  border: '1px solid',
+                  borderColor: 'divider',
                   transition: 'all 0.3s',
                   '&:hover': {
-                    boxShadow: 3,
+                    transform: 'translateX(4px)',
+                    borderColor: '#d9b060',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
                   },
                 }}
               >
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 3 }}>
+                <CardContent sx={{ p: 3 }}>
+                  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
                     <Box sx={{ flex: 1 }}>
-                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1.5 }}>
+                        <Chip
+                          label={noticia.published ? 'Publicada' : 'Rascunho'}
+                          size="small"
+                          sx={{
+                            bgcolor: noticia.published ? '#dcfce7' : '#fef3c7',
+                            color: noticia.published ? '#166534' : '#b45309',
+                            fontWeight: 700,
+                            borderRadius: 1,
+                            height: 24
+                          }}
+                        />
+                        {noticia.featured && (
+                          <Chip
+                            icon={<StarIcon sx={{ fontSize: '14px !important' }} />}
+                            label="Destaque"
+                            size="small"
+                            sx={{
+                              bgcolor: '#fffbeb',
+                              color: '#b45309',
+                              fontWeight: 700,
+                              borderRadius: 1,
+                              height: 24,
+                              '& .MuiChip-icon': { color: '#d9b060' }
+                            }}
+                          />
+                        )}
+                        <Typography variant="caption" sx={{ color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                          <CalendarIcon sx={{ fontSize: 14 }} />
+                          {formatarData(noticia.createdAt)}
+                        </Typography>
+                      </Box>
+
+                      <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: '#1e293b', fontSize: '1.25rem' }}>
                         {noticia.title}
                       </Typography>
 
                       {noticia.excerpt && (
                         <Typography
                           variant="body2"
-                          color="text.secondary"
                           sx={{
-                            mb: 2,
+                            color: '#64748b',
+                            lineHeight: 1.6,
                             display: '-webkit-box',
                             WebkitLineClamp: 2,
                             WebkitBoxOrient: 'vertical',
@@ -221,47 +298,25 @@ export default function MuiNoticiasList({ noticias }: MuiNoticiasListProps) {
                           {noticia.excerpt}
                         </Typography>
                       )}
-
-                      <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                        {noticia.featured && (
-                          <Chip
-                            icon={<StarIcon />}
-                            label="Destaque"
-                            size="small"
-                            sx={{
-                              bgcolor: '#ede9fe',
-                              color: '#8b5cf6',
-                              fontWeight: 500,
-                            }}
-                          />
-                        )}
-
-                        <Chip
-                          label={noticia.published ? 'Publicada' : 'Rascunho'}
-                          size="small"
-                          sx={{
-                            bgcolor: noticia.published ? '#d1fae5' : '#fef3c7',
-                            color: noticia.published ? '#10b981' : '#f59e0b',
-                            fontWeight: 500,
-                          }}
-                        />
-
-                        <Chip
-                          icon={<CalendarIcon />}
-                          label={formatarData(noticia.createdAt)}
-                          size="small"
-                          variant="outlined"
-                        />
-                      </Stack>
                     </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', borderLeft: { md: '1px solid' }, borderColor: { md: 'divider' }, pl: { md: 3 } }}>
                       <Button
                         component={Link}
                         href={`/admin/noticias/${noticia.id}`}
                         variant="outlined"
                         startIcon={<EditIcon />}
-                        sx={{ textTransform: 'none' }}
+                        sx={{
+                          textTransform: 'none',
+                          color: '#0f172a',
+                          borderColor: '#e2e8f0',
+                          borderRadius: 2,
+                          px: 3,
+                          '&:hover': {
+                            borderColor: '#d9b060',
+                            bgcolor: '#fffbeb'
+                          }
+                        }}
                       >
                         Editar
                       </Button>

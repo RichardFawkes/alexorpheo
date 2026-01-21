@@ -4,6 +4,9 @@ import Image from "next/image"
 import { Calendar, Newspaper } from "lucide-react"
 import { supabaseServer } from "@/lib/supabase/server"
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: "Notícias Jurídicas | Alexorpheo Advocacia",
   description: "Fique por dentro das principais novidades e atualizações do mundo jurídico",

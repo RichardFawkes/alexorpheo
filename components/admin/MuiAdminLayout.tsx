@@ -83,47 +83,53 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
   }
 
   const drawer = (
-    <Box>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: '#0f172a', color: '#94a3b8' }}>
       <Toolbar
         sx={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           px: 3,
-          py: 2,
+          py: 4,
+          minHeight: '80px !important'
         }}
       >
         <Box sx={{ textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '1.1rem' }}>
             Alex Orpheo
           </Typography>
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-            Painel Administrativo
+          <Typography variant="caption" sx={{ color: '#d9b060', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.7rem' }}>
+            Advocacia Premium
           </Typography>
         </Box>
       </Toolbar>
-      <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)' }} />
-      <List sx={{ px: 2, py: 2 }}>
+      <Divider sx={{ borderColor: 'rgba(255,255,255,0.05)', mx: 3 }} />
+      <List sx={{ px: 2, py: 3, flexGrow: 1 }}>
         {menuItems.map((item) => {
-          const isActive = pathname === item.path || pathname?.startsWith(item.path + '/')
+          const isActive = pathname === item.path || (pathname?.startsWith(item.path + '/') && item.path !== '/admin')
           return (
-            <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+            <ListItem key={item.text} disablePadding sx={{ mb: 1 }}>
               <ListItemButton
                 onClick={() => handleNavigate(item.path)}
                 sx={{
-                  borderRadius: 2,
-                  color: isActive ? '#fff' : 'rgba(255,255,255,0.7)',
-                  backgroundColor: isActive ? 'rgba(255,255,255,0.12)' : 'transparent',
+                  borderRadius: '12px',
+                  py: 1.5,
+                  px: 2.5,
+                  transition: 'all 0.2s ease-in-out',
+                  color: isActive ? '#0f172a' : '#94a3b8',
+                  backgroundColor: isActive ? '#d9b060' : 'transparent',
                   '&:hover': {
                     backgroundColor: isActive
-                      ? 'rgba(255,255,255,0.16)'
-                      : 'rgba(255,255,255,0.08)',
+                      ? '#b08d4b'
+                      : 'rgba(255,255,255,0.05)',
+                    color: isActive ? '#0f172a' : '#fff',
+                    transform: 'translateX(4px)',
                   },
                 }}
               >
                 <ListItemIcon
                   sx={{
-                    color: isActive ? '#fff' : 'rgba(255,255,255,0.7)',
+                    color: 'inherit',
                     minWidth: 40,
                   }}
                 >
@@ -141,69 +147,101 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
           )
         })}
       </List>
-      <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)', mx: 2 }} />
-      <List sx={{ px: 2, py: 2 }}>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => handleNavigate('/')}
-            sx={{
-              borderRadius: 2,
-              color: 'rgba(255,255,255,0.7)',
-              '&:hover': {
-                backgroundColor: 'rgba(255,255,255,0.08)',
-              },
+      <Box sx={{ p: 2 }}>
+        <ListItemButton
+          onClick={() => handleNavigate('/')}
+          sx={{
+            borderRadius: '12px',
+            py: 1.5,
+            px: 2.5,
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: '#94a3b8',
+            '&:hover': {
+              backgroundColor: 'rgba(255,255,255,0.05)',
+              borderColor: '#d9b060',
+              color: '#d9b060',
+            },
+          }}
+        >
+          <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
+            <Home />
+          </ListItemIcon>
+          <ListItemText
+            primary="Ver Site"
+            primaryTypographyProps={{
+              fontSize: '0.95rem',
+              fontWeight: 500,
             }}
-          >
-            <ListItemIcon sx={{ color: 'rgba(255,255,255,0.7)', minWidth: 40 }}>
-              <Home />
-            </ListItemIcon>
-            <ListItemText
-              primary="Ver Site"
-              primaryTypographyProps={{
-                fontSize: '0.95rem',
-                fontWeight: 500,
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
-      </List>
+          />
+        </ListItemButton>
+      </Box>
     </Box>
   )
 
   return (
     <div suppressHydrationWarning>
       <ThemeProvider theme={muiTheme}>
-        <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+        <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f8fafc' }}>
         {/* AppBar */}
         <AppBar
           position="fixed"
+          elevation={0}
           sx={{
             width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
             ml: { sm: `${DRAWER_WIDTH}px` },
-            backgroundColor: '#fff',
-            color: '#000',
-            boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.05)',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(12px)',
+            color: '#1e293b',
+            borderBottom: '1px solid #e2e8f0',
           }}
         >
-          <Toolbar>
+          <Toolbar sx={{ height: 80, px: { xs: 2, sm: 4 } }}>
             <IconButton
               color="inherit"
               aria-label="abrir menu"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { sm: 'none' }, color: '#64748b' }}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 600 }}>
-              {menuItems.find((item) => pathname === item.path)?.text || 'Painel Admin'}
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>
-                {user?.name || user?.email || 'Admin'}
+
+            <Box sx={{ flexGrow: 1 }}>
+              <Typography variant="h6" component="div" sx={{ fontWeight: 700, color: '#0f172a' }}>
+                {menuItems.find((item) => pathname === item.path)?.text || 'Painel Admin'}
               </Typography>
-              <IconButton onClick={handleMenuOpen} size="small">
-                <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}>
+              <Typography variant="body2" sx={{ color: '#64748b' }}>
+                {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box sx={{ textAlign: 'right', display: { xs: 'none', sm: 'block' } }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#0f172a' }}>
+                  {user?.name || 'Administrador'}
+                </Typography>
+                <Typography variant="caption" sx={{ color: '#64748b' }}>
+                  {user?.email || 'admin@alexorpheo.com'}
+                </Typography>
+              </Box>
+              <IconButton
+                onClick={handleMenuOpen}
+                sx={{
+                  p: 0.5,
+                  border: '2px solid transparent',
+                  '&:hover': { border: '2px solid #d9b060' },
+                  transition: 'all 0.2s'
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    bgcolor: '#0f172a',
+                    color: '#d9b060',
+                    fontWeight: 700
+                  }}
+                >
                   {user?.name?.[0] || user?.email?.[0] || 'A'}
                 </Avatar>
               </IconButton>
@@ -211,20 +249,36 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.1))',
+                    mt: 1.5,
+                    minWidth: 180,
+                    borderRadius: 2,
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
                 }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
-                <MenuItem onClick={handleLogout}>
-                  <ListItemIcon>
+                <MenuItem onClick={handleLogout} sx={{ py: 1.5, px: 2.5, color: '#ef4444' }}>
+                  <ListItemIcon sx={{ color: 'inherit' }}>
                     <Logout fontSize="small" />
                   </ListItemIcon>
-                  <ListItemText>Sair</ListItemText>
+                  <ListItemText primary="Sair do Sistema" primaryTypographyProps={{ fontWeight: 500 }} />
                 </MenuItem>
               </Menu>
             </Box>
@@ -247,7 +301,7 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
             }}
             sx={{
               display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, border: 'none' },
             }}
           >
             {drawer}
@@ -257,7 +311,7 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
             variant="permanent"
             sx={{
               display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, border: 'none' },
             }}
             open
           >
@@ -270,18 +324,21 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
           component="main"
           sx={{
             flexGrow: 1,
-            p: 3,
+            p: { xs: 2, sm: 4 },
             width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-            backgroundColor: '#f5f5f5',
+            backgroundColor: '#f8fafc',
             minHeight: '100vh',
           }}
         >
-          <Toolbar />
-          {children}
+          <Toolbar sx={{ height: 80 }} />
+          <Box sx={{ maxWidth: '1600px', mx: 'auto' }}>
+            {children}
+          </Box>
         </Box>
       </Box>
       </ThemeProvider>
     </div>
   )
+
 }
 

@@ -43,35 +43,38 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
     {
       title: 'Artigos',
       value: stats.totalArtigos,
-      subtitle: `${stats.artigosPublicados} publicados • ${stats.rascunhosArtigos} rascunhos`,
-      icon: <ArticleIcon />,
-      color: '#1976d2',
-      bgColor: '#e3f2fd',
+      subtitle: `${stats.artigosPublicados} publicados`,
+      icon: <ArticleIcon sx={{ fontSize: 28 }} />,
+      color: '#fff',
+      bgColor: '#1e293b', // Dark slate
+      trend: '+12%', // Placeholder for trend
     },
     {
       title: 'Notícias',
       value: stats.totalNoticias,
-      subtitle: `${stats.noticiasPublicadas} publicadas • ${stats.rascunhosNoticias} rascunhos`,
-      icon: <NewspaperIcon />,
-      color: '#d9b060',
-      bgColor: '#fef3c7',
+      subtitle: `${stats.noticiasPublicadas} publicadas`,
+      icon: <NewspaperIcon sx={{ fontSize: 28 }} />,
+      color: '#1e293b',
+      bgColor: '#d9b060', // Gold
+      trend: '+5%',
     },
     {
-      title: 'Conteúdo Publicado',
+      title: 'Conteúdo',
       value: stats.totalPublicado,
-      subtitle: 'Total visível no site',
-      icon: <CheckCircleIcon />,
+      subtitle: 'Itens ao vivo',
+      icon: <CheckCircleIcon sx={{ fontSize: 28 }} />,
       color: '#10b981',
-      bgColor: '#d1fae5',
-      badge: 'Ao Vivo',
+      bgColor: '#d1fae5', // Light green
+      trend: 'Ativo',
     },
     {
       title: 'Categorias',
       value: stats.totalCategorias,
-      subtitle: 'Categorias ativas',
-      icon: <FolderIcon />,
-      color: '#8b5cf6',
-      bgColor: '#ede9fe',
+      subtitle: 'Seções ativas',
+      icon: <FolderIcon sx={{ fontSize: 28 }} />,
+      color: '#6366f1',
+      bgColor: '#e0e7ff', // Light indigo
+      trend: 'Estrutura',
     },
   ]
 
@@ -79,168 +82,233 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
     {
       title: 'Novo Artigo',
       description: 'Escreva um artigo jurídico',
-      icon: <ArticleIcon />,
+      icon: <AddIcon />,
       href: '/admin/artigos/novo',
-      color: '#1976d2',
+      color: '#fff',
+      bgcolor: '#1e293b',
+      hover: '#334155'
     },
     {
       title: 'Nova Notícia',
       description: 'Publique uma notícia',
-      icon: <NewspaperIcon />,
+      icon: <AddIcon />,
       href: '/admin/noticias/novo',
-      color: '#d9b060',
+      color: '#1e293b',
+      bgcolor: '#d9b060',
+      hover: '#b08d4b'
     },
     {
-      title: 'Gerenciar Artigos',
-      description: 'Ver todos os artigos',
-      icon: <EditIcon />,
+      title: 'Ver Artigos',
+      description: 'Gerenciar publicações',
+      icon: <ArticleIcon />,
       href: '/admin/artigos',
       color: '#64748b',
+      bgcolor: '#fff',
+      hover: '#f1f5f9',
+      border: true
     },
     {
-      title: 'Gerenciar Notícias',
-      description: 'Ver todas as notícias',
-      icon: <EditIcon />,
+      title: 'Ver Notícias',
+      description: 'Gerenciar notícias',
+      icon: <NewspaperIcon />,
       href: '/admin/noticias',
       color: '#64748b',
+      bgcolor: '#fff',
+      hover: '#f1f5f9',
+      border: true
     },
   ]
 
   return (
     <Box>
       {/* Header */}
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
-          Dashboard
+      <Box sx={{ mb: 5 }}>
+        <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0f172a', letterSpacing: '-0.025em' }}>
+          Visão Geral
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Visão geral do conteúdo do site
+        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 600 }}>
+          Bem-vindo ao painel de controle. Aqui está o resumo da performance do seu conteúdo jurídico.
         </Typography>
       </Box>
 
       {/* Stats Cards */}
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4, flexWrap: 'wrap' }}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ mb: 6 }}>
         {statsCards.map((card, index) => (
           <Card
             key={index}
+            elevation={0}
             sx={{
-              flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(25% - 18px)' },
-              minWidth: 0,
-              transition: 'all 0.3s',
+              flex: 1,
+              borderRadius: 4,
+              bgcolor: '#fff',
+              border: '1px solid #e2e8f0',
+              transition: 'all 0.3s ease',
+              position: 'relative',
+              overflow: 'hidden',
               '&:hover': {
                 transform: 'translateY(-4px)',
-                boxShadow: 4,
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                borderColor: 'transparent',
               },
             }}
           >
-            <CardContent>
-              <Stack spacing={2}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <Avatar
+            <CardContent sx={{ p: 3 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    bgcolor: card.bgColor,
+                    color: card.color,
+                    width: 56,
+                    height: 56,
+                    borderRadius: 3,
+                  }}
+                >
+                  {card.icon}
+                </Avatar>
+                {card.trend && (
+                  <Chip
+                    label={card.trend}
+                    size="small"
                     sx={{
-                      bgcolor: card.bgColor,
-                      color: card.color,
-                      width: 48,
-                      height: 48,
+                      bgcolor: '#f1f5f9',
+                      color: '#475569',
+                      fontWeight: 600,
+                      borderRadius: 2
                     }}
-                  >
-                    {card.icon}
-                  </Avatar>
-                  {card.badge && (
-                    <Chip
-                      label={card.badge}
-                      size="small"
-                      sx={{
-                        bgcolor: '#d1fae5',
-                        color: '#10b981',
-                        fontWeight: 600,
-                        fontSize: '0.75rem',
-                      }}
-                    />
-                  )}
-                </Box>
-                <Box>
-                  <Typography variant="h3" sx={{ fontWeight: 700, mb: 0.5 }}>
-                    {card.value}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500, mb: 0.5 }}>
-                    {card.title}
-                  </Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    {card.subtitle}
-                  </Typography>
-                </Box>
-              </Stack>
+                  />
+                )}
+              </Box>
+
+              <Typography variant="h3" sx={{ fontWeight: 800, mb: 0.5, color: '#0f172a' }}>
+                {card.value}
+              </Typography>
+              <Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#64748b', mb: 0.5 }}>
+                {card.title}
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#94a3b8' }}>
+                {card.subtitle}
+              </Typography>
             </CardContent>
           </Card>
         ))}
       </Stack>
 
       {/* Quick Actions */}
-      <Box>
-        <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: '#0f172a' }}>
           Ações Rápidas
         </Typography>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
           {quickActions.map((action, index) => (
-            <Box key={index} sx={{ flex: 1 }}>
-              <Card
-                component={Link}
-                href={action.href}
-                sx={{
-                  textDecoration: 'none',
-                  transition: 'all 0.3s',
-                  cursor: 'pointer',
-                  '&:hover': {
-                    boxShadow: 3,
-                    borderColor: action.color,
-                  },
-                }}
-              >
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Avatar
-                        sx={{
-                          bgcolor: `${action.color}15`,
-                          color: action.color,
-                          width: 40,
-                          height: 40,
-                        }}
-                      >
-                        {action.icon}
-                      </Avatar>
-                      <Box>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                          {action.title}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {action.description}
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <ArrowForwardIcon sx={{ color: 'text.secondary' }} />
-                  </Box>
-                </CardContent>
-              </Card>
-            </Box>
+            <Card
+              key={index}
+              component={Link}
+              href={action.href}
+              elevation={0}
+              sx={{
+                flex: 1,
+                textDecoration: 'none',
+                borderRadius: 4,
+                bgcolor: action.bgcolor,
+                color: action.color,
+                border: action.border ? '1px solid #e2e8f0' : 'none',
+                transition: 'all 0.2s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                  bgcolor: action.hover,
+                  transform: 'scale(1.02)',
+                },
+              }}
+            >
+              <CardContent sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Box
+                  sx={{
+                    p: 1.5,
+                    borderRadius: '50%',
+                    bgcolor: 'rgba(255,255,255,0.2)',
+                    display: 'flex'
+                  }}
+                >
+                  {action.icon}
+                </Box>
+                <Box>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
+                    {action.title}
+                  </Typography>
+                  <Typography variant="caption" sx={{ opacity: 0.8 }}>
+                    {action.description}
+                  </Typography>
+                </Box>
+                <ArrowForwardIcon sx={{ ml: 'auto', opacity: 0.7 }} />
+              </CardContent>
+            </Card>
           ))}
         </Stack>
       </Box>
 
-      {/* Recent Activity Section (Optional) */}
-      <Box sx={{ mt: 4 }}>
-        <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#f8fafc' }}>
-          <TrendingUpIcon sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-            Bem-vindo ao Painel Administrativo
+      {/* Welcome Banner */}
+      <Paper
+        elevation={0}
+        sx={{
+          p: 4,
+          borderRadius: 4,
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 4,
+          overflow: 'hidden',
+          position: 'relative'
+        }}
+      >
+        <Box sx={{ position: 'relative', zIndex: 1 }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
+            Painel Administrativo Premium
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Gerencie todo o conteúdo do seu site de forma simples e eficiente
+          <Typography variant="body1" sx={{ opacity: 0.8, maxWidth: 500, mb: 3 }}>
+            Gerencie seus artigos e notícias com facilidade. Mantenha seu site atualizado para atrair mais clientes.
           </Typography>
-        </Paper>
-      </Box>
+          <Button
+            component={Link}
+            href="/"
+            variant="contained"
+            sx={{
+              bgcolor: '#d9b060',
+              color: '#0f172a',
+              fontWeight: 700,
+              '&:hover': { bgcolor: '#b08d4b' }
+            }}
+          >
+            Visualizar Site
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            position: 'relative',
+            zIndex: 1
+          }}
+        >
+          <TrendingUpIcon sx={{ fontSize: 120, opacity: 0.1 }} />
+        </Box>
+
+        {/* Decorative circle */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -50,
+            right: -50,
+            width: 300,
+            height: 300,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(217,176,96,0.1) 0%, rgba(217,176,96,0) 70%)',
+          }}
+        />
+      </Paper>
     </Box>
   )
 }
+
 

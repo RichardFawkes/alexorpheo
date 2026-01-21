@@ -4,6 +4,9 @@ import CarouselNoticias from "@/components/home/CarouselNoticias"
 import SectionAreasAtuacao from "@/components/home/SectionAreasAtuacao"
 import SectionCTAFinal from "@/components/home/SectionCTAFinal"
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function obterNoticiasDestaque() {
   try {
     const { data, error } = await supabaseServer

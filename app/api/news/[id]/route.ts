@@ -2,12 +2,13 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth/auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
+import { revalidatePath } from "next/cache"
 
 const newsSchema = z.object({
   title: z.string().min(3).optional(),
   slug: z.string().min(3).optional(),
   excerpt: z.string().optional(),
-  content: z.string().min(10).optional(),
+  content: z.string().min(5).optional(),
   coverImage: z.string().optional(),
   category: z.string().optional(),
   tags: z.array(z.string()).optional(),
@@ -105,6 +106,12 @@ export async function PUT(
         { status: 500 }
       )
     }
+
+    // Revalidar caminhos
+    revalidatePath("/")
+    revalidatePath("/noticias")
+    revalidatePath(`/noticias/${data.slug}`)
+    revalidatePath("/admin/noticias")
 
     return NextResponse.json(data)
   } catch (error) {

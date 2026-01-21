@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import PublicLayoutWrapper from "@/components/layout/PublicLayoutWrapper";
 import { SITE_CONFIG } from "@/lib/constants/site-config";
+import TopLoader from "@/components/ui/TopLoader";
 
-export const metadata: Metadata = {
-  title: `${SITE_CONFIG.site.nome} - Excelência Jurídica em São Paulo`,
+export const metadata: Metadata = { title: `${SITE_CONFIG.site.nome} - Excelência Jurídica em São Paulo`,
+
   description: `Advocacia de excelência com ${SITE_CONFIG.site.anosExperiencia}+ anos de experiência em São Paulo. Atendimento personalizado e soluções jurídicas estratégicas com foco em Direito do Trabalho.`,
   keywords: [
     "advogado são paulo",
@@ -53,10 +52,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
-        <Header />
-        <main className="min-h-screen pt-20 md:pt-24">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <TopLoader />
+        <PublicLayoutWrapper>
+          {children}
+        </PublicLayoutWrapper>
       </body>
     </html>
   );
