@@ -1,15 +1,29 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+// Função helper para criar cliente seguro ou lançar erro explicativo
+const createSafeClient = () => {
+  if (!supabaseUrl || !supabaseServiceKey) {
+    console.error('⚠️ SUPABASE_SERVICE_ROLE_KEY ou NEXT_PUBLIC_SUPABASE_URL não definidos no servidor.')
+    // Retorna um cliente "dummy" que falha graciosamente ou permite que a página carregue sem dados
+    // Isso evita que a aplicação quebre inteira apenas por importar este arquivo
+    return createClient('https://placeholder.supabase.co', 'placeholder', {
+      auth: { autoRefreshToken: false, persistSession: false }
+    })
+  }
+  
+  return createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  })
+}
 
 // Cliente server-side com Service Role (para queries no servidor)
-export const supabaseServer = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-})
+export const supabaseServer = createSafeClient()
 
 // Tipos para as tabelas
 export type TArticle = {

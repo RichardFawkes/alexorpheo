@@ -41,11 +41,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-24 md:h-32">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-16 md:h-24 w-auto">
+            <div className="relative h-10 md:h-24 w-80">
               <Image
                 src="/logo-nova.png"
                 alt="Orpheo Advocacia"
-                width={400}
+                width={300}
                 height={100}
                 className="h-16 md:h-24 w-auto object-contain transition-all duration-300 group-hover:opacity-80 brightness-[1.05] contrast-[1.1]"
                 priority

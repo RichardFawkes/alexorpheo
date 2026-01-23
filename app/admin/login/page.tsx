@@ -1,40 +1,27 @@
 import { Metadata } from "next";
 import LoginForm from "@/components/admin/LoginForm";
-import { Scale } from "lucide-react";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Login | Painel Administrativo",
-  description: "Acesso ao painel administrativo",
+  description: "Acesso seguro ao painel administrativo Orpheo Advocacia",
 };
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <Link href="/" className="inline-flex items-center space-x-2 mb-6">
-            <Scale className="h-10 w-10 text-primary" />
-            <div className="flex flex-col items-start">
-              <span className="font-bold text-xl leading-tight">Orpheo</span>
-              <span className="text-xs text-muted-foreground">Advocacia</span>
-            </div>
-          </Link>
-          <h2 className="mt-6 text-3xl font-bold text-foreground">
-            Painel Administrativo
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Faça login para acessar o sistema
-          </p>
-        </div>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-950">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950" />
+      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-900/20 to-transparent" />
 
+      {/* Decorative Gradient Orbs */}
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl animate-pulse delay-1000" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full flex justify-center px-4 sm:px-6 lg:px-8">
         <LoginForm />
-
-        <div className="text-center text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-primary transition-colors">
-            ← Voltar para o site
-          </Link>
-        </div>
       </div>
     </div>
   );

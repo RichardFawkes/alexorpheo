@@ -1,302 +1,332 @@
+"use client"
+
 import { Metadata } from "next";
 import Image from "next/image";
-import { Award, Briefcase, GraduationCap, Scale, Target, Users, Heart, Shield, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Award, Briefcase, GraduationCap, Scale, Target, Users, Heart, Shield, CheckCircle, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SITE_CONFIG } from "@/lib/constants/site-config";
+import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: `Sobre | ${SITE_CONFIG.advogado.nomeExibicao} - Advocacia`,
-  description: `Conheça ${SITE_CONFIG.advogado.nome} e sua trajetória profissional na advocacia. ${SITE_CONFIG.advogado.formacao}.`,
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
 };
 
 export default function SobrePage() {
   return (
-    <div className="flex flex-col">
-      {/* Hero com Imagem */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/banner.jpeg')] bg-cover bg-center opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/94 to-slate-900/92"></div>
+    <div className="flex flex-col bg-slate-50">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-slate-900">
+          <Image
+            src="/banner.jpeg"
+            alt="Escritório de Advocacia"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+        </div>
 
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-6 px-4 py-2 bg-gold-500/10 border border-gold-500/20 rounded-full">
-              <span className="text-gold-400 text-sm font-semibold">{SITE_CONFIG.advogado.oab}</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 font-serif bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.div variants={fadeInUp} className=" text-white inline-block mb-6 px-4 py-1.5 bg-gold-500/10 border border-gold-500/20 rounded-full backdrop-blur-sm">
+              <span className="text-gold-400 text-white text-sm font-semibold tracking-wider uppercase">{SITE_CONFIG.advogado.oab}</span>
+            </motion.div>
+
+            <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold mb-6 font-serif text-white tracking-tight">
               {SITE_CONFIG.advogado.nome}
-            </h1>
-            <p className="text-lg md:text-2xl text-slate-300/90 mb-3">
+            </motion.h1>
+
+            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-slate-300 mb-4 font-light">
               {SITE_CONFIG.advogado.formacao}
-            </p>
-            <p className="text-base md:text-lg text-gold-300 font-semibold mb-10">
+            </motion.p>
+
+            <motion.p variants={fadeInUp} className="text-lg text-gold-400 font-medium mb-12 uppercase tracking-widest">
               {SITE_CONFIG.advogado.titulo}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
-              <div className="flex items-center gap-2">
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+              <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50">
                 <CheckCircle className="h-5 w-5 text-gold-500" />
                 <span>{SITE_CONFIG.site.anosExperiencia}+ anos de experiência</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50">
                 <CheckCircle className="h-5 w-5 text-gold-500" />
                 <span>Especialista em Direito do Trabalho</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 rounded-lg border border-slate-700/50">
                 <CheckCircle className="h-5 w-5 text-gold-500" />
-                <span>Atendimento em {SITE_CONFIG.contato.endereco.cidade}/{SITE_CONFIG.contato.endereco.estado}</span>
+                <span>Atendimento em {SITE_CONFIG.contato.endereco.cidade}</span>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Sobre o Advogado */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-white">
+      {/* Biography Section */}
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-            {/* Imagem do Advogado */}
-            <div className="lg:col-span-2">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-slate-100 rounded-2xl"></div>
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Image Column */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-5 sticky top-24"
+            >
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gold-500 rounded-2xl rotate-3 opacity-20 group-hover:rotate-6 transition-transform duration-500"></div>
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-slate-100">
                   <Image
                     src="/foto-advogado.png"
                     alt={SITE_CONFIG.advogado.nome}
                     fill
-                    className="object-cover"
-                    priority
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl border border-slate-200">
+
+                <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 hidden md:block">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-slate-900">{SITE_CONFIG.site.anosExperiencia}+</div>
-                    <div className="text-sm text-slate-600 font-medium">Anos de<br />Experiência</div>
+                    <div className="text-5xl font-bold text-slate-900 font-serif mb-1">{SITE_CONFIG.site.anosExperiencia}+</div>
+                    <div className="text-sm text-slate-500 font-medium uppercase tracking-wider">Anos de<br />Experiência</div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Conteúdo */}
-            <div className="lg:col-span-3 space-y-8">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-5 font-serif text-slate-900">
-                  Um Novo Tipo de Escritório de Advocacia
-                </h2>
-                <div className="prose prose-lg max-w-none space-y-5 text-slate-700 leading-relaxed">
-                  <p>
-                    <strong>Orpheo Advocacia</strong> é um escritório dedicado à consultoria, assessoria e serviços jurídicos, formado por uma equipe experiente, multidisciplinar e comprometida com soluções eficientes para seus clientes.
-                  </p>
-                  <p>
-                    Trabalhamos com foco na agilidade, na clareza e na atuação estratégica, buscando sempre a melhor condução dos processos e a rápida resolução das demandas, tanto no Judiciário quanto na esfera consultiva.
-                  </p>
-                  <p>
-                    Nossa <strong>principal área de atuação é o Direito do Trabalho</strong>, abrangendo ações relacionadas a adicional de insalubridade e periculosidade, adicional noturno, indenizações decorrentes de redução da capacidade laborativa, horas extras, intervalos, descontos indevidos, benefícios corporativos, verbas rescisórias, vínculo de emprego, estabilidade gestante, proteção de membros da CIPA, entre outras demandas trabalhistas.
-                  </p>
-                  <p>
-                    Também oferecemos <strong>assessoria empresarial</strong>, auxiliando na organização de escalas de revezamento, planejamento de pagamentos, controle de jornada, análises de justa causa, acordos com a CEF (Caixa Econômica Federal), reestruturação financeira e outras soluções voltadas à área trabalhista corporativa.
-                  </p>
-                  <p>
-                    Somos um escritório moderno, preparado para um mercado em constante transformação, e comprometido em ajudar nossos clientes a enfrentar desafios jurídicos com segurança, transparência e estratégia.
-                  </p>
-                  <p className="text-slate-700 font-medium">
-                    Será um prazer entender suas necessidades e contribuir para a solução do seu caso.
-                  </p>
-                </div>
-              </div>
+            {/* Content Column */}
+            <div className="lg:col-span-7 lg:pl-12 space-y-10">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+              >
+                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-8 font-serif text-slate-900 leading-tight">
+                  Um Novo Conceito em <span className="text-gold-600 italic">Advocacia Moderna</span>
+                </motion.h2>
 
-              {/* Cards de Destaque */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="border-2 border-gold-100 bg-gradient-to-br from-gold-50 to-white">
-                  <CardHeader>
-                    <GraduationCap className="h-10 w-10 text-gold-600 mb-3" />
-                    <CardTitle className="text-lg">Formação Acadêmica</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-slate-600 font-medium">
-                      {SITE_CONFIG.advogado.formacao}
+                <motion.div variants={fadeInUp} className="prose prose-lg prose-slate text-slate-600 leading-relaxed space-y-6">
+                  <p>
+                    <strong className="text-slate-900">Orpheo Advocacia</strong> redefine a consultoria jurídica ao unir tradição e inovação. Nossa equipe multidisciplinar não apenas resolve problemas, mas antecipa cenários para oferecer segurança jurídica integral aos nossos clientes.
+                  </p>
+                  <p>
+                    Acreditamos que a advocacia moderna exige mais do que conhecimento técnico; exige <span className="text-gold-600 font-medium">agilidade, clareza e estratégia</span>. Atuamos tanto no contencioso quanto na consultoria preventiva, sempre focados na eficiência e na redução de riscos.
+                  </p>
+                  <div className="bg-slate-50 p-6 rounded-xl border-l-4 border-gold-500 my-8">
+                    <p className="italic text-slate-700 m-0">
+                      "Nossa missão é transformar a complexidade jurídica em soluções claras e resultados efetivos para empresas e indivíduos."
                     </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <p>
+                    Com destaque no <strong>Direito do Trabalho</strong>, protegemos direitos fundamentais e auxiliamos empresas na gestão humanizada e legal de suas equipes. Nossa atuação se estende à assessoria empresarial completa, garantindo sustentabilidade jurídica para o seu negócio.
+                  </p>
+                </motion.div>
+              </motion.div>
 
-                <Card className="border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-white">
-                  <CardHeader>
-                    <Award className="h-10 w-10 text-blue-600 mb-3" />
-                    <CardTitle className="text-lg">Qualificação</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-slate-600 font-medium">
-                      {SITE_CONFIG.advogado.titulo}
-                    </p>
-                    <p className="text-sm text-slate-500 mt-2">
-                      {SITE_CONFIG.advogado.oab}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+              {/* Credentials Cards */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"
+              >
+                <motion.div variants={fadeInUp} className="group p-6 bg-slate-50 rounded-xl border border-slate-100 hover:border-gold-200 hover:shadow-lg transition-all duration-300">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
+                    <GraduationCap className="h-6 w-6 text-gold-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">Formação Acadêmica</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">{SITE_CONFIG.advogado.formacao}</p>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="group p-6 bg-slate-50 rounded-xl border border-slate-100 hover:border-gold-200 hover:shadow-lg transition-all duration-300">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
+                    <Award className="h-6 w-6 text-gold-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">Qualificação</h3>
+                  <p className="text-slate-600 text-sm">{SITE_CONFIG.advogado.titulo}</p>
+                  <p className="text-slate-400 text-xs mt-1 font-mono">{SITE_CONFIG.advogado.oab}</p>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Diferenciais */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-slate-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-2 bg-gold-100 rounded-full">
-              <span className="text-gold-700 text-sm font-semibold">NOSSOS DIFERENCIAIS</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif text-slate-900">
-              Por que escolher nosso escritório?
-            </h2>
-            <p className="text-slate-600 text-lg max-w-3xl mx-auto">
-              Combinamos expertise jurídica com atendimento humanizado para oferecer a melhor experiência aos nossos clientes
-            </p>
-          </div>
+      {/* Differentials Section */}
+      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070')] bg-cover bg-center opacity-5 fixed-background"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Scale className="h-8 w-8 text-[#002640]" />
-                </div>
-                <CardTitle className="text-xl">Ética e Integridade</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-slate-600">
-                  Atuação pautada pelos mais altos padrões éticos, com transparência e honestidade em todas as relações.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Target className="h-8 w-8 text-[#002640]" />
-                </div>
-                <CardTitle className="text-xl">Foco em Resultados</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-slate-600">
-                  Estratégias jurídicas eficazes e personalizadas para alcançar os melhores resultados possíveis.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Heart className="h-8 w-8 text-[#002640]" />
-                </div>
-                <CardTitle className="text-xl">Atendimento Humanizado</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-slate-600">
-                  Cada cliente é tratado com respeito, empatia e atenção personalizada às suas necessidades.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group">
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 h-16 w-16 bg-gradient-to-br from-[#d9b060] to-[#c49b52] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="h-8 w-8 text-[#002640]" />
-                </div>
-                <CardTitle className="text-xl">Experiência Comprovada</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-slate-600">
-                  Mais de {SITE_CONFIG.site.anosExperiencia} anos defendendo os direitos de trabalhadores com excelência.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Áreas de Especialização */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 font-serif text-slate-900">
-              Áreas de Especialização
-            </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-              Atuação focada em Direito do Trabalho, com expertise em diversas áreas jurídicas
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 border-slate-100 hover:border-[#d9b060] transition-all duration-300 hover:shadow-lg bg-white">
-              <CardHeader>
-                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
-                  <Briefcase className="h-6 w-6 text-gold-300" />
-                </div>
-                <CardTitle className="text-xl">Direito Trabalhista</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-slate-600">
-                  Especialização principal com atuação em rescisões, horas extras, FGTS, assédio moral, estabilidades e todos os direitos do trabalhador.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-slate-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg bg-white">
-              <CardHeader>
-                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
-                  <Scale className="h-6 w-6 text-gold-300" />
-                </div>
-                <CardTitle className="text-xl">Direito Cível</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-slate-600">
-                  Atuação em contratos, responsabilidade civil, indenizações, direito de família e outras demandas cíveis.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-slate-100 hover:border-red-200 transition-all duration-300 hover:shadow-lg bg-white">
-              <CardHeader>
-                <div className="h-12 w-12 bg-[#002640] rounded-xl flex items-center justify-center mb-4">
-                  <Shield className="h-6 w-6 text-gold-300" />
-                </div>
-                <CardTitle className="text-xl">Direito Criminal</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-slate-600">
-                  Defesa criminal, habeas corpus, recursos e assistência em processos criminais com estratégia e dedicação.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070')] bg-cover bg-center opacity-5"></div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">
-            Precisa de Orientação Jurídica?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Agende uma consulta e descubra como podemos ajudá-lo a defender seus direitos
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={`https://wa.me/${SITE_CONFIG.contato.telefone.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.mensagens.whatsapp)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#d9b060] hover:bg-[#c49b52] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20 max-w-3xl mx-auto">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-gold-400 text-sm font-bold tracking-widest uppercase mb-4 block"
             >
-              <Users className="h-5 w-5 mr-2" />
-              Agendar Consulta
-            </a>
-            <a
-              href="/contato"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-all duration-300 border border-white/20"
+              Nossos Pilares
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl md:text-5xl font-bold mb-6 font-serif"
             >
-              Entre em Contato
-            </a>
+              Por que escolher a <span className="text-gold-400">Orpheo Advocacia?</span>
+            </motion.h2>
           </div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {[
+              { icon: Scale, title: "Ética e Integridade", desc: "Transparência absoluta em todas as etapas do processo jurídico." },
+              { icon: Target, title: "Foco em Resultados", desc: "Estratégias personalizadas para maximizar as chances de êxito." },
+              { icon: Heart, title: "Atendimento Humanizado", desc: "Acolhimento e escuta ativa para entender suas reais necessidades." },
+              { icon: Shield, title: "Segurança Jurídica", desc: "Proteção patrimonial e pessoal através de medidas preventivas." }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={fadeInUp}
+                className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700 hover:border-gold-500/50 transition-all duration-300 group"
+              >
+                <div className="w-14 h-14 bg-slate-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-gold-500 transition-colors duration-300">
+                  <item.icon className="h-7 w-7 text-gold-400 group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-slate-100 font-serif">{item.title}</h3>
+                <p className="text-slate-400 leading-relaxed text-sm">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Expertise Summary */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif text-slate-900">
+                Excelência em Diversas Áreas
+              </h2>
+              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+                Nossa atuação é pautada pela especialização contínua. Cada área do direito possui particularidades que exigem conhecimento profundo e atualização constante.
+              </p>
+              <Button asChild size="lg" className="bg-slate-900 hover:bg-slate-800 text-white rounded-full px-8">
+                <a href="/areas-atuacao" className="flex items-center">
+                  Conhecer todas as áreas
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="grid gap-6"
+            >
+              {[
+                { title: "Direito Trabalhista", desc: "Defesa dos direitos do trabalhador e compliance trabalhista para empresas.", icon: Briefcase },
+                { title: "Direito Cível", desc: "Soluções para conflitos civis, contratos e responsabilidade civil.", icon: Scale },
+                { title: "Direito Criminal", desc: "Defesa técnica especializada em processos criminais e inquéritos.", icon: Shield }
+              ].map((area, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={fadeInUp}
+                  className="flex items-start gap-6 p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                >
+                  <div className="shrink-0 w-12 h-12 bg-gold-50 rounded-full flex items-center justify-center">
+                    <area.icon className="h-6 w-6 text-gold-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{area.title}</h3>
+                    <p className="text-slate-600 text-sm">{area.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-gradient-to-br from-gold-500 to-gold-600 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/pattern-grid.svg')] opacity-10"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-8 font-serif"
+          >
+            Vamos conversar sobre o seu caso?
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-gold-600 hover:bg-slate-50 border-0 text-lg px-8 py-6 h-auto rounded-xl shadow-xl"
+            >
+              <a
+                href={`https://wa.me/${SITE_CONFIG.contato.telefone.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.mensagens.whatsapp)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Users className="h-5 w-5 mr-2" />
+                Agendar Consulta
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="bg-transparent border-2 border-white  hover:bg-white/10 text-lg px-8 py-6 h-auto rounded-xl"
+            >
+              <a href="/contato">
+                Enviar E-mail
+              </a>
+            </Button>
+          </motion.div>
         </div>
       </section>
     </div>

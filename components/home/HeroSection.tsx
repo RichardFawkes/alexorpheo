@@ -44,8 +44,8 @@ export default function HeroSection() {
           className="object-cover object-[25%_50%] md:object-[60%_50%]"
           priority
         />
-        {/* Overlay suave para leitura do texto */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/80 to-slate-950/88" />
+        {/* Overlay removido para clarear a imagem */}
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/80 to-slate-950/88" /> */}
       </motion.div>
 
       <motion.div
@@ -53,114 +53,7 @@ export default function HeroSection() {
         className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <div className="max-w-5xl mx-auto text-center">
-
-          {/* Badge profissional */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-3 px-6 py-3 bg-slate-950/70 border border-white/10 rounded-full mb-10 shadow-md"
-          >
-            <Scale className="w-5 h-5 text-[#d9b060]" />
-            <span className="text-sm md:text-base font-semibold text-slate-50">
-              <span className="text-[#d9b060]">{SITE_CONFIG.advogado.oab}</span>
-              {" • "}
-              {SITE_CONFIG.site.anosExperiencia}+ anos de experiência
-            </span>
-          </motion.div>
-
-          {/* Título principal */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-[1.1]"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            <span className="block text-white mb-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">Advocacia de</span>
-            <span className="block text-[#d9b060] pb-2">Excelência Absoluta</span>
-          </motion.h1>
-
-          {/* Subtítulo */}
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-slate-200/90 mb-14 max-w-3xl mx-auto leading-relaxed font-light"
-          >
-            Soluções jurídicas estratégicas de{" "}
-            <span className="text-[#d9b060] font-semibold">alto padrão</span>{" "}
-            com atendimento personalizado e {SITE_CONFIG.site.anosExperiencia}+ anos de experiência em São Paulo
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
-          >
-            <motion.div
-              whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-            >
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#d9b060] hover:bg-[#c49b52] text-slate-900 px-8 py-6 text-base md:text-lg font-semibold rounded-full shadow-lg transition-colors duration-300"
-              >
-                <Link href="/contato" className="flex items-center relative z-10">
-                  <Phone className="mr-3 h-6 w-6" />
-                  Agendar Consulta Exclusiva
-                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-            >
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border border-slate-100/40 text-white hover:bg-white/5 px-8 py-6 text-base md:text-lg font-semibold rounded-full transition-colors duration-300"
-              >
-                <Link href="/sobre" className="flex items-center">
-                  Conheça o Escritório
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Diferenciais */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto"
-          >
-            {diferenciais.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{
-                  y: -6,
-                  transition: { type: "spring", stiffness: 320, damping: 22 }
-                }}
-                className="flex flex-col items-center gap-3 p-6 md:p-7 bg-slate-950/75 rounded-2xl border border-[#d9b060]/40 shadow-lg hover:border-[#d9b060] transition-all duration-300 cursor-pointer"
-              >
-                <item.icon className="w-9 h-9 md:w-10 md:h-10 text-[#d9b060]" />
-                <span className="text-sm md:text-base text-slate-50 font-medium text-center leading-snug">
-                  {item.text}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Conteúdo textual removido para visual mais limpo conforme solicitado */}
         </div>
       </motion.div>
     </section>
