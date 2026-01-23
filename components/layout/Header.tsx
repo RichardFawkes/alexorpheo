@@ -38,16 +38,16 @@ export default function Header() {
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 md:h-32">
+        <div className="flex justify-between items-center h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-10 md:h-24 w-80">
+            <div className="relative h-12 md:h-16 w-64">
               <Image
                 src="/logo-nova.png"
                 alt="Orpheo Advocacia"
                 width={300}
                 height={100}
-                className="h-16 md:h-24 w-auto object-contain transition-all duration-300 group-hover:opacity-80 brightness-[1.05] contrast-[1.1]"
+                className="h-12 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80 brightness-[1.05] contrast-[1.1]"
                 priority
               />
             </div>

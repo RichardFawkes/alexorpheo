@@ -99,7 +99,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30 selection:text-amber-200">
 
       {/* --- HERO SECTION --- */}
-      <div className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full min-h-[30vh] flex items-center justify-center overflow-hidden">
         {/* Background Image/Effect */}
         <div className="absolute inset-0 z-0">
           {noticia.coverImage ? (
@@ -118,7 +118,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
           <div className="max-w-4xl mx-auto text-center">
 
             {/* Breadcrumb / Back */}
