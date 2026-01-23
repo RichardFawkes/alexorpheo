@@ -74,34 +74,34 @@ export default function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
       </motion.div>
 
-      {/* Barra de Informações Premium (Trust Bar) - Design 2026 Compacto */}
+      {/* Barra de Informações Premium (Trust Bar) - Design 2026 Imersivo */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="relative z-20 w-full bg-black/40 backdrop-blur-md border-t border-white/5"
+        className="relative z-20 w-full"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {diferenciais.map((item, idx) => (
               <div
                 key={idx}
-                className="group relative flex items-center gap-4 p-3 rounded-xl transition-all duration-300 hover:bg-white/5 border border-transparent hover:border-white/5"
+                className="group relative flex items-center gap-4 p-2 transition-all duration-300"
               >
                 {/* Icon Container with Glow */}
                 <div className="relative shrink-0">
-                  <div className="absolute inset-0 bg-[#D9B060] blur-lg rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
-                  <div className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 group-hover:border-[#D9B060]/50 transition-colors duration-300">
-                    <item.icon className="w-5 h-5 text-[#D9B060]" strokeWidth={1.5} />
+                  <div className="absolute inset-0 bg-[#D9B060] blur-2xl rounded-full opacity-20 group-hover:opacity-50 transition-opacity duration-500 scale-150" />
+                  <div className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <item.icon className="w-8 h-8 text-[#D9B060] drop-shadow-[0_0_15px_rgba(217,176,96,0.5)]" strokeWidth={1.5} />
                   </div>
                 </div>
 
                 {/* Text Content */}
                 <div className="flex flex-col">
-                  <h3 className="text-white font-medium text-sm leading-tight mb-0.5 group-hover:text-[#D9B060] transition-colors duration-300">
+                  <h3 className="text-white font-medium text-base leading-tight mb-1 group-hover:text-[#D9B060] transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-slate-400 text-[10px] uppercase tracking-wider font-medium group-hover:text-slate-300 transition-colors duration-300">
+                  <p className="text-slate-300 text-xs uppercase tracking-wider font-medium opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                     {item.desc}
                   </p>
                 </div>
