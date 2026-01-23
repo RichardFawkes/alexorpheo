@@ -31,7 +31,7 @@ export default async function Home() {
   const noticias = await obterNoticiasDestaque()
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden -mt-20 md:-mt-24">
+    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden pt-20 md:pt-24">
 
       {/* HERO SECTION - Ultra Premium com Parallax */}
       <HeroSection />
