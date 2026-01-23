@@ -31,132 +31,150 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-x-hidden bg-[#002640] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-white/5 ${
         isScrolled
-          ? "bg-slate-950/98 backdrop-blur-xl shadow-2xl border-b border-gold-500/20"
-          : "bg-slate-950/95 backdrop-blur-lg border-b border-white/5"
+          ? "bg-slate-950/80 backdrop-blur-md shadow-2xl h-16 md:h-20"
+          : "bg-transparent backdrop-blur-sm h-20 md:h-24"
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-24">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex justify-between items-center h-full">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-12 md:h-16 w-64">
+            <div className="relative h-10 md:h-12 w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo-nova.png"
                 alt="Orpheo Advocacia"
-                width={300}
-                height={100}
-                className="h-12 md:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80 brightness-[1.05] contrast-[1.1]"
+                width={200}
+                height={80}
+                className="h-full w-auto object-contain brightness-[1.1]"
                 priority
               />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-base font-medium text-slate-200 hover:text-gold-400 transition-all duration-300 relative group"
+                className="relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors duration-300 rounded-full hover:bg-white/5 group overflow-hidden"
               >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-400 group-hover:w-full transition-all duration-300" />
+                <span className="relative z-10">{item.name}</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-gold-500/10 to-gold-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
               </Link>
             ))}
-            <Button
-              asChild
-              className="bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:from-gold-600 hover:to-gold-700 rounded-lg px-8 py-3 shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              <Link href="/contato" className="flex items-center">
-                <Phone className="mr-2 h-4 w-4" />
-                Agendar Consulta
-              </Link>
-            </Button>
+            <div className="pl-4 ml-4 border-l border-white/10">
+              <Button
+                asChild
+                className="bg-[#D9B060] hover:bg-[#C5A059] text-slate-950 font-bold rounded-full px-6 shadow-[0_0_15px_rgba(217,176,96,0.4)] hover:shadow-[0_0_25px_rgba(217,176,96,0.6)] transition-all duration-300"
+              >
+                <Link href="/contato" className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  <span>Agendar Consulta</span>
+                </Link>
+              </Button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-800/50 border border-slate-700/50 transition-all duration-300"
+            className="lg:hidden p-2 rounded-full hover:bg-white/10 transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Menu"
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 text-gold-400" />
-            ) : (
-              <Menu className="h-6 w-6 text-gold-400" />
-            )}
+            <div className="relative w-6 h-6 flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  {isMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-6 h-6 text-gold-400" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-6 h-6 text-gold-400" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+            </div>
           </button>
         </div>
 
-        {/* Mobile Navigation - Premium */}
+        {/* Mobile Navigation - Premium 2026 */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="lg:hidden absolute top-full left-0 right-0 bg-slate-950/95 backdrop-blur-2xl border-t border-white/10 overflow-hidden"
+              style={{ height: "calc(100vh - 100%)" }}
             >
-              <div className="py-8 px-4 border-t border-slate-800/50 bg-slate-950/98 backdrop-blur-xl">
+              <div className="flex flex-col h-full p-6 overflow-y-auto">
                 {/* Navigation Links */}
-                <div className="flex flex-col space-y-2 mb-8">
+                <div className="flex flex-col space-y-1 mt-8">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 + 0.1 }}
                     >
                       <Link
                         href={item.href}
-                        className="group flex items-center justify-between py-4 px-4 rounded-xl text-base font-semibold text-slate-200 hover:text-gold-400 transition-all duration-300 hover:bg-slate-800/30 border border-transparent hover:border-slate-700/50"
+                        className="group flex items-center justify-between p-4 rounded-2xl text-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <span>{item.name}</span>
-                        <ChevronRight className="w-5 h-5 text-gold-400 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" />
+                        <span className="group-hover:translate-x-2 transition-transform duration-300">{item.name}</span>
+                        <ChevronRight className="w-5 h-5 text-gold-500 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300" />
                       </Link>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* CTA Button */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.5 }}
-                >
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:from-gold-600 hover:to-gold-700 rounded-xl py-7 text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                <div className="mt-auto mb-24 space-y-6">
+                  {/* CTA Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
                   >
-                    <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center">
-                      <Phone className="mr-2 h-5 w-5" />
-                      Agendar Consulta
-                    </Link>
-                  </Button>
-                </motion.div>
+                    <Button
+                      asChild
+                      className="w-full bg-[#D9B060] hover:bg-[#C5A059] text-slate-950 rounded-2xl py-6 text-lg font-bold shadow-[0_0_20px_rgba(217,176,96,0.3)] hover:shadow-[0_0_30px_rgba(217,176,96,0.5)] transition-all duration-300 border border-gold-400/20"
+                    >
+                      <Link href="/contato" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center gap-3">
+                        <Phone className="h-5 w-5" />
+                        Agendar Consulta
+                      </Link>
+                    </Button>
+                  </motion.div>
 
-                {/* Decorative Line */}
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="mt-8 h-px bg-gradient-to-r from-transparent via-slate-700/50 to-transparent"
-                />
-
-                {/* Contact Info */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.7 }}
-                  className="mt-6 text-center"
-                >
-                  <p className="text-xs text-slate-400 mb-1">Atendimento Premium</p>
-                  <p className="text-sm text-gold-400 font-semibold">{SITE_CONFIG.advogado.oab}</p>
-                </motion.div>
+                  {/* Contact Info */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                    className="text-center space-y-2"
+                  >
+                    <div className="w-12 h-1 bg-gold-500/30 mx-auto rounded-full mb-4" />
+                    <p className="text-xs text-slate-400 uppercase tracking-widest">Atendimento Premium</p>
+                    <p className="text-sm text-gold-400 font-semibold tracking-wider">{SITE_CONFIG.advogado.oab}</p>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           )}

@@ -55,11 +55,12 @@ export default function ArtigosPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white overflow-x-hidden">
       {/* Hero Profissional */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-slate-950 overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e3a8a12_1px,transparent_1px),linear-gradient(to_bottom,#1e3a8a12_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -74,17 +75,17 @@ export default function ArtigosPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 md:mb-6 leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              Artigos <span className="text-blue-900">Jurídicos</span>
+              Artigos <span className="text-gold-500">Jurídicos</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed"
+              className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
             >
               Análises aprofundadas, atualizações legislativas e insights estratégicos
             </motion.p>

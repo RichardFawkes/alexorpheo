@@ -20,7 +20,7 @@ export default function PublicLayoutWrapper({
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-20 md:pt-24">{children}</main>
+      <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />
     </>

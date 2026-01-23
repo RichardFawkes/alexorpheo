@@ -58,20 +58,24 @@ export default async function NoticiasPage() {
   const categorias = await obterCategorias()
 
   return (
-    <div className="min-h-screen bg-gold-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-slate-950">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 opacity-90" />
+
         {/* Linhas decorativas */}
         <div className="absolute left-0 bottom-0 w-32 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-50" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 uppercase tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 uppercase tracking-tight">
               INSIGHTS<br />
               <span className="text-gold-500">JURÍDICOS</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
               Fique por dentro das principais atualizações do mundo jurídico
             </p>
 
@@ -79,7 +83,7 @@ export default async function NoticiasPage() {
             <div className="mt-10">
               <Link
                 href="#noticias"
-                className="inline-block px-8 py-4 border-2 border-gold-500 text-gold-600 rounded-full font-bold uppercase tracking-wider hover:bg-gold-500 hover:text-white transition-all duration-300"
+                className="inline-block px-8 py-4 border-2 border-gold-500 text-gold-500 rounded-full font-bold uppercase tracking-wider hover:bg-gold-500 hover:text-slate-950 transition-all duration-300"
               >
                 VER TODOS OS INSIGHTS
               </Link>
