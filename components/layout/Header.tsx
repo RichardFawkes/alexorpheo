@@ -43,7 +43,7 @@ export default function Header() {
           <Link href="/" className="flex items-center group">
             <div className="relative h-10 md:h-12 w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/logo-nova.png"
+                src="/logo_atualizada.png"
                 alt="Orpheo Advocacia"
                 width={200}
                 height={80}

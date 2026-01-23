@@ -140,7 +140,7 @@ export const SITE_CONFIG: TSiteConfig = {
     titulo: "Orpheo Advocacia - Excelência Jurídica em São Paulo",
     descricao: "Advocacia de excelência com atendimento humanizado e foco em Direito do Trabalho em São Paulo.",
     url: "https://www.alexorpheo.com.br",
-    logo: "/logo-nova.png",
+    logo: "/logo_atualizada.png",
     anoFundacao: 2013,
     anosExperiencia: 11,
   },
@@ -161,7 +161,7 @@ export const obterTelefoneFormatado = (telefone: string): string => {
 }
 
 export const obterEnderecoCompleto = (): string => {
-  const { logradouro, bairro, cidade, estado, cep } = SITE_CONFIG.contato.endereco
+const { logradouro, bairro, cidade, estado, cep } = SITE_CONFIG.contato.endereco
   return `${logradouro}, ${bairro} - ${cidade}/${estado} - CEP: ${cep}`
 }
 

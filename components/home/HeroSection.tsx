@@ -1,19 +1,8 @@
 "use client"
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Phone, Scale, Award, Users, CheckCircle2, Star } from "lucide-react"
 import { useRef } from "react"
-import { SITE_CONFIG } from "@/lib/constants/site-config"
-
-const diferenciais = [
-  { icon: Award, text: `${SITE_CONFIG.site.anosExperiencia}+ anos de experiência` },
-  { icon: Users, text: "Atendimento personalizado" },
-  { icon: CheckCircle2, text: "Resultados comprovados" },
-  { icon: Star, text: "Excelência reconhecida" }
-]
 
 export default function HeroSection() {
   const heroRef = useRef(null)
@@ -37,13 +26,25 @@ export default function HeroSection() {
         style={{ y: smoothY, scale: smoothScale }}
         className="absolute inset-0 z-0"
       >
-        <Image
-          src="/banner.jpeg"
-          alt="Orpheo Advocacia - Banner principal"
-          fill
-          className="object-cover object-[25%_50%] md:object-[60%_50%]"
-          priority
-        />
+        <motion.div
+          initial={{ opacity: 0, scale: 1.15, filter: "blur(15px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{
+            duration: 1.5,
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.1
+          }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src="/banner.jpeg"
+            alt="Orpheo Advocacia - Banner principal"
+            fill
+            className="object-cover object-[25%_50%] md:object-[60%_50%]"
+            priority
+            quality={100}
+          />
+        </motion.div>
         {/* Overlay removido para clarear a imagem */}
         {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/80 to-slate-950/88" /> */}
       </motion.div>
