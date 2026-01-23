@@ -81,22 +81,26 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-/* PremiumScrollBar */
-::-webkit-scrollbar {
-  width: 10px;
+/* PremiumScrollBar - Invisível mas Funcional */
+html {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+/* Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
-  border-radius: 5px;
+*::-webkit-scrollbar-track {
+  background: transparent !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(40 60.5% 61.4%);
+*::-webkit-scrollbar-thumb {
+  background: transparent !important;
 }
 
 /* Smooth Scroll */
@@ -106,8 +110,8 @@ html {
 
 /* Premium Selection */
 ::selection {
-  background: hsl(var(--primary) / 0.3);
-  color: hsl(var(--foreground));
+  background: #D9B060; /* Gold */
+  color: #000000;
 }
 
 /* Premium Focus */
