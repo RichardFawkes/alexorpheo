@@ -140,7 +140,7 @@ export const SITE_CONFIG: TSiteConfig = {
     titulo: "Orpheo Advocacia - Excelência Jurídica em São Paulo",
     descricao: "Advocacia de excelência com atendimento humanizado e foco em Direito do Trabalho em São Paulo.",
     url: "https://www.alexorpheo.com.br",
-    logo: "/logo_atualizada.png",
+    logo: "/logo-orpheo.png",
     anoFundacao: 2013,
     anosExperiencia: 11,
   },
