@@ -255,28 +255,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
               </div>
 
               {/* CTA Card */}
-              <div className="relative p-8 rounded-2xl overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-90 transition-transform group-hover:scale-105 duration-500" />
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay" />
 
-                <div className="relative z-10 text-center">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Quote className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">
-                    Precisa de orientação jurídica?
-                  </h3>
-                  <p className="text-amber-100 mb-6 text-sm leading-relaxed">
-                    Nossa equipe de especialistas está pronta para analisar o seu caso com a atenção que ele merece.
-                  </p>
-                  <Link
-                    href="/contato"
-                    className="inline-flex w-full items-center justify-center px-6 py-3 bg-white text-amber-700 font-bold rounded-xl hover:bg-amber-50 transition-colors shadow-lg"
-                  >
-                    Fale Conosco
-                  </Link>
-                </div>
-              </div>
 
               {/* Related News Mini List */}
               {noticiasRelacionadas.length > 0 && (
