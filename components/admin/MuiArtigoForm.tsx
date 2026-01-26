@@ -37,6 +37,7 @@ import {
   Code as CodeIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material'
+import RichTextEditor from '@/components/ui/RichTextEditor'
 
 interface MuiArtigoFormProps {
   artigo?: {
@@ -58,7 +59,6 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
   const [error, setError] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
-  const contentRef = useRef<HTMLDivElement | null>(null)
   const [formData, setFormData] = useState({
     title: artigo?.title || '',
     slug: artigo?.slug || '',
@@ -139,35 +139,8 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
     }))
   }
 
-  const applyFormat = (before: string, after: string = '', placeholder = 'texto') => {
-    const el = contentRef.current
-    if (!el) {
-      setFormData(prev => ({ ...prev, content: `${prev.content}${before}${placeholder}${after}` }))
-      return
-    }
-    el.focus()
-    document.execCommand('insertHTML', false, `${before}${getSelectionText() || placeholder}${after}`)
-  }
-
-  const getSelectionText = () => {
-    const sel = window.getSelection()
-    return sel ? sel.toString() : ''
-  }
-
-  const exec = (command: string, value?: string) => {
-    const el = contentRef.current
-    if (!el) return
-    el.focus()
-    document.execCommand(command, false, value)
-    setFormData(prev => ({ ...prev, content: el.innerHTML }))
-  }
-
-  const insertAtLineStart = (prefix: string) => {
-    const el = contentRef.current
-    if (!el) return
-    el.focus()
-    document.execCommand('insertHTML', false, `${prefix} ${getSelectionText() || 'texto'}`)
-    setFormData(prev => ({ ...prev, content: el.innerHTML }))
+  const handleContentChange = (html: string) => {
+    setFormData(prev => ({ ...prev, content: html }))
   }
 
   const handleConfirmDelete = async () => {
@@ -293,45 +266,7 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
               Conteúdo
             </Typography>
 
-            <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
-              <Button variant="outlined" size="small" onClick={() => exec('bold')} startIcon={<FormatBoldIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Negrito</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('italic')} startIcon={<FormatItalicIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Itálico</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('underline')} startIcon={<FormatUnderlinedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Sublinhado</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('formatBlock', 'H2')} startIcon={<TitleIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Título</Button>
-              <Button variant="outlined" size="small" onClick={() => {
-                const url = prompt('URL do link:')
-                if (url) exec('createLink', url)
-              }} startIcon={<LinkIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Link</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('insertUnorderedList')} startIcon={<FormatListBulletedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Lista</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('insertOrderedList')} startIcon={<FormatListNumberedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Numerada</Button>
-              <Button variant="outlined" size="small" onClick={() => exec('formatBlock', 'BLOCKQUOTE')} startIcon={<FormatQuoteIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Citação</Button>
-              <Button variant="outlined" size="small" onClick={() => applyFormat('<code>', '</code>')} startIcon={<CodeIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Código</Button>
-            </Stack>
-
-            <Paper
-              elevation={0}
-              sx={{
-                borderRadius: 2,
-                border: '1px solid #e2e8f0',
-                minHeight: 280,
-                p: 2,
-                '&:focus-within': { borderColor: '#d9b060', boxShadow: '0 0 0 3px rgba(217,176,96,0.2)' },
-              }}
-            >
-              <div
-                ref={contentRef}
-                contentEditable
-                suppressContentEditableWarning
-                onInput={(e) => setFormData({ ...formData, content: (e.currentTarget as HTMLDivElement).innerHTML })}
-                style={{
-                  minHeight: 240,
-                  outline: 'none',
-                  fontSize: '1rem',
-                  lineHeight: 1.7,
-                }}
-                dangerouslySetInnerHTML={{ __html: formData.content || '' }}
-              />
-            </Paper>
+            <RichTextEditor value={formData.content} onChange={handleContentChange} />
 
           </Paper>
 
