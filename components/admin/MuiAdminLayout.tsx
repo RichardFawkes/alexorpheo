@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { ThemeProvider } from '@mui/material/styles'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 import {
   Box,
   Drawer,
@@ -55,6 +57,14 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const pathname = usePathname()
   const router = useRouter()
+  const emotionInsertionPoint = typeof document !== 'undefined'
+    ? (document.querySelector('meta[name=\"emotion-insertion-point\"]') as HTMLElement | null)
+    : null
+  const emotionCache = useMemo(() => createCache({
+    key: 'mui',
+    insertionPoint: emotionInsertionPoint || undefined,
+    prepend: true,
+  }), [emotionInsertionPoint])
 
   if (!user) {
     return <>{children}</>
@@ -180,6 +190,7 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
 
   return (
     <div suppressHydrationWarning>
+      <CacheProvider value={emotionCache}>
       <ThemeProvider theme={muiTheme}>
         <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f8fafc' }}>
         {/* AppBar */}
@@ -337,8 +348,8 @@ export default function MuiAdminLayout({ children, user }: MuiAdminLayoutProps) 
         </Box>
       </Box>
       </ThemeProvider>
+      </CacheProvider>
     </div>
   )
 
 }
-

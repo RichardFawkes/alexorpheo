@@ -7,6 +7,7 @@ import { supabaseServer } from "@/lib/supabase/server"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { obterUrlCompleta } from "@/lib/utils/url"
+import ContentFormatter from "@/components/ui/ContentFormatter"
 
 type TParams = Promise<{
   slug: string
@@ -141,13 +142,13 @@ export default async function ArtigoPage({ params }: { params: TParams }) {
             </div>
 
             {/* Título */}
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight font-serif">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight font-serif">
               {artigo.title}
             </h1>
 
             {/* Resumo */}
             {artigo.excerpt && (
-              <p className="text-xl text-slate-300 leading-relaxed border-l-4 border-blue-500 pl-6 max-w-3xl">
+              <p className="text-base md:text-lg text-slate-300 leading-relaxed border-l-4 border-blue-500 pl-6 max-w-3xl">
                 {artigo.excerpt}
               </p>
             )}
@@ -158,45 +159,23 @@ export default async function ArtigoPage({ params }: { params: TParams }) {
       {/* Conteúdo Principal */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-             <div className="flex flex-col lg:flex-row gap-12">
-               {/* Coluna Principal */}
-               <div className="flex-1">
-                 {/* Compartilhar Mobile */}
-                 <div className="lg:hidden flex items-center gap-4 mb-8 pb-8 border-b border-slate-100">
-                    <span className="text-slate-500 font-semibold text-sm uppercase tracking-wider">Compartilhar:</span>
-                    <div className="flex gap-2">
-                      <ShareButtons url={urlAtual} title={artigo.title} />
-                    </div>
-                 </div>
+          <div className="max-w-3xl mx-auto">
+             {/* Compartilhar */}
+             <div className="flex items-center gap-4 mb-8 pb-8 border-b border-slate-100">
+                <span className="text-slate-500 font-semibold text-sm uppercase tracking-wider">Compartilhar:</span>
+                <div className="flex gap-2">
+                  <ShareButtons url={urlAtual} title={artigo.title} />
+                </div>
+             </div>
 
-                 {/* Conteúdo HTML */}
-                 <article
-                    className="prose prose-lg prose-slate max-w-none
-                      prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900
-                      prose-a:text-blue-700 prose-a:no-underline hover:prose-a:underline
-                      prose-img:rounded-xl prose-img:shadow-lg
-                      prose-blockquote:border-l-blue-900 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic"
-                    dangerouslySetInnerHTML={{ __html: artigo.content }}
-                 />
+             {/* Conteúdo com formatação inteligente */}
+             <ContentFormatter content={artigo.content} />
 
-                 {/* Footer do Artigo */}
-                 <div className="mt-16 pt-8 border-t border-slate-200">
-                   <p className="text-slate-500 text-sm italic">
-                     Publicado por Alexorpheo Advocacia. O conteúdo deste artigo é meramente informativo e não substitui uma consulta jurídica.
-                   </p>
-                 </div>
-               </div>
-
-               {/* Sidebar (Desktop) */}
-               <div className="hidden lg:block w-24 shrink-0">
-                 <div className="sticky top-24 flex flex-col gap-4">
-                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest rotate-90 origin-left translate-x-8 mb-8">
-                     Compartilhar
-                   </p>
-                   <ShareButtons url={urlAtual} title={artigo.title} vertical />
-                 </div>
-               </div>
+             {/* Footer do Artigo */}
+             <div className="mt-16 pt-8 border-t border-slate-200">
+               <p className="text-slate-500 text-sm italic">
+                 Publicado por Alexorpheo Advocacia. O conteúdo deste artigo é meramente informativo e não substitui uma consulta jurídica.
+               </p>
              </div>
           </div>
         </div>

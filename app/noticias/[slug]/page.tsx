@@ -18,6 +18,7 @@ import {
 import { supabaseServer } from "@/lib/supabase/server"
 import { obterUrlCompleta } from "@/lib/utils/url"
 import SectionCTAFinal from "@/components/home/SectionCTAFinal"
+import ContentFormatter from "@/components/ui/ContentFormatter"
 
 type TParams = Promise<{
   slug: string
@@ -96,7 +97,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
   const tempoLeitura = calcularTempoLeitura(noticia.content || "")
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-amber-500/20 selection:text-slate-900">
 
       {/* --- HERO SECTION --- */}
       <div className="relative w-full min-h-[30vh] flex items-center justify-center overflow-hidden">
@@ -113,8 +114,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-transparent via-slate-950/50 to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
         </div>
 
         {/* Content */}
@@ -124,35 +124,35 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
             {/* Breadcrumb / Back */}
             <Link
               href="/noticias"
-              className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-colors mb-8 text-sm font-medium uppercase tracking-widest group"
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors mb-8 text-sm font-medium uppercase tracking-widest group text-white"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-white" />
               Voltar para Notícias
             </Link>
 
             {/* Meta Badges */}
             <div className="flex flex-wrap justify-center gap-3 mb-6">
               {noticia.category && (
-                <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-md">
+                <span className="px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-full">
                   {noticia.category}
                 </span>
               )}
-              <span className="flex items-center gap-1.5 px-3 py-1 bg-slate-800/50 border border-slate-700 text-slate-400 text-xs font-medium uppercase tracking-wider rounded-full backdrop-blur-md">
+              <span className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-200 text-slate-600 text-xs font-medium uppercase tracking-wider rounded-full">
                 <Clock className="w-3 h-3" />
                 {tempoLeitura}
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight tracking-tight drop-shadow-lg">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight tracking-tight">
               {noticia.title}
             </h1>
 
             {/* Meta Info Line */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 border-t border-slate-800/50 pt-6 mt-6 max-w-2xl mx-auto">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs md:text-sm text-slate-600 border-t border-slate-200 pt-4 mt-4 max-w-2xl mx-auto text-white">
               {noticia.publishedAt && (
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-amber-500" />
+                  <Calendar className="w-4 h-4 text-slate-700" />
                   <span className="uppercase tracking-wide font-medium">
                     {new Date(noticia.publishedAt).toLocaleDateString('pt-BR', {
                       day: '2-digit',
@@ -163,7 +163,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
                 </div>
               )}
               <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-amber-500" />
+                <User className="w-4 h-4 text-slate-700" />
                 <span className="uppercase tracking-wide font-medium">
                   Alex Orpheo
                 </span>
@@ -182,8 +182,8 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
 
             {/* Excerpt / Lead */}
             {noticia.excerpt && (
-              <div className="mb-10 p-6 md:p-8 bg-slate-900/50 border-l-4 border-amber-500 rounded-r-xl">
-                <p className="text-xl md:text-2xl text-slate-200 font-light leading-relaxed italic">
+              <div className="mb-10 p-6 md:p-8 bg-slate-50 border-l-4 border-slate-800 rounded-r-xl">
+                <p className="text-xl md:text-2xl text-slate-700 font-light leading-relaxed italic">
                   "{noticia.excerpt}"
                 </p>
               </div>
@@ -191,7 +191,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
 
             {/* Main Image (if exists and not used in hero fully) */}
             {noticia.coverImage && (
-              <div className="mb-12 relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 group">
+              <div className="mb-12 relative rounded-2xl overflow-hidden shadow border border-slate-200 group">
                 <Image
                   src={noticia.coverImage}
                   alt={noticia.title}
@@ -199,25 +199,12 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
                   height={675}
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
               </div>
             )}
 
-            {/* Rich Text Content */}
-            <div
-              className="prose prose-lg prose-invert max-w-none
-                prose-headings:font-bold prose-headings:text-slate-100 prose-headings:tracking-tight
-                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-slate-800 prose-h2:pb-4
-                prose-h3:text-xl prose-h3:text-amber-400 prose-h3:mt-8
-                prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-amber-400 prose-a:no-underline hover:prose-a:text-amber-300 hover:prose-a:underline transition-colors
-                prose-blockquote:border-l-amber-500 prose-blockquote:bg-slate-900/30 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-slate-400
-                prose-strong:text-white prose-strong:font-semibold
-                prose-ul:list-disc prose-ul:pl-6 prose-ul:text-slate-300 prose-ul:space-y-2
-                prose-ol:list-decimal prose-ol:pl-6 prose-ol:text-slate-300 prose-ol:space-y-2
-                prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-slate-800"
-              dangerouslySetInnerHTML={{ __html: noticia.content }}
-            />
+            {/* Conteúdo com formatação inteligente */}
+            <ContentFormatter content={noticia.content} />
 
             {/* Tags Footer */}
             {noticia.tags && noticia.tags.length > 0 && (
@@ -242,9 +229,9 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
             <div className="sticky top-24 space-y-8">
 
               {/* Share Card */}
-              <div className="p-6 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl">
-                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                  <Share2 className="w-5 h-5 text-amber-500" />
+              <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow">
+                <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <Share2 className="w-5 h-5 text-slate-700" />
                   Compartilhar
                 </h3>
                 <div className="flex gap-2">
@@ -258,7 +245,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-3 flex items-center justify-center bg-slate-800 hover:bg-amber-500 text-slate-400 hover:text-slate-900 rounded-xl transition-all duration-300 group"
+                      className="flex-1 py-3 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-xl transition-all duration-300 group"
                       aria-label={`Compartilhar no ${social.label}`}
                     >
                       <social.icon className="w-5 h-5" />
@@ -269,7 +256,7 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
 
               {/* CTA Card */}
               <div className="relative p-8 rounded-2xl overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br transition-transform group-hover:scale-105 duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-90 transition-transform group-hover:scale-105 duration-500" />
                 <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay" />
 
                 <div className="relative z-10 text-center">
@@ -293,8 +280,8 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
 
               {/* Related News Mini List */}
               {noticiasRelacionadas.length > 0 && (
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                  <h3 className="text-lg font-bold text-white mb-6 border-b border-slate-800 pb-4">
+                <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                  <h3 className="text-lg font-bold text-slate-900 mb-6 border-b border-slate-200 pb-4">
                     Leia Também
                   </h3>
                   <div className="space-y-6">
@@ -312,10 +299,10 @@ export default async function NoticiaPage({ params }: { params: TParams }) {
                             </div>
                           )}
                           <div>
-                            <span className="text-xs text-amber-500 font-bold uppercase tracking-wider mb-1 block">
+                            <span className="text-xs text-slate-700 font-bold uppercase tracking-wider mb-1 block">
                               {item.category || 'Notícia'}
                             </span>
-                            <h4 className="text-sm font-semibold text-slate-200 group-hover:text-amber-400 transition-colors line-clamp-2 leading-snug">
+                            <h4 className="text-sm font-semibold text-slate-900 group-hover:text-slate-700 transition-colors line-clamp-2 leading-snug">
                               {item.title}
                             </h4>
                           </div>

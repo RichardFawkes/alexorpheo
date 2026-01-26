@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -17,13 +17,28 @@ import {
   Alert,
   CircularProgress,
   Chip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material'
 import {
   ArrowBack as ArrowBackIcon,
   Save as SaveIcon,
   Newspaper as NewspaperIcon,
   Star as StarIcon,
+  FormatBold as FormatBoldIcon,
+  FormatItalic as FormatItalicIcon,
+  FormatUnderlined as FormatUnderlinedIcon,
+  Link as LinkIcon,
+  Title as TitleIcon,
+  FormatListBulleted as FormatListBulletedIcon,
+  FormatListNumbered as FormatListNumberedIcon,
+  FormatQuote as FormatQuoteIcon,
+  Code as CodeIcon,
+  Delete as DeleteIcon,
 } from '@mui/icons-material'
+import ContentFormatter from "@/components/ui/ContentFormatter"
 
 interface MuiNoticiaFormProps {
   noticia?: {
@@ -46,6 +61,9 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [tagsInput, setTagsInput] = useState(noticia?.tags?.join(', ') || '')
+  const contentRef = useRef<HTMLTextAreaElement | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
   const [formData, setFormData] = useState({
     title: noticia?.title || '',
     slug: noticia?.slug || '',
@@ -77,8 +95,24 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
         router.push('/admin/noticias')
         router.refresh()
       } else {
-        const errorData = await response.json()
-        setError(errorData.error || 'Erro ao salvar notícia')
+        let errorMessage = 'Erro ao salvar notícia'
+        let parsed: unknown = null
+        try {
+          const ct = response.headers.get('content-type') || ''
+          if (ct.includes('application/json')) {
+            parsed = await response.json()
+          } else {
+            const text = await response.text()
+            if (text) errorMessage = text
+          }
+        } catch {}
+        const data = parsed as { error?: string; details?: Array<{ message?: string }> } | null
+        if (data?.details && Array.isArray(data.details)) {
+          errorMessage = data.details.map((d) => d.message || '').join(', ') || errorMessage
+        } else if (data?.error) {
+          errorMessage = data.error
+        }
+        setError(errorMessage)
       }
     } catch (error) {
       console.error('Erro:', error)
@@ -112,6 +146,54 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
       .map((tag) => tag.trim())
       .filter((tag) => tag.length > 0)
     setFormData((prev) => ({ ...prev, tags: tagsArray }))
+  }
+
+  const applyFormat = (before: string, after: string = '', placeholder = 'texto') => {
+    const el = contentRef.current
+    if (!el) {
+      setFormData(prev => ({ ...prev, content: `${prev.content}${before}${placeholder}${after}` }))
+      return
+    }
+    const start = el.selectionStart ?? 0
+    const end = el.selectionEnd ?? 0
+    const selected = formData.content.substring(start, end) || placeholder
+    const newValue = formData.content.substring(0, start) + before + selected + after + formData.content.substring(end)
+    setFormData(prev => ({ ...prev, content: newValue }))
+    requestAnimationFrame(() => {
+      el.focus()
+      el.selectionStart = start + before.length
+      el.selectionEnd = start + before.length + selected.length
+    })
+  }
+
+  const insertAtLineStart = (token: string) => {
+    const el = contentRef.current
+    const start = el?.selectionStart ?? formData.content.length
+    const prefix = formData.content.substring(0, start)
+    const suffix = formData.content.substring(start)
+    const newValue = `${prefix}\n${token} ${suffix}`
+    setFormData(prev => ({ ...prev, content: newValue }))
+    requestAnimationFrame(() => el?.focus())
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!isEdit || !noticia?.id) return
+    try {
+      setIsDeleting(true)
+      const response = await fetch(`/api/news/${noticia.id}`, { method: 'DELETE' })
+      if (response.ok) {
+        setConfirmOpen(false)
+        router.push('/admin/noticias')
+        router.refresh()
+      } else {
+        const data = await response.json().catch(() => ({}))
+        setError(data.error || 'Erro ao excluir notícia')
+      }
+    } catch {
+      setError('Erro ao excluir notícia')
+    } finally {
+      setIsDeleting(false)
+    }
   }
 
   return (
@@ -227,6 +309,18 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
               Conteúdo
             </Typography>
 
+            <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('**', '**')} startIcon={<FormatBoldIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Negrito</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('_', '_')} startIcon={<FormatItalicIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Itálico</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('<u>', '</u>')} startIcon={<FormatUnderlinedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Sublinhado</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('# ', '')} startIcon={<TitleIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Título</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('[texto](', ')', 'texto')} startIcon={<LinkIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Link</Button>
+              <Button variant="outlined" size="small" onClick={() => insertAtLineStart('-')} startIcon={<FormatListBulletedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Lista</Button>
+              <Button variant="outlined" size="small" onClick={() => insertAtLineStart('1.')} startIcon={<FormatListNumberedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Numerada</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('> ', '')} startIcon={<FormatQuoteIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Citação</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('`', '`')} startIcon={<CodeIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Código</Button>
+            </Stack>
+
             <TextField
               label="Conteúdo da Notícia (Markdown)"
               fullWidth
@@ -235,6 +329,7 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
               rows={15}
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+              inputRef={contentRef}
               helperText="Utilize Markdown para formatar o texto"
               sx={{
                 '& .MuiOutlinedInput-root': {
@@ -244,6 +339,13 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
                 },
               }}
             />
+
+            <Typography variant="subtitle2" sx={{ color: '#64748b', mt: 3, mb: 1 }}>
+              Preview ao vivo (igual ao publicado)
+            </Typography>
+            <Paper elevation={0} sx={{ p: 3, borderRadius: 3, bgcolor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+              <ContentFormatter content={formData.content} />
+            </Paper>
           </Paper>
 
           {/* Mídia e Tags */}
@@ -444,6 +546,25 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
             }}
           >
             <Stack direction="row" spacing={2} justifyContent="flex-end">
+              {isEdit && (
+                <Button
+                  onClick={() => setConfirmOpen(true)}
+                  variant="outlined"
+                  color="error"
+                  disabled={isDeleting || isLoading}
+                  startIcon={isDeleting ? <CircularProgress size={20} color="inherit" /> : <DeleteIcon />}
+                  sx={{
+                    textTransform: 'none',
+                    borderRadius: 2,
+                    px: 3,
+                    borderColor: '#fecaca',
+                    color: '#b91c1c',
+                    '&:hover': { borderColor: '#ef4444', bgcolor: '#fee2e2' }
+                  }}
+                >
+                  {isDeleting ? 'Excluindo...' : 'Excluir'}
+                </Button>
+              )}
               <Button
                 component={Link}
                 href="/admin/noticias"
@@ -489,6 +610,20 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
           </Paper>
         </Stack>
       </form>
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <DialogTitle sx={{ fontWeight: 800, color: '#1e293b' }}>Excluir Notícia</DialogTitle>
+        <DialogContent>
+          <Typography sx={{ color: '#64748b' }}>
+            Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={() => setConfirmOpen(false)} variant="outlined" sx={{ textTransform: 'none', borderRadius: 2 }}>Cancelar</Button>
+          <Button onClick={handleConfirmDelete} variant="contained" color="error" disabled={isDeleting} startIcon={isDeleting ? <CircularProgress size={20} color="inherit" /> : <DeleteIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>
+            {isDeleting ? 'Excluindo...' : 'Excluir'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }

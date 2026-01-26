@@ -83,7 +83,7 @@ export default async function NoticiasPage() {
             <div className="mt-10">
               <Link
                 href="#noticias"
-                className="inline-block px-8 py-4 border-2 border-gold-500 text-gold-500 rounded-full font-bold uppercase tracking-wider hover:bg-gold-500 hover:text-slate-950 transition-all duration-300"
+                className="inline-block px-8 py-4 border-2 border-gold-500 text-gold-500 rounded-full text-white font-bold uppercase tracking-wider hover:bg-gold-500 hover:text-slate-950 transition-all duration-300"
               >
                 VER TODOS OS INSIGHTS
               </Link>

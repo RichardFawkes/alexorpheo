@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -17,12 +17,27 @@ import {
   Divider,
   Alert,
   CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material'
 import {
   ArrowBack as ArrowBackIcon,
   Save as SaveIcon,
   Article as ArticleIcon,
+  FormatBold as FormatBoldIcon,
+  FormatItalic as FormatItalicIcon,
+  FormatUnderlined as FormatUnderlinedIcon,
+  Link as LinkIcon,
+  Title as TitleIcon,
+  FormatListBulleted as FormatListBulletedIcon,
+  FormatListNumbered as FormatListNumberedIcon,
+  FormatQuote as FormatQuoteIcon,
+  Code as CodeIcon,
+  Delete as DeleteIcon,
 } from '@mui/icons-material'
+import ContentFormatter from "@/components/ui/ContentFormatter"
 
 interface MuiArtigoFormProps {
   artigo?: {
@@ -42,6 +57,9 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const contentRef = useRef<HTMLTextAreaElement | null>(null)
   const [formData, setFormData] = useState({
     title: artigo?.title || '',
     slug: artigo?.slug || '',
@@ -66,7 +84,7 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
       }
 
       const url = isEdit ? `/api/articles/${artigo?.id}` : '/api/articles'
-      const method = isEdit ? 'PUT' : 'POST'
+      const method = isEdit ? 'PATCH' : 'POST'
 
       const response = await fetch(url, {
         method,
@@ -78,15 +96,23 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
         router.push('/admin/artigos')
         router.refresh()
       } else {
-        const errorData = await response.json()
         let errorMessage = 'Erro ao salvar artigo'
-
-        if (errorData.details && Array.isArray(errorData.details)) {
-          errorMessage = errorData.details.map((d: any) => d.message).join(', ')
-        } else if (errorData.error) {
-          errorMessage = errorData.error
+        let parsed: unknown = null
+        try {
+          const ct = response.headers.get('content-type') || ''
+          if (ct.includes('application/json')) {
+            parsed = await response.json()
+          } else {
+            const text = await response.text()
+            if (text) errorMessage = text
+          }
+        } catch {}
+        const data = parsed as { error?: string; details?: Array<{ message?: string }> } | null
+        if (data?.details && Array.isArray(data.details)) {
+          errorMessage = data.details.map((d) => d.message || '').join(', ') || errorMessage
+        } else if (data?.error) {
+          errorMessage = data.error
         }
-
         setError(errorMessage)
       }
     } catch (error) {
@@ -112,6 +138,54 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
       title: value,
       slug: generateSlug(value),
     }))
+  }
+
+  const applyFormat = (before: string, after: string = '', placeholder = 'texto') => {
+    const el = contentRef.current
+    if (!el) {
+      setFormData(prev => ({ ...prev, content: `${prev.content}${before}${placeholder}${after}` }))
+      return
+    }
+    const start = el.selectionStart ?? 0
+    const end = el.selectionEnd ?? 0
+    const selected = formData.content.substring(start, end) || placeholder
+    const newValue = formData.content.substring(0, start) + before + selected + after + formData.content.substring(end)
+    setFormData(prev => ({ ...prev, content: newValue }))
+    requestAnimationFrame(() => {
+      el.focus()
+      el.selectionStart = start + before.length
+      el.selectionEnd = start + before.length + selected.length
+    })
+  }
+
+  const insertAtLineStart = (token: string) => {
+    const el = contentRef.current
+    const start = el?.selectionStart ?? formData.content.length
+    const prefix = formData.content.substring(0, start)
+    const suffix = formData.content.substring(start)
+    const newValue = `${prefix}\n${token} ${suffix}`
+    setFormData(prev => ({ ...prev, content: newValue }))
+    requestAnimationFrame(() => el?.focus())
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!isEdit || !artigo?.id) return
+    try {
+      setIsDeleting(true)
+      const response = await fetch(`/api/articles/${artigo.id}`, { method: 'DELETE' })
+      if (response.ok) {
+        setConfirmOpen(false)
+        router.push('/admin/artigos')
+        router.refresh()
+      } else {
+        const data = await response.json().catch(() => ({}))
+        setError(data.error || 'Erro ao excluir artigo')
+      }
+    } catch {
+      setError('Erro ao excluir artigo')
+    } finally {
+      setIsDeleting(false)
+    }
   }
 
   return (
@@ -217,6 +291,18 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
               Conteúdo
             </Typography>
 
+            <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('**', '**')} startIcon={<FormatBoldIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Negrito</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('_', '_')} startIcon={<FormatItalicIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Itálico</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('<u>', '</u>')} startIcon={<FormatUnderlinedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Sublinhado</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('# ', '')} startIcon={<TitleIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Título</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('[texto](', ')', 'texto')} startIcon={<LinkIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Link</Button>
+              <Button variant="outlined" size="small" onClick={() => insertAtLineStart('-')} startIcon={<FormatListBulletedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Lista</Button>
+              <Button variant="outlined" size="small" onClick={() => insertAtLineStart('1.')} startIcon={<FormatListNumberedIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Numerada</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('> ', '')} startIcon={<FormatQuoteIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Citação</Button>
+              <Button variant="outlined" size="small" onClick={() => applyFormat('`', '`')} startIcon={<CodeIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>Código</Button>
+            </Stack>
+
             <TextField
               label="Conteúdo do Artigo (Markdown)"
               fullWidth
@@ -225,6 +311,7 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
               rows={15}
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+              inputRef={contentRef}
               helperText="Utilize Markdown para formatar o texto"
               sx={{
                 '& .MuiOutlinedInput-root': {
@@ -234,6 +321,14 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
                 },
               }}
             />
+
+            <Divider sx={{ my: 3 }} />
+            <Typography variant="subtitle2" sx={{ color: '#64748b', mb: 1 }}>
+              Preview ao vivo (igual ao publicado)
+            </Typography>
+            <Paper elevation={0} sx={{ p: 3, borderRadius: 3, bgcolor: '#f8fafc', border: '1px solid #e2e8f0' }}>
+              <ContentFormatter content={formData.content} />
+            </Paper>
           </Paper>
 
           {/* Mídia */}
@@ -372,6 +467,25 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
             }}
           >
             <Stack direction="row" spacing={2} justifyContent="flex-end">
+              {isEdit && (
+                <Button
+                  onClick={() => setConfirmOpen(true)}
+                  variant="outlined"
+                  color="error"
+                  disabled={isDeleting || isLoading}
+                  startIcon={isDeleting ? <CircularProgress size={20} color="inherit" /> : <DeleteIcon />}
+                  sx={{
+                    textTransform: 'none',
+                    borderRadius: 2,
+                    px: 3,
+                    borderColor: '#fecaca',
+                    color: '#b91c1c',
+                    '&:hover': { borderColor: '#ef4444', bgcolor: '#fee2e2' }
+                  }}
+                >
+                  {isDeleting ? 'Excluindo...' : 'Excluir'}
+                </Button>
+              )}
               <Button
                 component={Link}
                 href="/admin/artigos"
@@ -417,7 +531,20 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
           </Paper>
         </Stack>
       </form>
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <DialogTitle sx={{ fontWeight: 800, color: '#1e293b' }}>Excluir Artigo</DialogTitle>
+        <DialogContent>
+          <Typography sx={{ color: '#64748b' }}>
+            Tem certeza que deseja excluir este artigo? Esta ação não pode ser desfeita.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={() => setConfirmOpen(false)} variant="outlined" sx={{ textTransform: 'none', borderRadius: 2 }}>Cancelar</Button>
+          <Button onClick={handleConfirmDelete} variant="contained" color="error" disabled={isDeleting} startIcon={isDeleting ? <CircularProgress size={20} color="inherit" /> : <DeleteIcon />} sx={{ textTransform: 'none', borderRadius: 2 }}>
+            {isDeleting ? 'Excluindo...' : 'Excluir'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }
-

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth/auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
+import { revalidatePath } from "next/cache"
 
 const articleSchema = z.object({
   title: z.string().min(3),
@@ -55,6 +56,11 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
+
+    revalidatePath("/")
+    revalidatePath("/artigos")
+    revalidatePath(`/artigos/${article.slug}`)
+    revalidatePath("/admin/artigos")
 
     return NextResponse.json(article, { status: 201 })
   } catch (error) {

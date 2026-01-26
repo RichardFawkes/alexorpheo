@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth/auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
+import { revalidatePath } from "next/cache"
 
 const articleSchema = z.object({
   title: z.string().min(3).optional(),
@@ -37,6 +38,10 @@ export async function GET(
       )
     }
 
+    revalidatePath("/")
+    revalidatePath("/artigos")
+    revalidatePath(`/artigos/${article.slug}`)
+    revalidatePath("/admin/artigos")
     return NextResponse.json(article)
   } catch (error) {
     console.error("Erro ao buscar artigo:", error)
@@ -67,13 +72,13 @@ export async function PATCH(
     const validatedData = articleSchema.parse(body)
 
     // Converter string vazia para null
-    const categoryId = validatedData.categoryId && validatedData.categoryId.trim() !== '' 
-      ? validatedData.categoryId 
+    const categoryId = validatedData.categoryId && validatedData.categoryId.trim() !== ''
+      ? validatedData.categoryId
       : null
 
     // Construir objeto de atualização apenas com campos fornecidos
     const updateData: any = {}
-    
+
     if (validatedData.title !== undefined) updateData.title = validatedData.title
     if (validatedData.slug !== undefined) updateData.slug = validatedData.slug
     if (validatedData.excerpt !== undefined) updateData.excerpt = validatedData.excerpt || null
@@ -160,4 +165,3 @@ export async function DELETE(
     )
   }
 }
-
