@@ -31,6 +31,7 @@ import {
   AccountCircle,
   Logout,
   Home,
+  Settings as SettingsIcon,
 } from '@mui/icons-material'
 import { signOut } from 'next-auth/react'
 import { muiTheme } from '@/lib/theme/mui-theme'
@@ -42,6 +43,7 @@ const menuItems = [
   { text: 'Artigos', icon: <ArticleIcon />, path: '/admin/artigos' },
   { text: 'Notícias', icon: <NewspaperIcon />, path: '/admin/noticias' },
   { text: 'Categorias', icon: <FolderIcon />, path: '/admin/categorias' },
+  { text: 'Configurações', icon: <SettingsIcon />, path: '/admin/configuracoes' },
 ]
 
 interface MuiAdminLayoutProps {

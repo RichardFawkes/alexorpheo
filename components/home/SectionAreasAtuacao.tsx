@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowRight, Briefcase, Users, Scale, Shield, ShoppingCart, Building2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, Briefcase, Users, Scale, Shield, ShoppingCart, Building2, ChevronRight, Plus } from "lucide-react"
 import { AREAS_ATUACAO } from "@/lib/constants/areas-atuacao"
+import { cn } from "@/lib/utils"
 
 const iconMap: Record<string, any> = {
   Briefcase,
@@ -16,7 +17,6 @@ const iconMap: Record<string, any> = {
 }
 
 export default function SectionAreasAtuacao() {
-  // Selecionamos as 6 principais áreas para exibir na home
   const displayAreas = AREAS_ATUACAO.slice(0, 6)
 
   const container = {
@@ -30,121 +30,135 @@ export default function SectionAreasAtuacao() {
   }
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0 }
   }
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-amber-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-slate-900/5 rounded-full blur-3xl" />
+    <section className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+      {/* Sophisticated Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(217,176,96,0.08)_0%,transparent_70%)] blur-[80px]" />
+        <div className="absolute -bottom-[20%] -left-[10%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(30,41,59,0.05)_0%,transparent_70%)] blur-[80px]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-amber-500/10 text-amber-600 text-sm font-semibold tracking-wider mb-4 border border-amber-500/20">
-              NOSSAS EXPERTISES
-            </span>
-            <h2 
-              className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="h-px w-12 bg-gold-400/50" />
+              <span className="text-gold-600 text-xs font-bold tracking-[0.2em] uppercase">
+                Nossas Expertises
+              </span>
+              <span className="h-px w-12 bg-gold-400/50" />
+            </div>
+
+            <h2
+              className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              Atuação Jurídica de <span className="text-amber-600 italic">Excelência</span>
+              Atuação Jurídica de <span className="text-gold-600 italic">Excelência</span>
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              Combinamos conhecimento técnico aprofundado com uma abordagem estratégica para oferecer soluções jurídicas que protegem seus interesses e garantem seus direitos.
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-2xl mx-auto">
+              Combinamos conhecimento técnico aprofundado com uma abordagem estratégica para oferecer soluções que protegem seus interesses.
             </p>
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {displayAreas.map((area) => {
             const IconComponent = iconMap[area.icone] || Scale
+            // Display only first 3 services tags to keep it clean
+            const visibleServices = area.servicos.slice(0, 3)
+            const remainingCount = Math.max(0, area.servicos.length - 3)
 
             return (
               <motion.div
                 key={area.id}
                 variants={item}
-                className="group relative bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-amber-500/30 overflow-hidden"
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="group relative bg-white rounded-2xl p-8 lg:p-10 shadow-[0_2px_20px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-10px_rgba(217,176,96,0.15)] transition-all duration-500 border border-slate-100 hover:border-gold-200 flex flex-col h-full"
               >
-                <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity duration-300 transform group-hover:scale-110">
-                  <IconComponent className="w-24 h-24 text-amber-900" />
+                {/* Hover Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gold-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+
+                {/* Floating Large Icon (Watermark) */}
+                <div className="absolute top-4 right-4 opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12 pointer-events-none">
+                  <IconComponent className="w-32 h-32 text-slate-900" />
                 </div>
 
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-slate-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
-                    <IconComponent className="w-7 h-7 text-slate-700 group-hover:text-white transition-colors duration-300" />
+                {/* Header */}
+                <div className="relative z-10 mb-8">
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-gold-500/30 group-hover:-translate-y-1">
+                    <IconComponent className="w-8 h-8 text-slate-700 group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
                   </div>
-                  
-                  <h3 
-                    className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-amber-600 transition-colors duration-300"
+
+                  <h3
+                    className="text-3xl font-bold text-slate-900 mb-3 group-hover:text-gold-700 transition-colors duration-300"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
                     {area.titulo}
                   </h3>
-                  
-                  <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+
+                  <p className="text-slate-600 leading-relaxed text-sm font-light border-l-2 border-gold-200/50 pl-4">
                     {area.descricao}
                   </p>
+                </div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {area.servicos.slice(0, 3).map((servico, idx) => (
-                      <span key={idx} className="text-xs py-1 px-2 bg-slate-50 text-slate-600 rounded-md border border-slate-100">
+                {/* Tags */}
+                <div className="relative z-10 mt-auto space-y-6">
+                  <div className="flex flex-wrap gap-2">
+                    {visibleServices.map((servico, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-flex items-center px-3 py-1 rounded-full bg-slate-50 text-xs font-medium text-slate-600 border border-slate-100 group-hover:border-gold-200/50 group-hover:bg-white transition-colors duration-300"
+                      >
                         {servico}
                       </span>
                     ))}
-                    {area.servicos.length > 3 && (
-                      <span className="text-xs py-1 px-2 text-slate-400">
-                        +{area.servicos.length - 3}
+                    {remainingCount > 0 && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-slate-50 text-xs font-medium text-gold-600 border border-dashed border-gold-300">
+                        <Plus className="w-3 h-3 mr-1" />
+                        {remainingCount}
                       </span>
                     )}
                   </div>
 
-                  <Link 
-                    href={`/areas-atuacao#${area.slug}`} 
-                    className="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-700 transition-colors group/link"
-                  >
-                    Saiba mais
-                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
+                  {/* Action Link */}
+                  <div className="pt-6 border-t border-slate-100 group-hover:border-gold-100 transition-colors duration-300">
+
+                  </div>
                 </div>
               </motion.div>
             )
           })}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-16"
-        >
-          <Button
-            asChild
-            size="lg"
-            className="bg-slate-900 text-white hover:bg-slate-800 px-10 py-6 text-base rounded-full shadow-lg hover:shadow-slate-900/20 transition-all duration-300"
-          >
-            <Link href="/areas-atuacao">
-              Ver Todas as Áreas de Atuação
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-        </motion.div>
+        {/* View All Button */}
+        <div className="mt-16 text-center">
+          <Link href="/areas-atuacao">
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full px-8 border-slate-200 text-slate-600 hover:text-gold-700 hover:border-gold-300 hover:bg-gold-50 transition-all duration-300"
+            >
+              Ver Todas as Áreas
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   )

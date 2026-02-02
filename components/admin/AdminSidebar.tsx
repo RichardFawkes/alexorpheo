@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FileText, FolderOpen, Scale, Newspaper } from "lucide-react";
+import { LayoutDashboard, FileText, FolderOpen, Scale, Newspaper, Settings } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Artigos", href: "/admin/artigos", icon: FileText },
   { name: "Notícias", href: "/admin/noticias", icon: Newspaper },
   { name: "Categorias", href: "/admin/categorias", icon: FolderOpen },
+  { name: "Configurações", href: "/admin/configuracoes", icon: Settings },
 ];
 
 export default function AdminSidebar() {

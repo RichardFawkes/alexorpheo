@@ -29,7 +29,7 @@ const diferenciais = [
   }
 ]
 
-export default function HeroSection() {
+export default function HeroSection({ bannerImage }: { bannerImage?: string | null }) {
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -62,7 +62,7 @@ export default function HeroSection() {
           className="relative w-full h-full"
         >
           <Image
-            src="/banner.png"
+            src={bannerImage || "/banner.png"}
             alt="Orpheo Advocacia - Banner principal"
             fill
             className="object-cover object-[25%_50%] md:object-[60%_50%]"

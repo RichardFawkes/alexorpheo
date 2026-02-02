@@ -52,7 +52,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center group">
               <div className="relative h-10 w-auto">
                 <Image
-                  src="/logo.png"
+                  src="/logo-orpheo.png"
                   alt="Orpheo Advocacia"
                   width={200}
                   height={50}
