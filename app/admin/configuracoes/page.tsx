@@ -8,14 +8,12 @@ import {
   Paper,
   Button,
   TextField,
-  Grid,
   Snackbar,
   Alert,
   CircularProgress
 } from '@mui/material'
-import { Save as SaveIcon, CloudUpload as CloudUploadIcon } from '@mui/icons-material'
+import { Save as SaveIcon } from '@mui/icons-material'
 import Image from 'next/image'
-import { uploadImage } from '@/lib/storage/uploadImage'
 
 export default function SettingsPage() {
   const [loading, setLoading] = useState(true)
@@ -40,26 +38,6 @@ export default function SettingsPage() {
       console.error('Erro ao carregar configurações:', error)
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    try {
-      setSaving(true)
-      const result = await uploadImage(file, 'articles') // Reusing 'articles' bucket for now as it's public
-      if (result.success && result.url) {
-        setBannerUrl(result.url)
-      } else {
-        setMessage({ type: 'error', text: result.error || 'Erro ao fazer upload da imagem' })
-      }
-    } catch (error) {
-      console.error('Erro no upload:', error)
-      setMessage({ type: 'error', text: 'Erro ao fazer upload da imagem' })
-    } finally {
-      setSaving(false)
     }
   }
 
@@ -112,25 +90,9 @@ export default function SettingsPage() {
                 value={bannerUrl}
                 onChange={(e) => setBannerUrl(e.target.value)}
                 variant="outlined"
-                helperText="Cole a URL ou faça upload de uma imagem"
+                helperText="Cole a URL da imagem (ex: https://...)"
               />
             </Box>
-
-            <Button
-              variant="outlined"
-              component="label"
-              startIcon={<CloudUploadIcon />}
-              sx={{ mb: 2 }}
-              disabled={saving}
-            >
-              Fazer Upload de Imagem
-              <input
-                type="file"
-                hidden
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-            </Button>
           </Box>
 
           <Box>

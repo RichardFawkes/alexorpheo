@@ -100,7 +100,7 @@ export default function LoginForm() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@orpheo.adv.br"
+                placeholder="Email"
                 className="bg-slate-950/50 border-slate-700 text-slate-100 placeholder:text-slate-600 focus:border-amber-500/50 focus:ring-amber-500/20 transition-all duration-300"
                 {...register("email")}
                 disabled={isLoading}
@@ -120,7 +120,7 @@ export default function LoginForm() {
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
+                placeholder="Senha"
                 className="bg-slate-950/50 border-slate-700 text-slate-100 placeholder:text-slate-600 focus:border-amber-500/50 focus:ring-amber-500/20 transition-all duration-300"
                 {...register("password")}
                 disabled={isLoading}
