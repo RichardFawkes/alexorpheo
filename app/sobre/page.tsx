@@ -30,7 +30,7 @@ export default function SobrePage() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-slate-900">
           <Image
-            src="/banner.jpeg"
+            src="/banner.png"
             alt="Escritório de Advocacia"
             fill
             className="object-cover opacity-20"

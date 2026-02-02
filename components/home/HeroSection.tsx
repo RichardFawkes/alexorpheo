@@ -62,7 +62,7 @@ export default function HeroSection() {
           className="relative w-full h-full"
         >
           <Image
-            src="/banner.jpeg"
+            src="/banner.png"
             alt="Orpheo Advocacia - Banner principal"
             fill
             className="object-cover object-[25%_50%] md:object-[60%_50%]"
