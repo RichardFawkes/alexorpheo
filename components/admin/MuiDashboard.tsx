@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_CONFIG } from '@/lib/constants/site-config'
 import Link from 'next/link'
 import {
   Box,
@@ -20,7 +21,6 @@ import {
   Add as AddIcon,
   TrendingUp as TrendingUpIcon,
   ArrowForward as ArrowForwardIcon,
-  Edit as EditIcon,
 } from '@mui/icons-material'
 
 type TStats = {
@@ -251,7 +251,7 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
       <Paper
         elevation={0}
         sx={{
-          p: 4,
+          p: { xs: 3, md: 5 },
           borderRadius: 4,
           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
           color: '#fff',
@@ -260,52 +260,111 @@ export default function MuiDashboard({ stats }: MuiDashboardProps) {
           justifyContent: 'space-between',
           gap: 4,
           overflow: 'hidden',
-          position: 'relative'
+          position: 'relative',
+          border: '1px solid rgba(255,255,255,0.05)',
+          boxShadow: '0 20px 40px -10px rgba(15, 23, 42, 0.3)'
         }}
       >
-        <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
+        {/* Decorative elements */}
+        <Box sx={{
+          position: 'absolute',
+          top: -100,
+          right: -100,
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(217, 176, 96, 0.1) 0%, rgba(217, 176, 96, 0) 70%)',
+          zIndex: 0,
+          pointerEvents: 'none'
+        }} />
+
+        <Box sx={{ position: 'relative', zIndex: 1, maxWidth: 600 }}>
+          <Stack direction="row" spacing={1.5} sx={{ mb: 3 }} alignItems="center">
+            <Box
+              component="img"
+              src={SITE_CONFIG.site.logo}
+              sx={{
+                height: 28,
+                width: 'auto',
+                filter: 'brightness(0) invert(1)',
+                opacity: 0.9
+              }}
+            />
+            <Typography variant="subtitle2" sx={{
+              color: '#d9b060',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              fontSize: '0.75rem'
+            }}>
+              {SITE_CONFIG.site.nome}
+            </Typography>
+          </Stack>
+
+          <Typography variant="h4" sx={{ fontWeight: 800, mb: 2, fontSize: { xs: '1.5rem', md: '2rem' } }}>
             Painel Administrativo Premium
           </Typography>
-          <Typography variant="body1" sx={{ opacity: 0.8, maxWidth: 500, mb: 3 }}>
-            Gerencie seus artigos e notícias com facilidade. Mantenha seu site atualizado para atrair mais clientes.
+
+          <Typography variant="body1" sx={{ opacity: 0.8, mb: 4, lineHeight: 1.7, fontSize: '1.05rem' }}>
+            Gerencie seus artigos e notícias com facilidade e elegância. Mantenha o padrão de excelência da {SITE_CONFIG.site.nome} sempre atualizado.
           </Typography>
+
           <Button
             component={Link}
             href="/"
             variant="contained"
+            size="large"
+            startIcon={<TrendingUpIcon />}
             sx={{
               bgcolor: '#d9b060',
               color: '#0f172a',
               fontWeight: 700,
-              '&:hover': { bgcolor: '#b08d4b' }
+              px: 4,
+              py: 1.5,
+              borderRadius: 2,
+              boxShadow: '0 4px 12px rgba(217, 176, 96, 0.3)',
+              textTransform: 'none',
+              fontSize: '1rem',
+              '&:hover': {
+                bgcolor: '#b08d4b',
+                boxShadow: '0 6px 16px rgba(217, 176, 96, 0.4)',
+                transform: 'translateY(-2px)'
+              },
+              transition: 'all 0.2s ease'
             }}
           >
             Visualizar Site
           </Button>
         </Box>
+
         <Box
           sx={{
-            display: { xs: 'none', md: 'block' },
+            display: { xs: 'none', md: 'flex' },
             position: 'relative',
-            zIndex: 1
+            zIndex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            pr: 4
           }}
         >
-          <TrendingUpIcon sx={{ fontSize: 120, opacity: 0.1 }} />
+          <Box
+            component="img"
+            src={SITE_CONFIG.site.logo}
+            alt="Logo Orpheo"
+            sx={{
+              height: 160,
+              width: 'auto',
+              opacity: 0.9,
+              filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.5))',
+              transform: 'rotate(-5deg)',
+              transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              '&:hover': {
+                transform: 'rotate(0deg) scale(1.05)',
+                filter: 'drop-shadow(0 15px 40px rgba(217, 176, 96, 0.3))'
+              }
+            }}
+          />
         </Box>
-
-        {/* Decorative circle */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: -50,
-            right: -50,
-            width: 300,
-            height: 300,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(217,176,96,0.1) 0%, rgba(217,176,96,0) 70%)',
-          }}
-        />
       </Paper>
     </Box>
   )
