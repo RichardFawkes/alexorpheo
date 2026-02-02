@@ -74,6 +74,8 @@ export async function generateMetadata({ params }: { params: TParams }): Promise
     openGraph: {
       title: noticia.title,
       description: noticia.excerpt || noticia.title,
+      url: obterUrlCompleta(`/noticias/${slug}`),
+      type: "article",
       images: noticia.coverImage ? [noticia.coverImage] : [],
     }
   }

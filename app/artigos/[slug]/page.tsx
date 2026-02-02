@@ -80,6 +80,13 @@ export async function generateMetadata({ params }: { params: TParams }): Promise
   return {
     title: `${artigo.title} | Alexorpheo Advocacia`,
     description: artigo.excerpt || artigo.title,
+    openGraph: {
+      title: artigo.title,
+      description: artigo.excerpt || artigo.title,
+      url: obterUrlCompleta(`/artigos/${slug}`),
+      type: "article",
+      images: artigo.coverImage ? [{ url: artigo.coverImage }] : [],
+    },
   }
 }
 

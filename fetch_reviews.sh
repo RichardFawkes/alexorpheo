@@ -1,0 +1,28 @@
+curl 'https://www.google.com/wizrpcui/_/WizRpcUi/data/batchexecute?rpcids=s7jv5e&source-path=%2Fsearch&hl=pt-BR&_reqid=778205&rt=c' \
+  -H 'accept: */*' \
+  -H 'accept-language: pt-BR,pt;q=0.9' \
+  -H 'available-dictionary: :YWIDqY36mNMBOEvY9c8Sy+QFxCzAHLxwlj6sIYNtGjQ=:' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded;charset=UTF-8' \
+  -b '__Secure-BUCKET=CPYD; OTZ=8446931_68_64_73560_68_416340; SID=g.a0006AhIi_qxxR31Ba80gHvkK-J_kheObjZnU-Z9-YVe11VL3lr2-Yq_Uesgv-FQssVqYX2EVQACgYKAeMSARYSFQHGX2MiM7RyEbztuziqsw-6vBRc3RoVAUF8yKpRiFB1MKFxlVNRKGnDCF3V0076; __Secure-1PSID=g.a0006AhIi_qxxR31Ba80gHvkK-J_kheObjZnU-Z9-YVe11VL3lr2dkeAljvYNtHxe7zL4JhjrQACgYKAQ0SARYSFQHGX2MiOnPuQaqWw17zqdBaKgixHhoVAUF8yKreypVUx-QQzITRX02mWD2e0076; __Secure-3PSID=g.a0006AhIi_qxxR31Ba80gHvkK-J_kheObjZnU-Z9-YVe11VL3lr20bFKvMOz-fxIng87t1HAvAACgYKAR8SARYSFQHGX2Mi2gTZ4SzSmK8zfyA4Voxk-hoVAUF8yKoonhpI7WoNSyNbUGvsgMN40076; HSID=AitmzWDArubCYE4gc; SSID=AYgqIXkY-MFiuXhxs; APISID=-2bh_G4MEvN9L1fj/ACsRc0mw6GFGUt-D5; SAPISID=Gb75rjojMeIsrY_v/AbJG_qZ6LJeJ-rJIy; __Secure-1PAPISID=Gb75rjojMeIsrY_v/AbJG_qZ6LJeJ-rJIy; __Secure-3PAPISID=Gb75rjojMeIsrY_v/AbJG_qZ6LJeJ-rJIy; SEARCH_SAMESITE=CgQI_p8B; ADS_VISITOR_ID=00000000-0000-0000-0000-000000000000; S=billing-ui-v3=gqywM5h3GdJNUGLSEgbxNlS6G_EMbyQ4:billing-ui-v3-efe=gqywM5h3GdJNUGLSEgbxNlS6G_EMbyQ4; AEC=AaJma5vYQjoofgOtebh6A3p8YsZvlUIDUW_d418iZmhB-zm6eN35V61c7w; __Secure-1PSIDTS=sidts-CjEB7I_69IUurd_RXwmqEWeOsyl_bA28FN7t62CFmNmuYMjDJ0l98zWJanprrI3fno7OEAA; __Secure-3PSIDTS=sidts-CjEB7I_69IUurd_RXwmqEWeOsyl_bA28FN7t62CFmNmuYMjDJ0l98zWJanprrI3fno7OEAA; __Secure-STRP=AD6DoguCkxQk-C9Qw0BZE1XKCYncyBmbt5kZHBuZ7Y7TpFCNDpDeV0Mf8RVkmA0C9rvC1pmYSG5dEOijqN3n33HxzxJex50c_w; NID=528=jJ27DDSPksTJSOZw-eDmWRbl6Y5TxZJlCYKB4s4lZaYHkai85xsZsDR2CbyVvQP_2wH-xZK1I_q-ZBz5w6KGeP7szYkmZwbbgfjavUnvn0VDMI1-CR2Zgf6zmj67fYc-N9paLUrmszDYEnA6NHQJzid4wtIXghUZlsT3FhZcLbWhujXVDjOOeVWMNAICdQ235_iQ5mkphYClDf6K4wTbEuPhP8oyt2F9lYyZFeScWcGVWkQx0iEUW05OTb7ZUU4r_FmeeQABZ5x6ZEclpGzZKNrfqZsWD5uIdcWzrXkFIsARTwHIvkrWwGA8dYo2s4SgWIVySy7ilAjCoPXUBnIUx3CE0dCyN-ZSeHkBBzDcTh1fBaHXi4MEFhazrLdgT4vj19xH3AWCmdPFBXv8SnsSc74_dfbMjhJf3Gb2hG6is8Df_PtE405xbaQ3TiTMfgTQnsAHmf8Ot9Xs39Xv8S30hKBHpWwC6GwI9S-Hc9pPNA_b2Wlg6QszpQZH6yZmemeV66oElU6jNCD37rkI9suDrYIDwLyvaID-ztq31QnrhkEh5DcYrWdPmU0kDF-CZSpxvvkqhR1uW96pZTGAyItasCmuMWnxh2VkSf8JSLfybeTKqE-gCkB1xNBTO9K8svEh3SAhkMjty-7M9eJ6Crr7zj9MAjNdann-ZrFoBehSgobsk9kRUrjyNlx4BMCIudqSBSEBJ7fQK67GCmC4gs17oyCmCXBzxIGNhUAUgtqdIYLFl8-HxkGYK90tqQuOvSYwvwoIBOCXaRhjiCNu-94_qHaGB7OvSRf0iLABDO8yYUYx2m-pcTkAzP-soYM08G0-XZjCIVaQ1g5HtiYyq7uBIC27t21pgZyZ8Jjw2Y1EW-RYK8sw9uLRVM4AEfpedV-rQkatRVx6nfeG12meMtIbp8yWAOx4Ynlyhy5X4W0pp8UvsBpzLm5Y5fg0MAxZ4-SLlBDvFISI-qs2LMtKl606EWp5087n7mKCFF4Ph9tfCv-ssSAvsJnV3c0OWA9U17BQP9RnPxF7zBt4mY8yWnwk7U498fAP_jEM2WD9Iajs5mSxC-6SyZhQe1RLFVB1cCI6wsPd1APPdmJ_ZJf7RAS5fg17l2kgMiIxhXopWf1k-DWYR1jpmO3UMnh0VUm_tsn8kjS9KiRvXTdarLzkrHSo2bf_DbiJhbikvClmqyPPUef-ThJOx6RUk6mRpFAD7bVSQVJ1fRIpavwMxFTZ8vOEqKM_yCiFpN6R2cw05uh3mTbtZSzOyIZ0CVg_Mept_CGVUxc_X5WjYM4gUn03AIvWsCRIXGBvAxSCW_S-Y_vXOv0L1AyTgv_zE399lVMp-WEUQROhjBEpph3iguNjF844FCajXFOdYwB2OaWtrOkeMzAxstN_yG3M0XCXXu8lbT4bOrCIZ0Tp_MDLLEgnHsss1uUwR9X-ktxkgBRISbCKOgvvtt_uHgjB2x0JoUVJ64NVmXwdXFoiZiylnX1hle8vULXkbMeBFa7j68kGcd_2RVtldUYFA2lhdLc57yqGVfBg_tNBtCrrxuGQMz8uwaUerVeAikEpG0KL9jbYgUz8ZgChKejVcdeSRKhPbNka6iSTO7Htpi5NLxgKUr3VqDOocNZd-nltLOwI-nDB3UebUvcMPJGFVS5ynxlx5U3vtSJWDfZBcuxZighG9-E2WaGvQYjepOfqnwdj; DV=44A_jhQHUmRhkFtvo_tLkKA40du8wVmls1cWBzvvOAIAAFBanvQI6iukjQAAADTzTNoRbQI_PAAAAOrXM7IaFq81FQAAwKmjjLrlfHsaBgAAAA; UULE=j+WzEsMTIsMTc2OTk5Mjk5NTMwMDAwMCxudWxsLFstMjM1ODM1MDU0LC00NjgxNjEwMzJdLG51bGwsMjkyODkuMzQ4MjI5NDk2MzcyLG51bGwsNl0=; SIDCC=AKEyXzXAYKAVe_GYf9z9Px7oZnJlf8mbi1jeCDop6QpJ43Qu4sarmxa1iLyYfSO1VoHkYN4OhvU; __Secure-1PSIDCC=AKEyXzV9UDZ307Mzp80EpE-2nX8ZidXdHXYYP7ald5IKIfxVtBhvKfL6tR4wj5ePL1OcALwv_A; __Secure-3PSIDCC=AKEyXzWxrCTQ2LaAEd5gwVk4q0-UQAkYcQGQRm7A1_A_VCnH00l6H-uO22RfXZxWWw02giXOIKw' \
+  -H 'origin: https://www.google.com' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://www.google.com/' \
+  -H 'sec-ch-ua: "Brave";v="143", "Chromium";v="143", "Not A(Brand";v="24"' \
+  -H 'sec-ch-ua-arch: "arm"' \
+  -H 'sec-ch-ua-bitness: "64"' \
+  -H 'sec-ch-ua-full-version-list: "Brave";v="143.0.0.0", "Chromium";v="143.0.0.0", "Not A(Brand";v="24.0.0.0"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-model: ""' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-ch-ua-platform-version: "26.2.0"' \
+  -H 'sec-ch-ua-wow64: ?0' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-gpc: 1' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \
+  -H 'x-client-pctx: CgcSBWjR7PMq' \
+  -H 'x-same-domain: 1' \
+  --data-raw 'f.req=%5B%5B%5B%22s7jv5e%22%2C%22%5Bnull%2C1%2C%5C%22%5C%22%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C10%2Cnull%2C%5B%5C%220x94cfbf2c4b6d869f%3A0x99cc09c12043ede1%5C%22%5D%2Cnull%2Cnull%2C%5C%22%5C%22%2Cnull%2C%5B1%2C1%2Cnull%2C%5B%5B3%5D%2C%5B4%5D%2C%5B5%5D%2C%5B6%5D%2C%5B7%5D%5D%5D%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C0%5D%22%2Cnull%2C%22generic%22%5D%5D%5D&at=AKlEn5gjgEz2Ddb-8UdQdS_kLipi%3A1769992994077&'

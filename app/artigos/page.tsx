@@ -36,8 +36,8 @@ export default function ArtigosPage() {
         const articlesData = await articlesRes.json()
         const categoriesData = await categoriesRes.json()
 
-        setArticles(articlesData)
-        setCategories(categoriesData)
+        setArticles(Array.isArray(articlesData) ? articlesData : [])
+        setCategories(Array.isArray(categoriesData) ? categoriesData : [])
       } catch (error) {
         console.error('Erro ao carregar dados:', error)
       } finally {
