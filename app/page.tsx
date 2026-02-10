@@ -52,17 +52,17 @@ export default async function Home() {
       {/* HERO SECTION - Ultra Premium com Parallax */}
       <HeroSection bannerImage={configuracoes?.bannerImage} />
 
-      {/* NOTÍCIAS */}
-      {noticias.length > 0 && <CarouselNoticias noticias={noticias} />}
-
       {/* ÁREAS DE ATUAÇÃO */}
       <SectionAreasAtuacao />
 
-      {/* CTA FINAL */}
-      <SectionCTAFinal />
+      {/* NOTÍCIAS */}
+      {noticias.length > 0 && <CarouselNoticias noticias={noticias} />}
 
       {/* AVALIAÇÕES DO GOOGLE */}
       <GoogleReviews />
+
+      {/* CTA FINAL */}
+      <SectionCTAFinal />
     </div>
   )
 }
