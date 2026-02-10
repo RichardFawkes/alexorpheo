@@ -53,6 +53,8 @@ interface MuiArtigoFormProps {
   isEdit?: boolean
 }
 
+import { notifyNewPost } from '@/lib/services/notification'
+
 export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -92,6 +94,10 @@ export default function MuiArtigoForm({ artigo, isEdit = false }: MuiArtigoFormP
       })
 
       if (response.ok) {
+        if (formData.published) {
+            notifyNewPost(formData.title, 'Artigo');
+        }
+
         router.push('/admin/artigos')
         router.refresh()
       } else {

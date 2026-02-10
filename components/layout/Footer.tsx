@@ -4,6 +4,8 @@ import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowRight, Youtube
 import { Button } from "@/components/ui/button"
 import { SITE_CONFIG, obterRedesSociaisAtivas } from "@/lib/constants/site-config"
 
+import NewsletterForm from "@/components/newsletter/NewsletterForm"
+
 export default function Footer() {
   const redesSociaisAtivas = obterRedesSociaisAtivas()
 
@@ -29,17 +31,7 @@ export default function Footer() {
             <p className="text-slate-400 mb-6">
               Receba artigos, dicas e atualizações sobre direito diretamente no seu e-mail
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Seu melhor e-mail"
-                className="flex-1 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-600"
-              />
-              <Button className=" text-white hover:from-amber-700 hover:to-amber-800 rounded-lg px-8 shadow-lg shadow-amber-600/20">
-                Inscrever-se
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
       </div>

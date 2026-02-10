@@ -56,6 +56,8 @@ interface MuiNoticiaFormProps {
   isEdit?: boolean
 }
 
+import { notifyNewPost } from '@/lib/services/notification'
+
 export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -91,6 +93,12 @@ export default function MuiNoticiaForm({ noticia, isEdit = false }: MuiNoticiaFo
       })
 
       if (response.ok) {
+        // Se estiver publicando (seja novo ou edição mudando para publicado), notifica
+        if (formData.published) {
+             // Dispara notificação sem await para não travar a navegação
+             notifyNewPost(formData.title, 'Notícia');
+        }
+
         router.push('/admin/noticias')
         router.refresh()
       } else {
