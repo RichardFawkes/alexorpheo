@@ -32,6 +32,7 @@ import {
   Logout,
   Home,
   Settings as SettingsIcon,
+  Gavel as GavelIcon,
 } from '@mui/icons-material'
 import { signOut } from 'next-auth/react'
 import { muiTheme } from '@/lib/theme/mui-theme'
@@ -42,6 +43,7 @@ const menuItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/admin' },
   { text: 'Artigos', icon: <ArticleIcon />, path: '/admin/artigos' },
   { text: 'Notícias', icon: <NewspaperIcon />, path: '/admin/noticias' },
+  { text: 'Áreas de Atuação', icon: <GavelIcon />, path: '/admin/areas' },
   { text: 'Categorias', icon: <FolderIcon />, path: '/admin/categorias' },
   { text: 'Configurações', icon: <SettingsIcon />, path: '/admin/configuracoes' },
 ]
