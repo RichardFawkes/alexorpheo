@@ -13,6 +13,7 @@ function obterUrlBase(): string {
 }
 
 export const authConfig: NextAuthConfig = {
+  secret: process.env.NEXTAUTH_SECRET ?? (process.env.NODE_ENV !== 'production' ? 'dev-secret' : undefined),
   trustHost: true,
   providers: [
     Credentials({

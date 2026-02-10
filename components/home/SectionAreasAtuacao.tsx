@@ -4,8 +4,9 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Briefcase, Users, Scale, Shield, ShoppingCart, Building2, ChevronRight, Plus } from "lucide-react"
-import { AREAS_ATUACAO } from "@/lib/constants/areas-atuacao"
+import { AREAS_ATUACAO, TAreaAtuacao } from "@/lib/constants/areas-atuacao"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 const iconMap: Record<string, any> = {
   Briefcase,
@@ -17,7 +18,25 @@ const iconMap: Record<string, any> = {
 }
 
 export default function SectionAreasAtuacao() {
-  const displayAreas = AREAS_ATUACAO.slice(0, 6)
+  const [areas, setAreas] = useState<TAreaAtuacao[]>(AREAS_ATUACAO)
+
+  useEffect(() => {
+    let mounted = true
+    fetch("/api/practice-areas", { cache: "force-cache" })
+      .then(res => res.ok ? res.json() : AREAS_ATUACAO)
+      .then((data) => {
+        if (!mounted) return
+        const arr = Array.isArray(data) && data.length ? data : AREAS_ATUACAO
+        setAreas(arr)
+      })
+      .catch(() => {
+        if (!mounted) return
+        setAreas(AREAS_ATUACAO)
+      })
+    return () => { mounted = false }
+  }, [])
+
+  const displayAreas = areas.slice(0, 6)
 
   const container = {
     hidden: { opacity: 0 },
