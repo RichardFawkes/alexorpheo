@@ -3,10 +3,28 @@
 import { motion } from "framer-motion"
 import { Star, Quote } from "lucide-react"
 import Image from "next/image"
-import reviewsData from "@/lib/data/google-reviews.json"
+import localReviews from "@/lib/data/google-reviews.json"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 export default function ReviewsGrid() {
+  const [reviewsData, setReviewsData] = useState(localReviews)
+
+  useEffect(() => {
+    let mounted = true
+    fetch("/api/google-reviews", { cache: "force-cache" })
+      .then(res => res.ok ? res.json() : localReviews)
+      .then((data) => {
+        if (!mounted) return
+        const arr = Array.isArray(data) ? data : localReviews
+        setReviewsData(arr)
+      })
+      .catch(() => {
+        if (!mounted) return
+        setReviewsData(localReviews)
+      })
+    return () => { mounted = false }
+  }, [])
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {reviewsData.map((review, index) => (
