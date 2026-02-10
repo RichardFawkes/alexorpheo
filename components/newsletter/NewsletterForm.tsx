@@ -26,6 +26,7 @@ export default function NewsletterForm() {
           to_email: "contato@alexorpheo.com.br",
           to_name: "Admin",
           from_name: "Sistema do Site",
+          subject: "Nova inscrição na newsletter",
           subscriber_email: email,
           message: `Novo assinante de newsletter: ${email}`,
           post_title: "", 

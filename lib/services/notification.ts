@@ -13,6 +13,7 @@ export const notifyNewPost = async (title: string, type: 'Artigo' | 'Notícia') 
           to_email: "contato@alexorpheo.com.br",
           to_name: "Admin",
           from_name: "Sistema do Site",
+          subject: `Novo ${type} publicado: ${title}`,
           post_title: title,
           post_type: type,
           message: `Novo item publicado: ${type} - ${title}`,
