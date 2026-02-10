@@ -23,11 +23,13 @@ export default function NewsletterForm() {
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID_NEWSLETTER,
         {
-          to_email: "contato@alexorpheo.com.br", // Email do admin para receber aviso
+          to_email: "contato@alexorpheo.com.br",
+          to_name: "Admin",
+          from_name: "Sistema do Site",
           subscriber_email: email,
           message: `Novo assinante de newsletter: ${email}`,
-          post_title: "", // Evita erro de variável faltante no template
-          post_type: "Newsletter", // Identificador para o template
+          post_title: "", 
+          post_type: "Newsletter", 
         },
         EMAILJS_CONFIG.PUBLIC_KEY
       )

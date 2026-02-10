@@ -10,11 +10,13 @@ export const notifyNewPost = async (title: string, type: 'Artigo' | 'Notícia') 
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID_NEW_POST,
         {
-          to_email: "contato@alexorpheo.com.br", // Admin recebe aviso
+          to_email: "contato@alexorpheo.com.br",
+          to_name: "Admin",
+          from_name: "Sistema do Site",
           post_title: title,
           post_type: type,
           message: `Novo item publicado: ${type} - ${title}`,
-          subscriber_email: "", // Evita erro de variável faltante no template
+          subscriber_email: "",
         },
         EMAILJS_CONFIG.PUBLIC_KEY
     )
