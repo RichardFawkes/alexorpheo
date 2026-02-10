@@ -22,7 +22,7 @@ export default function SectionAreasAtuacao() {
 
   useEffect(() => {
     let mounted = true
-    fetch("/api/practice-areas", { cache: "force-cache" })
+    fetch("/api/practice-areas", { cache: "no-store" })
       .then(res => res.ok ? res.json() : AREAS_ATUACAO)
       .then((data) => {
         if (!mounted) return
@@ -36,7 +36,9 @@ export default function SectionAreasAtuacao() {
     return () => { mounted = false }
   }, [])
 
-  const displayAreas = areas.slice(0, 6)
+  const destaque = areas.filter(a => a.destaque)
+  const outras = areas.filter(a => !a.destaque)
+  const displayAreas = [...destaque, ...outras].slice(0, 6)
 
   const container = {
     hidden: { opacity: 0 },

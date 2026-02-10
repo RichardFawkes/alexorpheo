@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth/auth"
 import { supabaseServer } from "@/lib/supabase/server"
 import { z } from "zod"
 import { revalidatePath } from "next/cache"
+import { AREAS_ATUACAO } from "@/lib/constants/areas-atuacao"
 
 const areaSchema = z.object({
   titulo: z.string().min(3, "Título deve ter no mínimo 3 caracteres"),
@@ -24,6 +25,38 @@ export async function GET() {
 
     if (error) {
       return NextResponse.json([], { status: 200 })
+    }
+
+    // Se não houver dados no banco, semear com os existentes em constants
+    if (!data || data.length === 0) {
+      const now = new Date().toISOString()
+      const seedPayload = AREAS_ATUACAO.map(a => ({
+        id: a.id,
+        titulo: a.titulo,
+        slug: a.slug,
+        descricao: a.descricao,
+        icone: a.icone,
+        destaque: a.destaque,
+        servicos: a.servicos || [],
+        detalhes: a.detalhes || null,
+        createdAt: now,
+        updatedAt: now
+      }))
+
+      const insertRes = await supabaseServer
+        .from("PracticeArea")
+        .insert(seedPayload)
+        .select()
+
+      if (insertRes.error) {
+        // Mesmo que falhe a semeadura, retorna o fallback vazio para não quebrar a Home
+        return NextResponse.json([], { status: 200 })
+      }
+
+      revalidatePath("/")
+      revalidatePath("/areas-atuacao")
+      revalidatePath("/admin/areas")
+      return NextResponse.json(insertRes.data || [], { status: 200 })
     }
 
     return NextResponse.json(data || [])
